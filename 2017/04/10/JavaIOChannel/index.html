@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>14. 채널 | 개발하는 조롱이</title>
+    
+    
+        <meta name="keywords" content="JavaIO NIO,Channel" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="14. 채널 채널은 일종의 게이트웨이이다. 기존의 파일이나 소켓 등에서 사용하던 스트림이 네이티브 IO 서비스를 이용할 수 있도록 도아주는 메소드를 제공한다. 하지만 채너은 기존의 스트림과 구별되는 몇 가지 큰 차이점이 존재한다. 채널은 데이터를 보내거나 데이터를 받기 위한 타겟으로 ByteBuffer를 사용한다는 점이다. ByteBuffer를 사용함으로써">
+<meta name="keywords" content="JavaIO NIO,Channel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14. 채널">
+<meta property="og:url" content="http://jungha-cho.github.io/2017/04/10/JavaIOChannel/index.html">
+<meta property="og:site_name" content="개발하는 조롱이">
+<meta property="og:description" content="14. 채널 채널은 일종의 게이트웨이이다. 기존의 파일이나 소켓 등에서 사용하던 스트림이 네이티브 IO 서비스를 이용할 수 있도록 도아주는 메소드를 제공한다. 하지만 채너은 기존의 스트림과 구별되는 몇 가지 큰 차이점이 존재한다. 채널은 데이터를 보내거나 데이터를 받기 위한 타겟으로 ByteBuffer를 사용한다는 점이다. ByteBuffer를 사용함으로써">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-03-26T07:47:02.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14. 채널">
+<meta name="twitter:description" content="14. 채널 채널은 일종의 게이트웨이이다. 기존의 파일이나 소켓 등에서 사용하던 스트림이 네이티브 IO 서비스를 이용할 수 있도록 도아주는 메소드를 제공한다. 하지만 채너은 기존의 스트림과 구별되는 몇 가지 큰 차이점이 존재한다. 채널은 데이터를 보내거나 데이터를 받기 위한 타겟으로 ByteBuffer를 사용한다는 점이다. ByteBuffer를 사용함으로써">
+<link rel="publisher" href="UA-97209547-1">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="개발하는 조롱이" type="application/atom+xml" />
+    
+
+    <!-- Google Analytics -->
+    
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-97209547-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">개발하는 조롱이</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Book
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            JavaIO NIO
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Buffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBuffer/">13. 버퍼 01. 버퍼 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferMake/">13. 버퍼 06. 버퍼 만들기</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Byte
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOByteStream/">04. 바이트 스트림 : 바이트 단위 IO 클래스</a></li>  <li class="file"><a href="/2017/04/10/JavaIOByteStream/">바이트 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteBuffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOByteBuffer/">13. 버퍼 07. ByteBuffer</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Channel
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2017/04/10/JavaIOChannel/">14. 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOFileChannel/">14. 채널 03. 파일 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOSocketChannel/">14. 채널 04. 소켓 채널</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Char
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOCharIOClass/">05. 문자 스트림 : 문자 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Override
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOOverrinding/">03. 자바 I/O ( 오버라이딩에 대한 이해 )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Pipe
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOPiped/">04. 2. 바이트 단위 IO 클래스 (2) (Piped)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Selector
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOSelector/">15. 셀렉터 Selector 01. 셀렉터 개요</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Socket
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasicsocket/">07. 네트워크 프로그래밍 기초 01. 소켓이란</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Stream
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            TCP
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/NetworkAndNetworking/">네트워크와 네트워킹</a></li>  <li class="file"><a href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasic/">07. 네트워크 프로그래밍 기초 - 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIO/">12. NIO 개요 01.자바 IO는 느리다?</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIONIO/">12. NIO 개요 04. 자바의 새로운 변화</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            이펙티브자바
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Access Modifier
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/11/EffectiveJavaRule13/">규칙 13 클래스와 멤버의 접근 권한은 최소화하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Builder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule2/">규칙2 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Convention
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaNamingConvention/">Effective Java, 일반적으로 통용되는 작명 관습을 따르라 ( naming convention )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Factory
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule1/">규칙1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Instance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule5/">규칙5 불필요한 객체는 만들지 말라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/11/Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라/">Effective-Java-규칙18_추상_클래스_대신_인터페이스를_사용하라</a></li>  <li class="file"><a href="/2018/03/15/이펙티브자바-4장-클래스와-인터페이스-1/">이펙티브자바 4장 클래스와 인터페이스 (1)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Singleton
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule3/">규칙3 private 생성자나 enum 자료형은 싱글턴 패턴을 따르도록 설계하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            new
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule4/">규칙4 객체 생성을 막을 때는 private 생성자를 사용하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반 원칙
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaGeneralProgrammingRule/">Effective Java, 일반적인 프로그래밍 원칙들</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바병렬프로그래밍
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Code
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">자바병렬프로그래밍-챕터4-객체구성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Synchronized
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/">자바병렬프로그래밍_Chapter05_구성단위</a></li>  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-동기화클래스/">자바병렬프로그래밍-Chapter05-동기화클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeThread/">Java Concurrency in Practice, Thread</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeThreadSafe/">Java Concurrency in Practice, 스레드 안전성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread Pool
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/">자바병렬프로그래밍-Chapter06-6.2.3-스레드풀</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            cache
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현/">자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            task
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-작업실행-task.1/">자바병렬프로그래밍-Chapter06-작업실행-task</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            객체 공유
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/">Java Concurrency in Practice, Objec Share</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            동시성과 병렬성
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism/">자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/08/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShare/">Java Concurrency in Practice, 객체 공유</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의 정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Interface/">Interface</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Annotation
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaAnnotation/">Standard Of Java, Chapter 12. Annotation</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Generic
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Generic/">Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaEnum/">Standard Of Java, Chapter 12. Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaGenerics/">Standard Of Java, Chapter 12. Generics</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaInterface/">Standard Of Java, Interface</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaChater13Thread/">Standard Of Java, Chapter 13. Thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/StandardOfJava/">총 정리</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘온소프트웨어
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Unicode
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareUnicode/">Joel On Software, UniCode</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            기본으로 돌아가기
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareBacktothebasic/">Joel On Software, 기본으로 돌아가기</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            명세서
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JoelOnSoftwareC5C14/">조엘 온 소프트웨어 C5-C14</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareSelectLanguage/">Joel On Software, Select Language</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘 테스트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareCheckList/">Joel On Software, 조엘 테스트 : 더 나은 코드를 위한 12단계</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            헤드퍼스트디자인패턴
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            STRATEGY
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/20/디자인패턴-STRATEGY/">디자인패턴-STRATEGY</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DataBase
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/ConnectionPool/">Connection Pool</a></li>  <li class="file"><a href="/2017/04/05/Engine/">engine</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Infra
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            CI
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Jenkins
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/">GCP에 CI 구축하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MQ
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/12/ApachKafkaInstall/">Apache Kafka 설치</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Logging
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/LogBack(slf4j)/">LogBack (slf4j)</a></li>  <li class="file"><a href="/2017/04/04/MDC/">MDC</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            라이브러리
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/ShutDownHook/">ShutDownHook</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            문법
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/trycatch문의finally와return의우선순위/">try catch문의 finally와 return의 우선순위</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/CallbyValuereference/">Call by Value reference</a></li>  <li class="file"><a href="/2017/04/04/Lock/">Lock</a></li>  <li class="file"><a href="/2017/05/10/Executor란-기초/">Executor란?-기초</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Language
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/Document/">Document</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Network
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteOrder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/ByteOrder/">Network Byte Order</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/26/블로그옮김-테스트/">블로그 테마 변경, 마크다운 테스트</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Tools
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IDE
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Eclipse
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/eclipse유용한단축키/">Eclipse 유용한 단축키</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            설계
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            OOP
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            연습
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            블랙잭
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(1)/">객체 지향 설계 연습하기 - 블랙잭 (1)</a></li>  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(2)/">객체 지향 설계 연습하기 - 블랙잭 (2)</a></li>  <li class="file"><a href="/2018/03/14/객체지향설계-블랙잭(3)/">객체 지향 설계 연습하기 - 블랙잭 (3)</a></li>  <li class="file"><a href="/2018/03/20/객체지향설계-블랙잭(4)/">객체지향설계-블랙잭(4)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            업무
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            장애
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/21/업무-이야기-장애편 (1)/">장애응대-SOCKET편 (1)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            비트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/03/2complement/">2의 보수법으로 음수 표현하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-JavaIOChannel" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Channel/">Channel</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Channel/">Channel</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/JavaIOChannel/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170410-JavaIOChannel.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170410-JavaIOChannel.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170410-JavaIOChannel.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            14. 채널
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h1>14. 채널</h1>
+<p>채널은 일종의 게이트웨이이다. 기존의 파일이나 소켓 등에서 사용하던 스트림이 네이티브 IO 서비스를 이용할 수 있도록 도아주는 메소드를 제공한다. 하지만 채너은 기존의 스트림과 구별되는 몇 가지 큰 차이점이 존재한다. 채널은 데이터를 보내거나 데이터를 받기 위한 타겟으로 ByteBuffer를 사용한다는 점이다. ByteBuffer를 사용함으로써 직간접적으로 여러 가지 다양한 네이티브 서비스를 이용할 수 있기 때문이다.</p>
+<p>또 이렇게 채널을 통해 데이터를 주고 받으면, 운영체제 수준의 네이티브 IO 서비스들을 직간접적으로 이용할 수 있다는 점이다. 따라서 기본적으로 채널을 통한 IO 통신은 기존의 스트림보다 좀더 효율적이고 기존에 지원되지 않았던 메모리 맵 파일, 파일 락킹 같은 기능들도 이용할 수 있게 된다.</p>
+<p>마지막으로 채널은 스트림과 달리 단방향 뿐만 아니라 양방향 통신도 가능하다. 항상 양방향 통신을 이용할 수 있는 것은 아니지만 소켓 채널의 경우 별다른 설정 없이 양방향 통신이 가능하지만 파일 챈ㄹ의 경우에는 그렇지 않다.</p>
+<h1>02. 채널의 기본 인터페이스</h1>
+<p>채널은 버퍼와 달리 인터페이스 기반으로 되어 있으므로 채널이 해야 할 행동에 대한 정의만 하고 그 세부적인 구현은 각각의 하위 구현 클ㄹ스에서 담당하게 되어 있다. 이렇게 설계된 이유는 인터페이스 위주의 설계가 확장성이 뛰어나고 좀더 유엲ㄴ 시스템 구조를 갖게 되는 점도 있지만, 가장 결정적인 이유는 다른 곳에 있다. 그 이유는 각각의 운영체제마다 IO에 관련된 시스템 콜 명령어와 그 처리 루틴이 다르기 때문이다. 따라서 자바 플랫폼이 다르더라도 같은 동작을 해야하기 떄문에 어떤 행동을 해야 하는지에만 초점을 맞춘 채널 인터페이스를 정의하고 그 세부적인 행동에 대한 구현은 각 운영체제에 맞춰 대부분 네이티브 언어를 사용해서 구현하도록 만들 수 밖에 없었던 것이다.</p>
+<p>이러한 이유로 자바 플랫폼이면 어디서나 코드를 수정하지 않아도 동일하게 동작한다(write once, run anyway)는 자바의 기본 철학에 위배되지 않게 구현하기 위해 이미 도입되었어야 할 기능들이 이런 구현상의 어려움으로 뒤늦게 나온것이다.</p>
+<h3>1. Channel, InterruptibleChannel</h3>
+<p>Channel 인터페이스는 채널의 최상위 인터페이스다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package java.nio.channel;</span><br><span class="line"></span><br><span class="line">import java.io.Closeable;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">public interface Channel extends Closeable &#123;</span><br><span class="line">    public boolean isOpen();</span><br><span class="line">    public void close() throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>채널이 현재 열려 있는지의 여부를 확인하기 위한 isOpen() 메소드와 채널이 열려있을 경우, 채널을 닫기 위한 close() 메소드, 이렇게 두개만 정의하고 있다.</p>
+<p>InterruptibleChannel 인터페이스는 비동기적으로 채널을 닫거나(close) 인터럽트(Interrupt)할 수 있는 인터페이스다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface InterruptibleChannel extends Channel &#123;</span><br><span class="line">    public void close() throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>API</p>
+<p>이 인터페이스는 Channel 인터페이스를 상속 받고 Channel 인터페이스의 Close() 메소드를 오버라이딩한다. 이 인터페이스로 인해 기존의 스트림과 달리 명백하게 채널을 닫을 수 있게 되었다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class StreamTest &#123;</span><br><span class="line">    static FileInputStream in = null;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        in = new FileInputStream(&quot;C:/wwwroot/test.doc&quot;);</span><br><span class="line">        TestThread t = new TestThread(in);</span><br><span class="line">        t.start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(2000);</span><br><span class="line">        System.out.println(in.available());</span><br><span class="line"></span><br><span class="line">        t.interrupt();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(2000);</span><br><span class="line">        System.out.println(in.available());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class TestThread extends Thread &#123;</span><br><span class="line">        FileInputStream in = null;</span><br><span class="line">        public TestThread(FileInputStream o) &#123;</span><br><span class="line">            in = o;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void run() &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                int v = 0;</span><br><span class="line">                while ( ( v = in.read() ) != -1 ) &#123;</span><br><span class="line">                    System.out.println(&quot;Thread start...&quot;);</span><br><span class="line">                    System.out.println(v);</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125;</span><br><span class="line">                in.close();</span><br><span class="line">            &#125;catch (Exception e) &#123;</span><br><span class="line">                System.out.println(&quot;Thread end...&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이 코드를 실행하게 되면 스레드와 스트림의 상태 불일치가 일어난다. in.close() 부분을 finally문으로 처리하면 상태 불일치가 발생하지 않겠지만 이러한 현상이 일어날 가능성도 있다. 이러한 상태 불일치를 발생시키지 않고 채널과 스레드의 상태를 명확하게 하기 위한 인터페이스가 바로 InterruptibleChannel이다. 대부분의 세부적인 기능을 제공하는 채널들이 이 인터페이스를 구현하고 있는데, 이 인터페이스를 구현한 채널들은 두 가지 방법으로 채널과 스레드의 상태를 명확하게 유지할 수 있게 해준다.</p>
+<p>첫째, 비동기적인 방식으로 채널을 닫을 수 있다. InterruptibleChannel 인터페이스를 구현한 채널 내에서 입출력 작업을 하던 중 블록된 스레드가 있는 경우, 다른 스레드가 이 채널의 close() 메소드를 호출해서 채널을 종료할 수 있다. 이렇게 채널을 종료하면 블록되어 있던 스레드는 AsynchronousCloseException을 받게 된다.</p>
+<p>둘째, 앞서와 반대의 경우다. InterruptibleChannel 인터페이스를 구현한 채널 내에서 입출력 작업을 하던 중 블록된 스레드가 있는 경우, 다른 스레드가 블록된 스레드의 interrupt() 메소드를 호출할 수 있다. 이렇게 블록된 스레드의 Interrupt() 메소드를 호출하면 채널이 닫히고 그 후 블록된 스레드는 ClosedByInterruptException을 받게 된다. 또 그 블록된 스레드 상태는 Interrupt로 설정된다.</p>
+<p>이처럼 InterruptibleChannel 인터페이스를 구현한 채널들은 스레드 상태를 명확하게 유지할 수 있다.</p>
+<h3>2. ReadableByteChannel, WritableByteChannel, ByteChannel</h3>
+<p>ReadableByteChannel은 파라미터로 주어진 ByteBuffer로 채널안의 데이터를 읽어들이는 read()메소드만 제공한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package java.nio.channels;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line"></span><br><span class="line">public interface ReadableByteChannel extends Channel &#123;</span><br><span class="line">    public int read(ByteBuffer dst) throws IOException;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">WritableByteChannel은 앞서와 반대로 ByteBuffer에 저장된 데이터를 채널로 쓰기 위한 write() 메소드만을 제공한다.</span><br><span class="line">package java.nio.channels;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line"></span><br><span class="line">public interface WritableByteChannel extends Channel &#123;</span><br><span class="line">    public int write(ByteBuffer src) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ByteChannel은 ReadableByteChannel과 WritableByteChannel을 상속해서 채널로부터 데이터를 읽어들이거나 채널로 데이터를 쓰는 두 가지 동작을 모두 할 수 있는 인터페이스이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import java.nio.ByteBuffer;</span><br><span class="line">import java.nio.channels.Channels;</span><br><span class="line">import java.nio.channels.ReadableByteChannel;</span><br><span class="line">import java.nio.channels.WritableByteChannel;</span><br><span class="line"></span><br><span class="line">public class SimpleChannelTest &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        ReadableByteChannel src = Channels.newChannel(System.in);</span><br><span class="line">        WritableByteChannel dest = Channels.newChannel(System.out);</span><br><span class="line"></span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocateDirect(1024);</span><br><span class="line">        while(src.read(buffer) != -1) &#123;</span><br><span class="line">            buffer.flip();</span><br><span class="line">            while(buffer.hasRemaining()) &#123;</span><br><span class="line">                dest.write(buffer);</span><br><span class="line">            &#125;</span><br><span class="line">            buffer.clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>입력갑을 단순히 출력해주는 예제.</p>
+<p>java.nio.channels.channels 클래스에는 채널에서 사용하는 유틸리티 클래스로 기존의 스트림을 채널로 또는 채널을 스트림으로 손쉽게 변환해주는 여러 유용한 메소드가 있다. newChannel() 메소드를 이용해서 ReadableByteChannel과 WritableByteChannel을 생성했다.</p>
+<h3>4. ScatteringByteChannel, GatheringByteChannel</h3>
+<p>Scatter/Gatter는 운영체제가 지원하는 기술이다. NIO의 채널에서는 효율적인 입출력을 위해 운영체제가 지원하는 네이티브 IO 서비스인 Scatter/Gather를 사용할 수 있도록 ScatteringByteChannel, GatheringByteChannel 인터페이스를 제공하고 있다.</p>
+<p>Scatter/Gather는 버퍼 여러개를 한번의 IO 작업으로 처리할 수 있게 해주는 강력한 기능이다.</p>
+<p>단순히 보면 여러 버퍼를 다루기 위한 반복문을 피하고 코드가 간단해진다는 장점도 있다. 하지만 이 인터페이스가 정말로 강력한 것은 바로 시스템 콜과 커널 영역에서 프로세스 영역으로의 버퍼 복사를 줄여주거나 또는 완전히 없애준다는 점이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer[] buf = ....;</span><br><span class="line">for ( int i = 0 ; i &lt; buf.length ; i ++ ) &#123;</span><br><span class="line">// ByteBuffer 배열의 사이즈 만큼 읽기 시스템 콜을 수행한다.</span><br><span class="line">// 만약, 커널과 프로세스 간의 동일한 물리적 메모리를 참조하지 않는다면</span><br><span class="line">// 반복문을 실행하는 횟수만큼 커널 영역에서 프로세스 영역으로</span><br><span class="line">// 버퍼 복사가 이루어진다.</span><br><span class="line">readableByteChannel.read(buf[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ByteBuffer[] buf = ...;</span><br><span class="line">// 단 한번의 시스템 콜을 수행한다.</span><br><span class="line">// 만약, 앞선 경우와 같이 동일한 물리적 메모리를 참조하지 않는 경우</span><br><span class="line">// 단 한번의 커널 영역에서 프로세스 영역으로의 버퍼 복사가 이루어진다.</span><br><span class="line">scatteringByteChannel.read(buf);</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line">import java.nio.channels.ScatteringByteChannel;</span><br><span class="line"></span><br><span class="line">public class ScatterTest &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        FileInputStream fin = new FileInputStream(&quot;C:/news.txt&quot;);</span><br><span class="line">        ScatteringByteChannel channel = fin.getChannel();</span><br><span class="line"></span><br><span class="line">        ByteBuffer header = ByteBuffer.allocate(100);</span><br><span class="line">        ByteBuffer body = ByteBuffer.allocate(200);</span><br><span class="line">        ByteBuffer[] buffers = &#123; header, body &#125;;</span><br><span class="line"></span><br><span class="line">        int readCount = (int) channel.read(buffers);</span><br><span class="line">        channel.close();</span><br><span class="line">        System.out.println(&quot;Read Count : &quot; + readCount);</span><br><span class="line">        System.out.println(&quot;\n//-----------------------------//\n&quot;);</span><br><span class="line"></span><br><span class="line">        header.flip();</span><br><span class="line">        body.flip();</span><br><span class="line"></span><br><span class="line">        byte[] b = new byte[100];</span><br><span class="line"></span><br><span class="line">        heade.get(b);</span><br><span class="line">        System.out.println(&quot;Header : &quot; + new String(b));</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;\n//------------------------------//\n&quot;);</span><br><span class="line"></span><br><span class="line">        byte[] bb = new byte[200];</span><br><span class="line">        body.get(bb);</span><br><span class="line">        System.out.println(&quot;Body : &quot; + new String(bb));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line">import java.nio.channels.GatheringChannel;</span><br><span class="line"></span><br><span class="line">public class GatheringTest &#123;</span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        FileOutputStream fo = new FileOutputStream(&quot;C:/test.txt&quot;);</span><br><span class="line">        GatheringByteChannel channel = fo.getChannel();</span><br><span class="line"></span><br><span class="line">        ByteBuffer header = ByteBuffer.allocateDirect(20);</span><br><span class="line">        ByteBuffer body = ByteBuffer.allocateDirect(40);</span><br><span class="line">        ByteBuffer[] buffers = &#123; header, body &#125;;</span><br><span class="line"></span><br><span class="line">        header.put(&quot;Hello &quot;.getBytes());</span><br><span class="line">        body.put(&quot;World!&quot;.getBytes());</span><br><span class="line"></span><br><span class="line">        header.flip();</span><br><span class="line">        body.flip();</span><br><span class="line"></span><br><span class="line">        channel.write(buffers);</span><br><span class="line">        channel.close();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Scatter/Gather를 적절한 곳에 사용하면 여러 면에서 정말 강력한 기술이 된다. 예를 들어 네트워크 프로그래밍을 하는데 TCP 기반 서버/클라이언트 통신 프로토콜을 만들어 사용할때 프로토콜에 해당하는 부분은 헤더 버퍼에 실제 전달할 내용은 바디 버퍼에 넣어 전달할 수 있다.</p>
+<h3>03. 파일 채널</h3>
+<ul>
+<li>첫째 ByteChannel 인터페이스를 구현한다. 이 인터페이스를 구현하기 때문에 읽고 쓸수 있는 양방향성을 가질 수 있다. 하지만 항상 그렇진 않다.</li>
+<li>둘째 AbstractInterruptibleChannel 추상 클래스를 구현하고 있다. 이 클래스는 InterruptibleChannel 인터페이스를 구현한 클래스인데 비동기적인 방식으로 채널을 닫을 수 있게 되며 스레드와 채널 간의 상태 불일치가 발생하지 않도록 보장해준다.</li>
+<li>셋째 ScatteringByteChannel, GatheringByteChannel 인터페이스를 구현한다는 점이다. 따라서 ByteBuffer 배열을 이용해서 효율적으로 읽기와 쓰기가 가능하다.</li>
+</ul>
+<p>파일 채널은 항상 블록킹 모드이며 비블록킹 모드로 설정할 수 없다.<br>
+파일채널 객체는 직접 만들 수 없다<br>
+파일채널 객체는 이미 열려있는 파일 채널 객체로부터 getChannel() 메소드를 호출해서 생성된다. getChannel() 메소드로 리턴된 파일채널 객체는 파일 객체아 같은 파일에 연결되고 또한 같은 접근 권한을 갖게 된다.<br>
+대부분의 채널처럼 파일채널도 가능하면 네이티브 IO 서비스를 사용하기 위해 노력한다.<br>
+파일채널 클래스 스스로는 추상 클래스다. 파일채널 클래스의 실제 구현체는 getChannel() 메소드를 통해 얻어지는데 이렇게 얻어진 파일채널의 실제 구현체는 자신이 제공하는 메소드의 일부 또는 전부를 네이티브 코드를 사용해서 만들어 네이티브 IO 서비스를 최대한 이용하게 되어 있다.<br>
+파일채널 객체는 스레드에 안전하다.<br>
+같은 파일 채널 인스턴스에 대해 여러 스레드들이 동시에 메소드들을 호출해도 동기화 문제가 발생하지 않는다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">package java.nio.channels;</span><br><span class="line"></span><br><span class="line">public abstract class FileChannel extends AbstractChannel implements ByteChannel, GatheringByteChannel, ScatteringByteChannel &#123;</span><br><span class="line">    // 1. 기본 속성</span><br><span class="line">    public abstract int read (ByteBuffer dst)</span><br><span class="line">    public abstract int write (ByteBuffer src)</span><br><span class="line">    public abstract long size ()</span><br><span class="line">    public abstract long position ()</span><br><span class="line">    public abstract void position (long newPosition)</span><br><span class="line">    public abstract void truncate (long size)</span><br><span class="line">    public abstract void force (boolean metaData)</span><br><span class="line"></span><br><span class="line">    // 2. 파일 락킹</span><br><span class="line">    public final FileLock lock()</span><br><span class="line">    public abstract FileLock lock (long position, long size, boolean shared)</span><br><span class="line">    public final FileLock tryLock()</span><br><span class="line">    public abstract FileLock tryLock (long position, long size, boolean shared)</span><br><span class="line"></span><br><span class="line">    // 3. 메모리 맵핑</span><br><span class="line">    public abstract MappedByteBuffer map (MapMode mode, long position, long size)</span><br><span class="line">    public static class MapMode</span><br><span class="line">    &#123;</span><br><span class="line">        public static final MapMode READ_ONLY</span><br><span class="line">        public static final MapMode READ_WRITE</span><br><span class="line">        public static final MapMode PRIVATE</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 4. 채널 간 직접 전송</span><br><span class="line">    public abstract long transferTo (long position, long count, WritableByteChannel target)</span><br><span class="line">    public abstract long transferFrom (ReadableByteChannel src, long position, long count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>파일 채널은 이 API에서 보듯이 크게 네가지 부분으로 나눠서 살펴볼 수 있다.</p>
+<p>출처 : 김성박 송지훈 공저, 『 자바 IO &amp; NIO 네트워크 프로그래밍』, 한빛미디어(2004.9.30), 14장 인용</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2017/04/10/JavaIOByteStream/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    바이트 단위 IO 클래스
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/04/10/JavaIOCharIOClass/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">05. 문자 스트림 : 문자 단위 IO 클래스</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+        <section id="comments"> 
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+ </section>
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            cho_jeong_ha &copy; 2018 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://jungha-cho.github.io/2017/04/10/JavaIOChannel/';
+        
+        this.page.identifier = 'JavaIOChannel';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jungha-cho-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>자바병렬프로그래밍-챕터4-객체구성 | 개발하는 조롱이</title>
+    
+    
+        <meta name="keywords" content="자바병렬프로그래밍,Code" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Chapter 4 객체 구성 이어서… 차량 위치 추적 123Map&amp;lt;String, Point&amp;gt; location = vehicles.getLocation();for (String key : locations.keySet())  renderVehicle(key, locations.get(key)); 이와 유사하게 업데이터 스레드는 차량에 장착된 GPS">
+<meta name="keywords" content="자바병렬프로그래밍,Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="자바병렬프로그래밍-챕터4-객체구성">
+<meta property="og:url" content="http://jungha-cho.github.io/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/index.html">
+<meta property="og:site_name" content="개발하는 조롱이">
+<meta property="og:description" content="Chapter 4 객체 구성 이어서… 차량 위치 추적 123Map&amp;lt;String, Point&amp;gt; location = vehicles.getLocation();for (String key : locations.keySet())  renderVehicle(key, locations.get(key)); 이와 유사하게 업데이터 스레드는 차량에 장착된 GPS">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-03-26T07:54:43.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="자바병렬프로그래밍-챕터4-객체구성">
+<meta name="twitter:description" content="Chapter 4 객체 구성 이어서… 차량 위치 추적 123Map&amp;lt;String, Point&amp;gt; location = vehicles.getLocation();for (String key : locations.keySet())  renderVehicle(key, locations.get(key)); 이와 유사하게 업데이터 스레드는 차량에 장착된 GPS">
+<link rel="publisher" href="UA-97209547-1">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="개발하는 조롱이" type="application/atom+xml" />
+    
+
+    <!-- Google Analytics -->
+    
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-97209547-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">개발하는 조롱이</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Book
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaIO NIO
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Buffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBuffer/">13. 버퍼 01. 버퍼 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferMake/">13. 버퍼 06. 버퍼 만들기</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Byte
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOByteStream/">04. 바이트 스트림 : 바이트 단위 IO 클래스</a></li>  <li class="file"><a href="/2017/04/10/JavaIOByteStream/">바이트 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteBuffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOByteBuffer/">13. 버퍼 07. ByteBuffer</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Channel
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOChannel/">14. 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOFileChannel/">14. 채널 03. 파일 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOSocketChannel/">14. 채널 04. 소켓 채널</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Char
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOCharIOClass/">05. 문자 스트림 : 문자 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Override
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOOverrinding/">03. 자바 I/O ( 오버라이딩에 대한 이해 )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Pipe
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOPiped/">04. 2. 바이트 단위 IO 클래스 (2) (Piped)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Selector
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOSelector/">15. 셀렉터 Selector 01. 셀렉터 개요</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Socket
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasicsocket/">07. 네트워크 프로그래밍 기초 01. 소켓이란</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Stream
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            TCP
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/NetworkAndNetworking/">네트워크와 네트워킹</a></li>  <li class="file"><a href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasic/">07. 네트워크 프로그래밍 기초 - 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIO/">12. NIO 개요 01.자바 IO는 느리다?</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIONIO/">12. NIO 개요 04. 자바의 새로운 변화</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            이펙티브자바
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Access Modifier
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/11/EffectiveJavaRule13/">규칙 13 클래스와 멤버의 접근 권한은 최소화하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Builder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule2/">규칙2 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Convention
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaNamingConvention/">Effective Java, 일반적으로 통용되는 작명 관습을 따르라 ( naming convention )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Factory
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule1/">규칙1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Instance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule5/">규칙5 불필요한 객체는 만들지 말라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/11/Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라/">Effective-Java-규칙18_추상_클래스_대신_인터페이스를_사용하라</a></li>  <li class="file"><a href="/2018/03/15/이펙티브자바-4장-클래스와-인터페이스-1/">이펙티브자바 4장 클래스와 인터페이스 (1)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Singleton
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule3/">규칙3 private 생성자나 enum 자료형은 싱글턴 패턴을 따르도록 설계하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            new
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule4/">규칙4 객체 생성을 막을 때는 private 생성자를 사용하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반 원칙
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaGeneralProgrammingRule/">Effective Java, 일반적인 프로그래밍 원칙들</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            자바병렬프로그래밍
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Code
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">자바병렬프로그래밍-챕터4-객체구성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Synchronized
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/">자바병렬프로그래밍_Chapter05_구성단위</a></li>  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-동기화클래스/">자바병렬프로그래밍-Chapter05-동기화클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeThread/">Java Concurrency in Practice, Thread</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeThreadSafe/">Java Concurrency in Practice, 스레드 안전성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread Pool
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/">자바병렬프로그래밍-Chapter06-6.2.3-스레드풀</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            cache
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현/">자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            task
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-작업실행-task.1/">자바병렬프로그래밍-Chapter06-작업실행-task</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            객체 공유
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/">Java Concurrency in Practice, Objec Share</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            동시성과 병렬성
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism/">자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/08/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShare/">Java Concurrency in Practice, 객체 공유</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의 정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Interface/">Interface</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Annotation
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaAnnotation/">Standard Of Java, Chapter 12. Annotation</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Generic
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Generic/">Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaEnum/">Standard Of Java, Chapter 12. Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaGenerics/">Standard Of Java, Chapter 12. Generics</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaInterface/">Standard Of Java, Interface</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaChater13Thread/">Standard Of Java, Chapter 13. Thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/StandardOfJava/">총 정리</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘온소프트웨어
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Unicode
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareUnicode/">Joel On Software, UniCode</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            기본으로 돌아가기
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareBacktothebasic/">Joel On Software, 기본으로 돌아가기</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            명세서
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JoelOnSoftwareC5C14/">조엘 온 소프트웨어 C5-C14</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareSelectLanguage/">Joel On Software, Select Language</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘 테스트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareCheckList/">Joel On Software, 조엘 테스트 : 더 나은 코드를 위한 12단계</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            헤드퍼스트디자인패턴
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            STRATEGY
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/20/디자인패턴-STRATEGY/">디자인패턴-STRATEGY</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DataBase
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/ConnectionPool/">Connection Pool</a></li>  <li class="file"><a href="/2017/04/05/Engine/">engine</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Infra
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            CI
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Jenkins
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/">GCP에 CI 구축하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MQ
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/12/ApachKafkaInstall/">Apache Kafka 설치</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Logging
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/LogBack(slf4j)/">LogBack (slf4j)</a></li>  <li class="file"><a href="/2017/04/04/MDC/">MDC</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            라이브러리
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/ShutDownHook/">ShutDownHook</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            문법
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/trycatch문의finally와return의우선순위/">try catch문의 finally와 return의 우선순위</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/CallbyValuereference/">Call by Value reference</a></li>  <li class="file"><a href="/2017/04/04/Lock/">Lock</a></li>  <li class="file"><a href="/2017/05/10/Executor란-기초/">Executor란?-기초</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Language
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/Document/">Document</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Network
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteOrder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/ByteOrder/">Network Byte Order</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/26/블로그옮김-테스트/">블로그 테마 변경, 마크다운 테스트</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Tools
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IDE
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Eclipse
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/eclipse유용한단축키/">Eclipse 유용한 단축키</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            설계
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            OOP
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            연습
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            블랙잭
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(1)/">객체 지향 설계 연습하기 - 블랙잭 (1)</a></li>  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(2)/">객체 지향 설계 연습하기 - 블랙잭 (2)</a></li>  <li class="file"><a href="/2018/03/14/객체지향설계-블랙잭(3)/">객체 지향 설계 연습하기 - 블랙잭 (3)</a></li>  <li class="file"><a href="/2018/03/20/객체지향설계-블랙잭(4)/">객체지향설계-블랙잭(4)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            업무
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            장애
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/21/업무-이야기-장애편 (1)/">장애응대-SOCKET편 (1)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            비트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/03/2complement/">2의 보수법으로 음수 표현하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-자바병렬프로그래밍-챕터4-객체구성" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Code/">Code</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Code/">Code</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">
+            <time datetime="2017-05-09T17:26:43.000Z" itemprop="datePublished">2017-05-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            자바병렬프로그래밍-챕터4-객체구성
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h3>Chapter 4 객체 구성 이어서…</h3>
+<h3>차량 위치 추적</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Point&gt; location = vehicles.getLocation();</span><br><span class="line"><span class="keyword">for</span> (String key : locations.keySet())</span><br><span class="line">  renderVehicle(key, locations.get(key));</span><br></pre></td></tr></table></figure>
+<p>이와 유사하게 업데이터 스레드는 차량에 장착된 GPS 장치에서 읽어낸 위치 정보를 자동으로 입력하거나, GUI 화면에서 수동으로 입력한 내용을 새로운 위치 정보로 업데이트한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vehicleMoved</span><span class="params">(VehicleMovedEvent evt)</span> </span>&#123;</span><br><span class="line">  Point loc = evt.getNewLocation();</span><br><span class="line">  vehicles.setLocation(evt.getVehicleId(), loc.x, loc.y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이런 구조라면 뷰 스레드와 업데이터 스레드가 동시 다발적으로 데이터 모델을 사용하기 때문에 데이터 모델에 해당하는 클래스는 반드시 스레드 안전성을 확보하고 있어야만 한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MonitorVehicleTracker</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, MutablePoint&gt; locations;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MonitorVehicleTracker</span><span class="params">(Map&lt;String, MutablePoint&gt; locations)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.locations = deepCopy(locations);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Map&lt;String, MutablePoint&gt; <span class="title">getLocations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> deepCopy(locations);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> MutablePoint <span class="title">getLocation</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        MutablePoint loc = locations.get(id);</span><br><span class="line">        <span class="keyword">return</span> loc == <span class="keyword">null</span> ? <span class="keyword">null</span> : <span class="keyword">new</span> MutablePoint(loc);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setLocation</span><span class="params">(String id, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        MutablePoint loc = locations.get(id);</span><br><span class="line">        <span class="keyword">if</span> (loc == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No such ID: "</span> + id);</span><br><span class="line">        loc.x = x;</span><br><span class="line">        loc.y = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, MutablePoint&gt; <span class="title">deepCopy</span><span class="params">(Map&lt;String, MutablePoint&gt; m)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, MutablePoint&gt; result = <span class="keyword">new</span> HashMap&lt;String, MutablePoint&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String id : m.keySet())</span><br><span class="line">            result.put(id, <span class="keyword">new</span> MutablePoint(m.get(id)));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Collections.unmodifiableMap(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>위 클래스는 차량 위치를 담는 MutablePoint 클래스를 활용해 자바 모니터 패턴에 맞춰 만들어진 차량 추적 클래스가 나타나 있다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MutablePoint</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MutablePoint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        x = <span class="number">0</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MutablePoint</span><span class="params">(MutablePoint p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = p.x;</span><br><span class="line">        <span class="keyword">this</span>.y = p.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>위 클래스 MutablePoint는 클래스가 스레드 안전하지 않지만 차량 추적 클래스는 스레드 안전성을 확보하고 있다. 위치를 담는 location 변수나 위치를 나타내는 Point 인스턴스 모두 외부에 전혀 공개되고 있지 않았다.</li>
+<li>차량의 위치를 알고싶어하는 클라이언트 프로그램에게 위치를 넘겨줄 때는 MutablePoint 클래스의 생성자를 통해 MutablePoint의 복사본을 만들거나 deepCopy 메소드를 사용해 완전히 새로운 locations 인스턴스 복사본을 만들어 넘겨준다.</li>
+<li>deepCopy는 원래 Map 인스턴스에 Map 인스턴스 뿐만 아니라 그 안에 들어 있는 키와 값도 모두 복사해 완전히 새로운 인스턴스를 만든다.</li>
+<li>단순하게 Map 인스턴스를 Collection 클래스의 unmodifiableMap 메소드로 감싸는 것으로는 deepCopy의 기능을 다 하지 못하는데, UnmodificableMap은 컬렉션 자체만 변경할 수 없게 막아주며 그 안에 보관하고 있는 객체의 내용을 손대는 것은 막지 못하기 때문이다. HashMap의 생성자에 HashMap을 넘겨 복사하는 기능도 앞서 설명한 것과 동일하게, 즉 위치를 나타내는 Point 값을 복사하는 것이 아니라 point를 가리키는 참조를 복사하기 때문에 올바른 결과를 얻을 수 없다.</li>
+<li>외부에서 변경 가능한 데이터를 요청할 경우 그에 대한 복사본을 넘겨주는 방법을 사용하면 스레드 안전성을 부분적이나마 확보할 수 있다. 일반적인 경우라면 그다지 문제가 되지 않지만, 차량 추적 예제의 경우 추적하는 차량의 대수가 굉장히 많아진다면 성능에 문제가 발생할 수 있다.</li>
+</ul>
+<h3>4.3 스레드 안전성 위임</h3>
+<ul>
+<li>스레드 안전성을 확보한 객체를 조합해 만든 객체는 스레드에 안전한 객체일까?</li>
+<li><code>상황에 따라 다르다.</code>가 정답이다. 스레드에 안전한 객체를 모아 만든 객체는 스레드에 안전할 수도 있고 조금더 나은 출발점일 수 있다.</li>
+<li>앞서 살펴 봤던 CountingFactorizer 클래스의 상태는 스레드 안전한 AtomicLong 클래스의 상태와 같다.</li>
+<li>CountingFactorizer 클래스를 표현하는 상태값은 AtomicLong 하나이기 때문이다. 또 AtomicLong에 보관하는 카운트 값에 아무런 제한 조건이 없기 때문이다.</li>
+<li>이런 경우 CountingFactorizer는 스레드 안전성 문제를 AtomicLong 클래스에게 <code>위임 delegate</code>한다고 하며, AtomicLong 클래스가 스레드에 안전하기 때문에 AtomicLong에게 스레드 안전성을 위임했던 Counting Factorizer 역시 스레드에 안전하다.</li>
+</ul>
+<h3>4.3.1 예제: 위임 기법을 활용한 차량 추적</h3>
+<ul>
+<li>먼저 Point 클래스를 <code>immutable</code>하게 만들자.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Immutable</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Point</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>값을 변경할 수 없는 Point 객체, Point 클래스는 불변이기 떄문에 스레드 안전하다. 불변의 값은 얼마든지 마음대로 안전하게 공유하고 외부에 공개할 수 있다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingVehicleTracker</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ConcurrentMap&lt;String, Point&gt; locations;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Point&gt; unmodifiableMap;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DelegatingVehicleTracker</span><span class="params">(Map&lt;String, Point&gt; points)</span> </span>&#123;</span><br><span class="line">        locations = <span class="keyword">new</span> ConcurrentHashMap&lt;String, Point&gt;(points);</span><br><span class="line">        unmodifiableMap = Collections.unmodifiableMap(locations);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Point&gt; <span class="title">getLocations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> unmodifiableMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Point <span class="title">getLocation</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> locations.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocation</span><span class="params">(String id, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (locations.replace(id, <span class="keyword">new</span> Point(x, y)) == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"invalid vehicle name: "</span> + id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Alternate version of getLocations (Listing 4.8)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Point&gt; <span class="title">getLocationsAsStatic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.unmodifiableMap(</span><br><span class="line">                <span class="keyword">new</span> HashMap&lt;String, Point&gt;(locations));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>스레드 안전성을 ConcurrentHashMap 클래스에 위임한 추적 프로그램</li>
+<li>위 DelegatingVehicleTracker 예제에서는 별다른 동기화 흔적이 없다.</li>
+<li>모든 동기화 작업은 ConcurrentHashMap에서 담당하고, Map에 들어 있는 모든 값은 불변 상태이다.</li>
+<li>앞서 소개했던 모니터 적용 버전은 현재 시점의 차량 위치 전부의 고정된 스냅샷을 알려줬다.</li>
+<li>위임 기능을 적용한 버전은 언제든지 가장 최신의 차량 위치를 실시간으로 학인할 수 있는 동적인 데이터를 넘겨준다.</li>
+<li>특정 시점의 차량 고정 위치 데이터를 갖고 싶다면 getLocations 메소드에서 locations 변수에 들어있는 Map 클래스에 대한 단순 복사본을 넘겨줄 수 있다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;String, Point&gt; <span class="title">getLocations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Collections.unmodifiableMap(<span class="keyword">new</span> HashMap&lt;String, Point&gt;(locations));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3>4.3.2 독립 상태 변수</h3>
+<ul>
+<li>지금까지 모두 스레드 안전한 변수 하나에만 스레드 안전성을 위임했다.</li>
+<li>위임하고자 하는 내부 변수가 두개 이상이라 해도 두 개 이상의 변수가 서로 <code>독립적</code>이라면 클래스의 스레드 안전성을 위임할 수 있다.</li>
+<li><code>독립적</code>이라 함은 변수가 서로의 상태 값에 대한 연관성이 없다는 말이다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisualComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;KeyListener&gt; keyListeners</span><br><span class="line">            = <span class="keyword">new</span> CopyOnWriteArrayList&lt;KeyListener&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;MouseListener&gt; mouseListeners</span><br><span class="line">            = <span class="keyword">new</span> CopyOnWriteArrayList&lt;MouseListener&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addKeyListener</span><span class="params">(KeyListener listener)</span> </span>&#123;</span><br><span class="line">        keyListeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMouseListener</span><span class="params">(MouseListener listener)</span> </span>&#123;</span><br><span class="line">        mouseListeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeKeyListener</span><span class="params">(KeyListener listener)</span> </span>&#123;</span><br><span class="line">        keyListeners.remove(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeMouseListener</span><span class="params">(MouseListener listener)</span> </span>&#123;</span><br><span class="line">        mouseListeners.remove(listener);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>VisualComponent 클래스는 클라이언트가 마우스와 키보드 이벤트를 처리하는 리스너를 등록할 수 있는 화면 컴포넌트이다. VisualComponent는 각 종류별로 등록된 이벤트 리스너를 호출하는 기능을 갖고 있다. 내부적으로 보면 마우스 이벤트 리스너를 관리하는 목록 변수와 키보드 이벤트를 관리하는 목록 변수는 서로 아무런 연관이 없으므로 서로 독립적이다.</li>
+<li>리스너 이벤트 목록을 <code>CopyOnWriteArrayList</code> 클래스에 보관한다.  CopyOnWriteArrayList는 리스너 목록을 관리하기에 적당하게 만들어져 있는 스레드 안전한 List 클래스이다.</li>
+<li>위 두가지 리스트는 각각 스레드 안전성을 확보하고 있고 두 개의 변수를 서로 연동시켜 묶어주는 상태가 전혀 없기 때문에 VisualComponent는 스레드 안전성이라는 책임을 <code>mouseListeners</code>와 <code>keyListeners</code> 변수에게 완전히 위임할 수 있다.</li>
+</ul>
+<h3>4.3.3 위임할 때의 문제점</h3>
+<p>물론 위 VisualCompoenet 처럼 간단하게 구성되어 있는 클래스는 거의 없다. 거의 모든 클래스에서 내부 변수들이 상태 변수 간에 의존성을 가지고 있다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NumberRange</span> </span>&#123;</span><br><span class="line">    <span class="comment">// INVARIANT: lower &lt;= upper</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger lower = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger upper = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLower</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Warning -- unsafe check-then-act</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; upper.get())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"can't set lower to "</span> + i + <span class="string">" &gt; upper"</span>);</span><br><span class="line">        lower.set(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUpper</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Warning -- unsafe check-then-act</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; lower.get())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"can't set upper to "</span> + i + <span class="string">" &lt; lower"</span>);</span><br><span class="line">        upper.set(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isInRange</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (i &gt;= lower.get() &amp;&amp; i &lt;= upper.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote><p>클래스가 서로 의존성 없이 독립적이고 스레드 안전한 두 개 이상의 클래스를 조합해 만들어져 있고 두 개 이상의 클래스를 한번에 처리하는 복합 연산 메소드가 없는 상태라면, 스레드 안전성을 내부 변수에게 모두 위임할 수 있다.</p>
+</blockquote>
+<h3>4.3.4 내부 상태 변수를 외부에 공개</h3>
+<blockquote><p>상태 변수가 스레드 안전하고, 클래스 내부에서 상태 변수의 값에 대한 의존성을 갖고 있지 않고, 상태 변수에 대한 어떤 연산을 수행하더라도 잘못된 상태에 이를 가능성이 없다면, 해당 변수는 외부에 공개해도 안전하다.</p>
+</blockquote>
+<h3>4.3.5 예제: 차량 추적 프로그램의 상태를 외부에 공개</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafePoint</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GuardedBy</span>(<span class="string">"this"</span>) <span class="keyword">private</span> <span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SafePoint</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(a[<span class="number">0</span>], a[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SafePoint</span><span class="params">(SafePoint p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(p.get());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SafePoint</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.set(x, y);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span>[] get() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;x, y&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>x, y의 set과 get을 따로둔다면 x,y를 갖고올때 x는 바뀐값을 y는 바뀌지 않은 값을 가져올 수 있다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PublishingVehicleTracker</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, SafePoint&gt; locations;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, SafePoint&gt; unmodifiableMap;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PublishingVehicleTracker</span><span class="params">(Map&lt;String, SafePoint&gt; locations)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.locations = <span class="keyword">new</span> ConcurrentHashMap&lt;String, SafePoint&gt;(locations);</span><br><span class="line">        <span class="keyword">this</span>.unmodifiableMap = Collections.unmodifiableMap(<span class="keyword">this</span>.locations);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, SafePoint&gt; <span class="title">getLocations</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> unmodifiableMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SafePoint <span class="title">getLocation</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> locations.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocation</span><span class="params">(String id, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!locations.containsKey(id))</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"invalid vehicle name: "</span> + id);</span><br><span class="line">        locations.get(id).set(x, y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3>4.4 스레드 안전하게 구현된 클래스에 기능 추가</h3>
+<ul>
+<li>조심 또 조심… 쥐도 새도 모르게 동기화가 깨질 수 있따. 잠온다…</li>
+</ul>
+<h3>4.4.1 호출하는 측의 동기화</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotThreadSafe</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BadListHelper</span> &lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;E&gt; list = Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;E&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(E x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> absent = !list.contains(x);</span><br><span class="line">        <span class="keyword">if</span> (absent)</span><br><span class="line">            list.add(x);</span><br><span class="line">        <span class="keyword">return</span> absent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GoodListHelper</span> &lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;E&gt; list = Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;E&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(E x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (list) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> absent = !list.contains(x);</span><br><span class="line">            <span class="keyword">if</span> (absent)</span><br><span class="line">                list.add(x);</span><br><span class="line">            <span class="keyword">return</span> absent;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Vector 클래스와 Collections.synchronizedList 메소드에 대한 문서를 읽어보면 Vector 클래스 자체나 synchronizedList의 결과 List를 통해 클라이언트 측 동기화를 지원한다는 점을 알수 있다. 따라서 해당 list 변수로 락을 실행해 스레드 안전성을 확보했다.</li>
+</ul>
+<h3>4.4.2 클래스 재구성</h3>
+<ul>
+<li>기존 클래스에 새로운 단일 연산을 추가하고자 할 때 좀더 안전하게 사용할 수 있는 방법이 있는데, 바로 <code>재구성 composition</code>이다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImprovedList</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;T&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * PRE: list argument is thread-safe.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ImprovedList</span><span class="params">(List&lt;T&gt; list)</span> </span>&#123; <span class="keyword">this</span>.list = list; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> contains = list.contains(x);</span><br><span class="line">        <span class="keyword">if</span> (contains)</span><br><span class="line">            list.add(x);</span><br><span class="line">        <span class="keyword">return</span> !contains;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Plain vanilla delegation for List methods.</span></span><br><span class="line">    <span class="comment">// Mutative methods must be synchronized to ensure atomicity of putIfAbsent.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.contains(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Iterator&lt;T&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.iterator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Object[] toArray() &#123;</span><br><span class="line">        <span class="keyword">return</span> list.toArray();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; T[] toArray(T[] a) &#123;</span><br><span class="line">        <span class="keyword">return</span> list.toArray(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(T e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.add(e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.remove(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.containsAll(c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends T&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.addAll(c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(<span class="keyword">int</span> index, Collection&lt;? extends T&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.addAll(index, c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.removeAll(c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.retainAll(c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.equals(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.hashCode();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.get(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, T element)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.set(index, element);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, T element)</span> </span>&#123;</span><br><span class="line">        list.add(index, element);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.remove(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.indexOf(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lastIndexOf</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.lastIndexOf(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListIterator&lt;T&gt; <span class="title">listIterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.listIterator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListIterator&lt;T&gt; <span class="title">listIterator</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.listIterator(index);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">subList</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.subList(fromIndex, toIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123; list.clear(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ImprovedList는 List 클래스의 기능을 구현할 때는 ImprovedList 내부의 List 클래스 인스턴스가 갖고 있는 기능을 불러와 사용하고, 그에 덧붙여 putIfAbsend 메소드를 구현하고 있다.</li>
+<li>ImprovedList 클래스는 그 자체를 락으로 사용해 그 안에 포함되어 있는 List와는 다른 수준에서 락을 활용하고 있다.</li>
+<li>이런 방법으로 구현할 때에는 ImprovedList 클래스를 락으로 사용해 동기화하기 때문에, 내부의 List 클래스가 스레드 안전한지 아닌지는 중요하지 않고 신경 쓸 필요도 없다.</li>
+<li>심지어 불러다 사용한 List클래스가 내부적으로 동기화 정책을 바꾼다 해도 신경 쓸 필요가 없다.</li>
+<li>물론 이런 방법으로 동기화 기법을 한 단계 더 사용하면 전체적인 성능의 측면에서 약간 부정적인 영향이 있을 수 있다.</li>
+</ul>
+<h3>4.5 동기화 정책 문서화 하기</h3>
+<ul>
+<li>클래스의 동기화 정책에 대한 내용을 문서로 남기는 일은 스레드 안전성을 관리하는데 있어 가장 강력한 방법 가운데 하나다. (가장 많이 배척하는 방법 중임에도 틀림 없다.)
+<ul>
+<li>클래스를 가져다 사용하는 입장에서는 개발자가 작성한 문서를 가장 먼저 확인 할 것이다.</li>
+<li>유지보수를 담당하는 팀은 현재 사용하고 있는 프로그램의 안전성을 해치지 않을 수 있도록 동기화 전략을 파악하고자 할 것이다.</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>구현한 클래스가 어느 수준까지 스레드 안전성을 보장하는지에 대해 충분히 문서를 작성해둬야 한다. 동기화 기법이나 정책을 잘 정리해두면 유지보수 팀이 원활하게 관리할 수 있다.</p>
+</blockquote>
+<p>synchronized, volatile 등의 키워드나 기타 여러 가지 동기화 관련 클래스를 사용하는 일은 모두 멀티스레드 환경에서 동작하는 클래스의 내부에 담겨있는 데이터를 안전하게 사용할 수 있도록 <code>동기화 정책 synchronization policy</code>를 정의하는 일이라고 볼 수 있다. 동기화 정책은 전체 프로그램 설계의 일부분이며 반드시 문서로 남겨야 한다.</p>
+<p>동기화 정책을 구성하고 결정하고자 할 때 여러 가지 사항을 고려해야 한다.</p>
+<ul>
+<li>어떤 변수를 volatile로 지정할 것인지.</li>
+<li>어떤 변수를 사용할 때는 락으로 막아야 하는지.</li>
+<li>어떤 변수는 불변 클래스로 만들고 어떤 변수를 스레드에 한정시켜야 하는지.</li>
+<li>어떤 연산을 단일 연산으로 만들어야 하는지를 따져봐야 한다.</li>
+</ul>
+<p><code>최소한 클래스가 스레드 안전성에 대해서 어디까지 보장하는지 문서로 남겨야 한다.</code></p>
+<ul>
+<li>클래스가 스레드에 안전한가?</li>
+<li>락이 걸린 상태에서 콜백 함수를 호출하는 경우가 있는가?</li>
+<li>클래스의 동작 내용이 달라질 수 있는 락이 있는지?</li>
+</ul>
+<p><code>이런 질문에 대해서 추측성 생각은 위험하다.</code></p>
+<ul>
+<li>여러분이 개발한 클래스를 클라이언트 측에서 락으로 사용하지 못하게 해도 좋다.</li>
+<li>하지만 클라이언트 측 락을 사용할 수 없다고 적어 놓아야 한다.</li>
+<li>또 개발한 클래스를 유지보수시 어떤 락으로 동기화 해야 안전하게 구현할 수 있는지에 대해 문서로 알려야 한다.</li>
+</ul>
+<p><code>GuardedBy 등의 Annotation만 활용해도 훌령하다.</code></p>
+<ul>
+<li>동기화를 맞출때 사용하는 아주 작은 기법이라도 반드시 적어두자.</li>
+<li>후임자나 유지보수 인력에게는 굉장히 큰 도움이 된다.</li>
+</ul>
+<p><code>직관적으로 안전하겠다고 생각하는 클래스가 실제로는 그렇지 않은 경우가 많다.</code></p>
+<ul>
+<li>java.text.simpleDateFormat 클래스는 스레드 동기화가 되어 있지 않은데, JDK 1.4 버전 이전에는 API 문서에 동기화 언급이 전혀 없다.</li>
+</ul>
+<h3>4.5.1 애매한 문서 읽어내기</h3>
+<p>출처 :브라이언 괴츠, 더그 리, 팀 피얼스, 조셉 보우비어, 데이빗 홈즈, 조슈아 블로쉬 공저, 『 멀티코어를 100% 활용하는 자바 병렬 프로그래밍』, 에이콘(2008.7.30), 4장 인용.</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2017/05/10/Executor란-기초/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Executor란?-기초
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Java Concurrency in Practice, 객체 공유 - 스레드 한정</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+        <section id="comments"> 
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+ </section>
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            cho_jeong_ha &copy; 2018 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://jungha-cho.github.io/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/';
+        
+        this.page.identifier = '자바병렬프로그래밍-챕터4-객체구성';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jungha-cho-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

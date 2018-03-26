@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>객체 지향 설계 연습하기 - 블랙잭 (1) | 개발하는 조롱이</title>
+    
+    
+        <meta name="keywords" content="객체 지향 설계,블랙잭" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="객체 지향 설계 연습하기 - 블랙잭 (1)  0. 들어가며  업무에 Java를 사용하고 있지만, 깊은 이해도가 부족하다는걸 절감. 단순 객체 생성 및 비즈니스 로직 구현에만 매달리고 있음. 회의감이 듦. 신규 개발 뿐만 아니라 유지 보수 및 리팩토링시 객체 지향의 묘미를 살려보고자 함 객체 지향적 시야와 사고는 연습뿐이라는 것을 여러 커뮤니티에서 수집 객체">
+<meta name="keywords" content="객체 지향 설계,블랙잭">
+<meta property="og:type" content="article">
+<meta property="og:title" content="객체 지향 설계 연습하기 - 블랙잭 (1)">
+<meta property="og:url" content="http://jungha-cho.github.io/2018/03/12/객체지향설계-블랙잭(1)/index.html">
+<meta property="og:site_name" content="개발하는 조롱이">
+<meta property="og:description" content="객체 지향 설계 연습하기 - 블랙잭 (1)  0. 들어가며  업무에 Java를 사용하고 있지만, 깊은 이해도가 부족하다는걸 절감. 단순 객체 생성 및 비즈니스 로직 구현에만 매달리고 있음. 회의감이 듦. 신규 개발 뿐만 아니라 유지 보수 및 리팩토링시 객체 지향의 묘미를 살려보고자 함 객체 지향적 시야와 사고는 연습뿐이라는 것을 여러 커뮤니티에서 수집 객체">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://github.com/JungHa-Cho/BlackJack">
+<meta property="og:updated_time" content="2018-03-26T07:58:38.847Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="객체 지향 설계 연습하기 - 블랙잭 (1)">
+<meta name="twitter:description" content="객체 지향 설계 연습하기 - 블랙잭 (1)  0. 들어가며  업무에 Java를 사용하고 있지만, 깊은 이해도가 부족하다는걸 절감. 단순 객체 생성 및 비즈니스 로직 구현에만 매달리고 있음. 회의감이 듦. 신규 개발 뿐만 아니라 유지 보수 및 리팩토링시 객체 지향의 묘미를 살려보고자 함 객체 지향적 시야와 사고는 연습뿐이라는 것을 여러 커뮤니티에서 수집 객체">
+<meta name="twitter:image" content="https://github.com/JungHa-Cho/BlackJack">
+<link rel="publisher" href="UA-97209547-1">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="개발하는 조롱이" type="application/atom+xml" />
+    
+
+    <!-- Google Analytics -->
+    
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-97209547-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">개발하는 조롱이</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Book
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            JavaIO NIO
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Buffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBuffer/">13. 버퍼 01. 버퍼 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferMake/">13. 버퍼 06. 버퍼 만들기</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Byte
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOByteStream/">04. 바이트 스트림 : 바이트 단위 IO 클래스</a></li>  <li class="file"><a href="/2017/04/10/JavaIOByteStream/">바이트 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteBuffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOByteBuffer/">13. 버퍼 07. ByteBuffer</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Channel
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOChannel/">14. 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOFileChannel/">14. 채널 03. 파일 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOSocketChannel/">14. 채널 04. 소켓 채널</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Char
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOCharIOClass/">05. 문자 스트림 : 문자 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Override
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOOverrinding/">03. 자바 I/O ( 오버라이딩에 대한 이해 )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Pipe
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOPiped/">04. 2. 바이트 단위 IO 클래스 (2) (Piped)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Selector
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOSelector/">15. 셀렉터 Selector 01. 셀렉터 개요</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Socket
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasicsocket/">07. 네트워크 프로그래밍 기초 01. 소켓이란</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Stream
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            TCP
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/NetworkAndNetworking/">네트워크와 네트워킹</a></li>  <li class="file"><a href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasic/">07. 네트워크 프로그래밍 기초 - 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIO/">12. NIO 개요 01.자바 IO는 느리다?</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIONIO/">12. NIO 개요 04. 자바의 새로운 변화</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            이펙티브자바
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Access Modifier
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/11/EffectiveJavaRule13/">규칙 13 클래스와 멤버의 접근 권한은 최소화하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Builder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule2/">규칙2 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Convention
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaNamingConvention/">Effective Java, 일반적으로 통용되는 작명 관습을 따르라 ( naming convention )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Factory
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule1/">규칙1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Instance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule5/">규칙5 불필요한 객체는 만들지 말라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/11/Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라/">Effective-Java-규칙18_추상_클래스_대신_인터페이스를_사용하라</a></li>  <li class="file"><a href="/2018/03/15/이펙티브자바-4장-클래스와-인터페이스-1/">이펙티브자바 4장 클래스와 인터페이스 (1)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Singleton
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule3/">규칙3 private 생성자나 enum 자료형은 싱글턴 패턴을 따르도록 설계하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            new
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule4/">규칙4 객체 생성을 막을 때는 private 생성자를 사용하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반 원칙
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaGeneralProgrammingRule/">Effective Java, 일반적인 프로그래밍 원칙들</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바병렬프로그래밍
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Code
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">자바병렬프로그래밍-챕터4-객체구성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Synchronized
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/">자바병렬프로그래밍_Chapter05_구성단위</a></li>  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-동기화클래스/">자바병렬프로그래밍-Chapter05-동기화클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeThread/">Java Concurrency in Practice, Thread</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeThreadSafe/">Java Concurrency in Practice, 스레드 안전성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread Pool
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/">자바병렬프로그래밍-Chapter06-6.2.3-스레드풀</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            cache
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현/">자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            task
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-작업실행-task.1/">자바병렬프로그래밍-Chapter06-작업실행-task</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            객체 공유
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/">Java Concurrency in Practice, Objec Share</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            동시성과 병렬성
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism/">자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/08/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShare/">Java Concurrency in Practice, 객체 공유</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의 정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Interface/">Interface</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Annotation
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaAnnotation/">Standard Of Java, Chapter 12. Annotation</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Generic
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Generic/">Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaEnum/">Standard Of Java, Chapter 12. Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaGenerics/">Standard Of Java, Chapter 12. Generics</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaInterface/">Standard Of Java, Interface</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaChater13Thread/">Standard Of Java, Chapter 13. Thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/StandardOfJava/">총 정리</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘온소프트웨어
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Unicode
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareUnicode/">Joel On Software, UniCode</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            기본으로 돌아가기
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareBacktothebasic/">Joel On Software, 기본으로 돌아가기</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            명세서
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JoelOnSoftwareC5C14/">조엘 온 소프트웨어 C5-C14</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareSelectLanguage/">Joel On Software, Select Language</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘 테스트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareCheckList/">Joel On Software, 조엘 테스트 : 더 나은 코드를 위한 12단계</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            헤드퍼스트디자인패턴
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            STRATEGY
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/20/디자인패턴-STRATEGY/">디자인패턴-STRATEGY</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DataBase
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/ConnectionPool/">Connection Pool</a></li>  <li class="file"><a href="/2017/04/05/Engine/">engine</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Infra
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            CI
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Jenkins
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/">GCP에 CI 구축하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MQ
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/12/ApachKafkaInstall/">Apache Kafka 설치</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Logging
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/LogBack(slf4j)/">LogBack (slf4j)</a></li>  <li class="file"><a href="/2017/04/04/MDC/">MDC</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            라이브러리
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/ShutDownHook/">ShutDownHook</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            문법
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/trycatch문의finally와return의우선순위/">try catch문의 finally와 return의 우선순위</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/CallbyValuereference/">Call by Value reference</a></li>  <li class="file"><a href="/2017/04/04/Lock/">Lock</a></li>  <li class="file"><a href="/2017/05/10/Executor란-기초/">Executor란?-기초</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Language
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/Document/">Document</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Network
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteOrder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/ByteOrder/">Network Byte Order</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/26/블로그옮김-테스트/">블로그 테마 변경, 마크다운 테스트</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Tools
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IDE
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Eclipse
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/eclipse유용한단축키/">Eclipse 유용한 단축키</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            설계
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            OOP
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            연습
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            블랙잭
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2018/03/12/객체지향설계-블랙잭(1)/">객체 지향 설계 연습하기 - 블랙잭 (1)</a></li>  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(2)/">객체 지향 설계 연습하기 - 블랙잭 (2)</a></li>  <li class="file"><a href="/2018/03/14/객체지향설계-블랙잭(3)/">객체 지향 설계 연습하기 - 블랙잭 (3)</a></li>  <li class="file"><a href="/2018/03/20/객체지향설계-블랙잭(4)/">객체지향설계-블랙잭(4)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            업무
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            장애
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/21/업무-이야기-장애편 (1)/">장애응대-SOCKET편 (1)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            비트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/03/2complement/">2의 보수법으로 음수 표현하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-객체지향설계-블랙잭(1)" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/설계/">설계</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/설계/OOP/">OOP</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/설계/OOP/연습/">연습</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/설계/OOP/연습/블랙잭/">블랙잭</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/객체-지향-설계/">객체 지향 설계</a>, <a class="tag-link" href="/tags/블랙잭/">블랙잭</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/03/12/객체지향설계-블랙잭(1)/">
+            <time datetime="2018-03-12T07:09:00.000Z" itemprop="datePublished">2018-03-12</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20180312-객체지향설계-블랙잭(1).md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20180312-객체지향설계-블랙잭(1).md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20180312-객체지향설계-블랙잭(1).md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            객체 지향 설계 연습하기 - 블랙잭 (1)
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h1>객체 지향 설계 연습하기 - 블랙잭 (1)</h1>
+<p><img src="https://github.com/JungHa-Cho/BlackJack" alt="github source code"></p>
+<h3>0. 들어가며</h3>
+<ul>
+<li>업무에 Java를 사용하고 있지만, 깊은 이해도가 부족하다는걸 절감.</li>
+<li>단순 객체 생성 및 비즈니스 로직 구현에만 매달리고 있음. 회의감이 듦.</li>
+<li>신규 개발 뿐만 아니라 유지 보수 및 리팩토링시 객체 지향의 묘미를 살려보고자 함</li>
+<li>객체 지향적 시야와 사고는 연습뿐이라는 것을 여러 커뮤니티에서 수집</li>
+<li>객체 지향 설계 연습을 통해 객체 지향적 시야와 이해력을 높이고지 함</li>
+</ul>
+<h3>1. 왜? 블랙잭?</h3>
+<ul>
+<li>여러 커뮤니티에서 추천</li>
+<li>아래 내용은 개인적인 생각</li>
+<li>규칙이 단순, 게임 룰에 따라 게임의 흐름이 단순</li>
+<li>하지만, 플레이어 딜러 카드 등등 연관성이 종속적이라 설계 연습에 주효</li>
+</ul>
+<h2><a href="https://namu.wiki/w/%EB%B8%94%EB%9E%99%EC%9E%AD(%EC%B9%B4%EB%93%9C%EA%B2%8C%EC%9E%84)" target="_blank" rel="noopener">나무위키 참조</a></h2>
+<h3>2. 블랙잭 게임 룰</h3>
+<h4>2.1 룰의 배경</h4>
+<ul>
+<li>
+<p>무늬 SPADE, CLOVER, HEART, DIAMOND</p>
+</li>
+<li>
+<p>숫자 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, K, Q, J, A</p>
+</li>
+<li>
+<p>K, Q, J는 10점, A는 1 혹은 11, 둘 중 어느쪽으로 계산될 수 있다. ( 카지노 마다 룰이 다르다.)</p>
+</li>
+<li>
+<p>참여 인원은 2~8명, 2~8명 중 딜러를 정하거나 임의 딜러를 투입</p>
+</li>
+<li>
+<p>배팅 배당률은 배팅한 만큼 받는게 기본. 100원을 배팅해 이기면 200원을 얻고 지면 100원을 잃는다.</p>
+</li>
+<li>
+<p>딜러의 첫 번째 카드를 엎어 놓은 것 이외에는 모든 참가자의 카드가 공개된다.</p>
+</li>
+</ul>
+<h4>2.2 기본 룰</h4>
+<ul>
+<li>카드에 써있는 숫자 그대로 숫자를 더해 21을 만들면 된다.</li>
+<li>첫 시작시 카드 두장을 지급 받는다.</li>
+<li>처음 받은 두장이 21이 될 경우 __블랙잭__이라고 하며 보통 베팅액의 2배1.5배를 얻는다.</li>
+<li>딜러가 블랙잭인 경우에는 참가자가 베팅한 돈의 전부를 받는다.</li>
+<li>딜러와 참가자가 동시에 블랙잭인 경우에 참가자는 대개 베팅한 돈을 돌려받지만, 잃게 되는 경우도 있다.</li>
+<li>21이 되지 않을 경우 얼마든지 카드를 뽑을 수 있다.</li>
+<li>21 초과 ( 22 이상 )이 될 경우 __버스트__라고 하며, 딜러의 결과에 상관 없이 무조건 돈을 잃는다.</li>
+<li>카드를 더 받지 않는 것이 유리하다고 판단되면 추가하지 않아도 된다. 예를 들면, Q와 9을 받아 19점인 경우에 1장을 더 추가하면 21점을 초과할 염려가 있기 때문에 그 상태에서 카드를 더 받지 않고 그칠 수 있다.</li>
+<li>딜러는 참가자들의 추가가 모두 끝난 뒤에 자신이 카드를 추가할 것인지 여부를 결정한다.</li>
+<li>정식 규칙에서 딜러는 가진 카드의 합계가 16점 이하이면 반드시 1장을 추가해야 하고, 17점 이상이면 추가할 수 없게 되어 있다.</li>
+<li>딜러의 점수와 비교해서 동점이면 무승부, 딜러보다 높으면 이기고 낮으면 지게 된다.</li>
+<li>합계가 21점을 초과하면 0점으로 간주되는데, 딜러가 21점을 초과한 경우도 0점이 되지만, 21점을 초과한 참가자의 베팅액을 딸 수 있다.</li>
+</ul>
+<h4>2.3 게임의 흐름</h4>
+<ul>
+<li>배팅 금액을 정한다.</li>
+<li>딜러를 정해야 하며, 딜러는 딜러 기준 왼쪽으로 1장씩 2번을 돌려 각자 2장씩 가지게 한다.</li>
+<li>딜러의 첫번째 카드 외 모든 유저의 카드는 오픈한다.</li>
+<li>각자 판단 하에 카드를 요구한다.</li>
+</ul>
+<h4>2.4 게임 내 규칙</h4>
+<p><strong>Hit - 히트</strong></p>
+<ul>
+<li>처음 2장의 카드 상태에서 카드를 더 뽑는 것을 __HIT__라고 한다.</li>
+<li>제스쳐로는 검지 손가락으로 테이블을 톡 내려주면 된다.</li>
+<li>21이 되지 않는 한 얼마든지 카드를 뽑을 수 있다.</li>
+<li>21이 넘으면 무조건 진다.</li>
+<li>카드 숫자 합이 17이 되지 않으면 무조건 카드를 뽑아야 하는데, 해당 규칙은 딜러에게도 해당한다.</li>
+<li>따라서 딜러가 17이 되기 전까지는 무조건 카드를 받아야 한다.</li>
+<li>내가 이기지 않아도, 딜러가 지면 이긴다.</li>
+</ul>
+<p><strong>stand, stay - 스탠드, 스테이</strong></p>
+<ul>
+<li>카드를 뽑지 않고 턴을 종료한다.</li>
+<li>제스쳐는 손등을 위로 보이게 한뒤, 테이블을 한번 훝는다.</li>
+</ul>
+<p><strong>split - 스플릿</strong></p>
+<ul>
+<li>처음 받은 2장의 카드가 같은 숫자 또는 같은 그림일 경우, 패를 두개로 나누어 두개의 게임을 동시에 진행할수 있다.</li>
+<li>이후 또 똑같은 숫자가 나오면 똑같이 계속 스플릿을 진행할 수 있다.</li>
+<li>제스처로는 검지와 중지를 테이블에 향하여 친후 손가락을 떼면서 패를 나누는 듯한 제스쳐. 블랙잭용어는 기본적으로 딜러들이 다 알기때문에 ‘스플릿’ 이라고 말만해도 다 알아먹는다. 그러면 딜러가 확인차 자기 손가락으로 스플릿제스쳐를 취하면 맞다고 고개한번 끄덕거려주면 만사오케이. 그리고 애초에 스플릿이 아무때나 되는게 아니고 대부분 (8,8), (9,9) (A.A) 에만 하기때문에.</li>
+<li>블랙잭은 기본이 카드를 두장 받는것이므로 각각 한장씩 더 받게 된다.스플릿은 A를 제외하고는 3번까지 가능하다.(즉 4개의 게임으로 나누는것까지 가능하다.) (A같은경우는 카지노마다 룰이 다르다.)</li>
+<li>참고로 에이스를 스플릿해서 A,10이 나왔어도 블랙잭처럼 1.5배를 주는것은 아니고 그냥 21로 계산해서 1배만 준다. 다만, 딜러가 블랙잭이 나온경우 플레이어는 패하게되고, 딜러의 숫자합이 블랙잭이 아닌 21일경우 무승부로 인정되어 베팅금액을 다시 돌려준다.</li>
+</ul>
+<p><strong>Double Down - 더블 다운</strong></p>
+<ul>
+<li>돈을 두 배로 거는 것.</li>
+<li>제스쳐로는 베팅금을 더 걸면서 검지와 중지 손가락 두개를 테이블을 향하여 톡 친다.</li>
+<li>본래 합이 21이 넘지 않는 한 무제한으로 뽑을 수 있는 카드를 이후 단 하나만 더받는 조건으로 돈을 두 배로 걸 수 있다.</li>
+<li>따라서 일반적으로 두 장을 합쳐서 한 10이나 11일 경우에 더블다운을 하는 시나리오가 일반적으로 제일 좋다.</li>
+<li>좀더 확률상 높이자면 딜러가 버스트할 확률이 높은 상황 + 내 패가 10,11 정도면 더블을 성공할 확률이 매우 높아진다(확률상 숫자 10에 해당하는 10,J,Q,K가 나올 확률이 제일 높기 때문이고 설사 이 녀석들이 나오지 않는다 해도 딜러가 버스트 할 확률이 높기 때문이다).</li>
+</ul>
+<p><strong>bust - 버스트</strong></p>
+<ul>
+<li>카드 총합이 21을 넘는 경우.</li>
+<li>플레이어가 버스트 당하면 경기 흐름에 상관없이 바로 배당금을 잃는다.</li>
+<li>즉 12에서 10을 뽑아 22가 되는 사고로도 버스트 되어 패배한다.</li>
+<li>이는 플레이어 뿐만 아니라 딜러에게도 해당되기 때문에 플레이어가 꼬인 패를 갖고 있다고 해서 그 판에 대해 아예 손을 놓을 수 없게 만드는 규칙이기도 하다.</li>
+<li>특히 딜러는 매장 내에서 정한 ‘언더 오버’ 수치로 인해 언더 아래의 숫자인 패일 경우 반드시 뽑아야하기 때문에 살아있는 다른 플레이어들이 카드를 넘기는 순간에는 땀을 쥐게 된다.</li>
+<li>딜러가 버스트 당하면 그 시점까지 살아있던 다른 플레이어들은 갖고 있는 패에 상관 없이 승리하기에 이미 죽은 플레이어는 자신의 머리를 잡는다.</li>
+</ul>
+<p><strong>black jack</strong></p>
+<ul>
+<li>게임내 가장 높은 가치.</li>
+<li>Ace 한장과 10에 해당하는 패(10,J,Q,K)로 21을 이루는 경우 베팅금액의 1.5배를 돌려준다.</li>
+<li>원래 이기는 룰대로 두배로 이기는 경우도 있다.</li>
+<li>딜러도 블랙잭이 아닌 이상 무조건적인 승리.</li>
+<li>Ace혹은 10에 해당하는 패를 스플릿 해서 진행한 경우 A + 10의 조합이 나오더라도 블랙잭으로 인정하지 않고 21로 계산한다.</li>
+<li>에이텐은 플레이어에게 이로운 규칙이라서 카지노 측에서 적용시키기 꺼려하는 규칙이라고 하나, 일부에서는 그대로 적용해주는 곳도 있다고 한다.</li>
+</ul>
+<h4>2.5 추가 규칙</h4>
+<p><strong>인셔런스(Insurance)</strong></p>
+<ul>
+<li>딜러가 오픈한 첫 카드가 에이스일 경우, 블랙잭이 나올 가능성에 대비해 보험을 들어두는 것을 말한다.</li>
+<li>건 금액의 절반(절반은 상한일뿐이고 절반이하를 지불하는것도 가능하다.)을 인셔런스로 지불하게 되며 만약 딜러가 블랙잭일 경우 보험금의 2배를 보험수당으로 지불한다.</li>
+<li>물론 기존의 베팅금은 딜러가 가져가게되므로 인셔런스 성공시 본전회수가 된다.</li>
+<li>베팅금이 100원일경우 보험금은 50원해서 총 150원을 소모하게 되며, 베팅금 100원은 잃고 보험금 50원은 승리해 50원의 2배인 100원을 벌면 총 150원으로 처음과 동일한 본전치기가 된다.</li>
+<li>만약 딜러가 블랙잭이 아닐 경우엔 보험으로 걸어둔 금액을 잃게 된다.</li>
+<li>내 패가 19,20일 경우라면 보험금은 잃더라도 게임에는 승리할 확률이 무척 높으니 이경우에만 걸어볼만하다. 내가 19,20 이 아닐 경우에 인셔런스를 건다면, 내 패도 잃고 인셔런스도 잃는 경우가 매우 많다.</li>
+<li>내 패가 19,20이 아닌 경우에는 깔끔하게 판돈만 잃을 생각으로 인셔런스를 걸지 않도록 하자.</li>
+</ul>
+<p><strong>푸시(Push)</strong></p>
+<ul>
+<li>특수적으로 넣는 경우가 있다.</li>
+<li>원래 동점일경우 플레이어가 이기지만, 카지노측의 확률을 높이기 위함이다.</li>
+<li>딜러와 플레이어의 총합이 같을 경우 베팅금을 그대로 다시 돌려받는다.</li>
+<li>하지만, 블랙잭은 총합 21과는 다른 개념으로 블랙잭이 21보다 높은 가치이다.</li>
+<li>애초에 딜러가 블랙잭이면 내가 블랙잭이 아닌이상 지기때문에 카드를 더 받아서 21을 만들어 볼 수도 없다 딜러가 플레이어들로부터 원금을 걷어갈때 푸시인 경우 딜러가 손마디로 테이블을 1~2회 두드리면서 푸시임을 플레이어에게 상기시켜준다.</li>
+</ul>
+<p><strong>이븐 머니(Even Money)</strong></p>
+<ul>
+<li>
+<p>플레이어가 블랙잭이 나오고, 딜러의 보여진 패가 Ace인경우 딜러가 블랙잭이 나온 플레이어에게 이븐머니를 물어본다.</p>
+</li>
+<li>
+<p>베팅한 금액과 동일한 금액을 승리수당으로 받고 게임을 종료할 것인지, 아니면 블랙잭의 효과(1.5배)를 그대로 유지하면서 게임을 계속 진행할 것인지에 대해 선택을 하는 것.</p>
+</li>
+<li>
+<p>이븐머니를 선택할 경우 딜러의 블랙잭 여부와 상관없이 바로 1배의 승리수당을 받고.</p>
+</li>
+<li>
+<p>해당플레이어의 게임을 종료, 이븐머니를 선택하지 않을 경우 계속해서 게임을 진행한다.</p>
+</li>
+<li>
+<p>게임을 진행한 후 딜러가 블랙잭일경우 Push로 그냥 비겨버리고, 딜러가 블랙잭이 아닌 경우에는 일반적인 블랙잭처럼 1.5배의 수당을 받는다.</p>
+</li>
+<li>
+<p>그런데 말로는 ‘이븐머니’ 라고 거창하지만 실상을 들여다보면 이븐머니를 선택하는것은 인셔런스를 택하는것과 다를바가없다. 쉬운 이해를 위해 내가 1000원을 걸어서 블랙잭이 나왔는데 인슈어런스를 선택하는상황을 가정해보자.</p>
+</li>
+<li>
+<p>상황1. 인슈어런스하지않고 이븐머니를 결정한경우 - 이븐머니로 1000원을 받아서 1000원이 이익이다.</p>
+</li>
+<li>
+<p>상황2. 인슈어런스했는데 딜러가 블랙잭인경우 - 인슈어런스로 1500원을받는데 여기서 500원은 내가 인슈어런스걸었던금액이므로 1000원이 이익이다.</p>
+</li>
+<li>
+<p>상황3. 인슈어런스했는데 딜러가 블랙잭이 아닌경우 - 블랙잭(1.5배)으로 1500원을 따지만 인슈어런스로 지불한 500원은 딜러에게회수되므로 1000원이 이익이다.</p>
+</li>
+<li>
+<p>결국 이븐머니를 택하는것은 인슈어런스를 고르는것과 다를바가없다. 다만 일반적인 인슈어런스는 많이 선택하지않는데비해 이븐머니는 선택률이 꽤나높다.</p>
+</li>
+<li>
+<p>왜냐면 블랙잭나왔는데 한푼도 못따면(이븐머니안했는데 딜러도 블랙잭나와서 비기면) 기분 잡치니까…</p>
+</li>
+<li>
+<p>하나의 예를 들면 안전한 1000원 vs 불안정하지만 0원이랑 1500원 중 골라잡는 쫄깃한 선택지다.</p>
+</li>
+</ul>
+<p><strong>서렌더(Surrender)</strong></p>
+<ul>
+<li>플레이어가 게임을 포기하고, 베팅액의 절반을 돌려 받는 규칙이다. '다이’를 쳐도 조금이나마 돌려받을 수 있는 규칙이나, 딜러가 블랙잭을 터뜨렸을 경우 선언권이 막혀 그대로 패배한다.</li>
+</ul>
+<h1></h1>
+<h4>2.6 딜러 규칙</h4>
+<p>딜러는 플레이어의 패를 보고 히트할지 스테이할지를 결정하는 것이 아니라, 단순한 규칙에 따라 플레이 한다. 딜러가 기계적으로 플레이하게 만들어, 딜러의 주관적인 개입을 막는 것이 목적이다.</p>
+<ul>
+<li>
+<p>16 이하면 무조건 히트, 17 이상이면 무조건 스테이</p>
+</li>
+<li>
+<p>플레이어가 15에서 스테이했고, 딜러는 16일때, 딜러가 스테이하면 플레이어를 이길 수 있다. 하지만, 딜러는 의무적으로 버스트의 위험을 감수하고 무조건 히트해야 한다.</p>
+</li>
+<li>
+<p>플레이어가 18에서 스테이했고, 딜러는 17일때, 딜러가 히트를 해서 A~4 의 카드가 나오면 비기거나 이길 수 있다. 하지만, 딜러는 히트할 수 없고, 스테이해야 한다.</p>
+</li>
+<li>
+<p>당연하지만, 딜러는 스플릿, 더블다운, 서렌더, 인셔런스 등을 할 수 없다. 이것들은 플레이어를 위한 규칙이다.</p>
+</li>
+<li>
+<p>딜러는 버스트 되지 않는 한, A 는 11로 카운트 한다. 예를 들어 A-6 이라면 17이 되며, 딜러 규칙에 의해서 무조건 스테이한다는 것을 의미한다.</p>
+</li>
+<li>
+<p>단, 일부 카지노에서는 딜러가 소프트 17, 즉 A-6의 경우에도 히트하는 경우도 있다. 이를 Hit soft 17, 혹은 줄여서 h17 이라고 한다. 플레이 하기전 알아볼 것. [11]</p>
+</li>
+</ul>
+<h1></h1>
+<h4>2.7 기타 규칙</h4>
+<p>실전에서는 보통 사용되지 않는 규칙들이며, 친선 게임이나 비디오게임 등에서 사용되는 규칙들이다. 비디오게임에서는 보통 아래와 같은 패에서는 더 높은 배당을 지급한다. 그냥 재미로 알아 두면 좋다.</p>
+<p><strong>원아이드잭(One-eyed jack)</strong></p>
+<ul>
+<li>플레잉 카드를 잘 보면 스페이드J 와 하트J 는 얼굴이 옆면으로 되어 있어서 눈이 한쪽만 보인다.</li>
+<li>그래서, 이 2장의 카드를 원아이드잭이라 부른다.</li>
+<li>원아이드잭과 같은 무늬의 A 가 조합된 블랙잭은 더 등급이 높은 블랙잭으로 취급한다.</li>
+</ul>
+<p><strong>777</strong></p>
+<ul>
+<li>7 세장으로 21을 만드는 경우, 블랙잭과 동등 또는 그 이상의 등급으로 인정한다.슬롯머신에서 777 이 나오면 잭팟! 인생역전</li>
+</ul>
+<p><strong>파이브 카드 찰리(Five card Charlie)</strong></p>
+<ul>
+<li>3장을 히트해서 패가 5장이 되는 것을 의미하며, 버스트가 되지 않아야 한다.</li>
+<li>이때 적용되는 규칙은 여러가지가 있는데, 어떤 것이든 플레이어에게 유리하다. 호주의 멜버른에 있는 '크라운 카지노’에서는 이 룰이 적용된다.</li>
+<li>아래 n-카드 찰리 규칙 규칙 참고.</li>
+</ul>
+<p><strong>식스 카드 찰리(Six card Charlie)</strong></p>
+<ul>
+<li>4장을 히트해서 패가 6장이 되는 것을 의미하며, 역시 버스트가 되지 않아야 한다.</li>
+<li>파이브카드 찰리는 그나마 자주 나오기에, 좀더 조건을 강화해서 6장을 기준으로 하는 경우이다.</li>
+</ul>
+<p><strong>n-카드 찰리 규칙</strong></p>
+<ul>
+<li>
+<p>플레이어가 5장(or 6장)을 만들고, 딜러가 블랙잭이 아니라면 딜러의 패와 상관없이 플레이어가 이긴다. 단, 딜러가 블랙잭일 경우는 딜러가 승리한다.</p>
+</li>
+<li>
+<p>반대로, 딜러가 5장(or 6장)이 되는 경우, 무조건 플레이어가 승리한다. 단, 버스트된 플레이어는 제외된다. 즉, 딜러 버스트와 동일하다.[13]</p>
+</li>
+<li>
+<p>일부 비디오게임에서는 플레이어가 5장 이상일 경우, 카드 수에 따라 2배씩 계속 배당이 증가하기도 한다.</p>
+</li>
+<li>
+<p>단 5장이면 2배, 6장이면 4배, 7장이면 8배의 배당을 지급한다. [14] 단, 이 경우는 무조건 승리하는 것은 아니며, 숫자합으로 딜러를 이겨야 한다. 딜러가 블랙잭이면 말짱 꽝</p>
+</li>
+</ul>
+<p><strong>딜러 무제한 스테이 규칙</strong></p>
+<ul>
+<li>딜러는 자신의 숫자의 합이 플레이어보다 유리하면 언제든지 스테이할 수 있는 사기적인 규칙[15]. 일부 비디오게임에 적용되어 있다.</li>
+</ul>
+<h1></h1>
+<p>끝으로 마지막 할말</p>
+<p>나무 위키를 보며, 규칙을 익혔지만 생각보다 적용되는 룰이 많고 복잡하다…</p>
+<p>본 문서는 <a href="https://namu.wiki/w/%EB%B8%94%EB%9E%99%EC%9E%AD(%EC%B9%B4%EB%93%9C%EA%B2%8C%EC%9E%84)" target="_blank" rel="noopener">나무 위키</a>의 블랙잭 자료가 출처임을 밝힙니다.</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2018/03/12/객체지향설계-블랙잭(2)/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    객체 지향 설계 연습하기 - 블랙잭 (2)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">자바병렬프로그래밍-Chapter06-6.2.3-스레드풀</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+        <section id="comments"> 
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+ </section>
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            cho_jeong_ha &copy; 2018 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://jungha-cho.github.io/2018/03/12/객체지향설계-블랙잭(1)/';
+        
+        this.page.identifier = '객체지향설계-블랙잭(1)';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jungha-cho-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

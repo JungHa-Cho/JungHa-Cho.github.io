@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>13. 버퍼 01. 버퍼 개요 | 개발하는 조롱이</title>
+    
+    
+        <meta name="keywords" content="JavaIO NIO,Buffer" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="01. 버퍼 개요  버퍼는 운영체제의 커널이 관리하는 시스템 메모리를 직접 사용할 수 있다. 기존에는 버퍼 대신 주로 바이트 배열(byte[], 배열도 객체다)을 사용했기 때문에 JVM의 힙 영역에 메모리가 할당되고 맨 처음으로 바이트 배열의 초기 값이 시스템 메모리로 한 번 복사되어야 했다. 이렇게 초기 한 번 뿐이지만 복사가 이루어진다는 점도 성능에 나">
+<meta name="keywords" content="JavaIO NIO,Buffer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13. 버퍼 01. 버퍼 개요">
+<meta property="og:url" content="http://jungha-cho.github.io/2017/04/10/JavaIOWhatIOBuffer/index.html">
+<meta property="og:site_name" content="개발하는 조롱이">
+<meta property="og:description" content="01. 버퍼 개요  버퍼는 운영체제의 커널이 관리하는 시스템 메모리를 직접 사용할 수 있다. 기존에는 버퍼 대신 주로 바이트 배열(byte[], 배열도 객체다)을 사용했기 때문에 JVM의 힙 영역에 메모리가 할당되고 맨 처음으로 바이트 배열의 초기 값이 시스템 메모리로 한 번 복사되어야 했다. 이렇게 초기 한 번 뿐이지만 복사가 이루어진다는 점도 성능에 나">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://cfile23.uf.tistory.com/image/270D0C4F58C92481152819">
+<meta property="og:image" content="http://cfile8.uf.tistory.com/image/256AF73E58C929B62681DE">
+<meta property="og:image" content="http://cfile23.uf.tistory.com/image/2633873558C92DE33071A1">
+<meta property="og:image" content="http://cfile26.uf.tistory.com/image/23517D4658C931F50F15B4">
+<meta property="og:updated_time" content="2018-03-26T07:49:50.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="13. 버퍼 01. 버퍼 개요">
+<meta name="twitter:description" content="01. 버퍼 개요  버퍼는 운영체제의 커널이 관리하는 시스템 메모리를 직접 사용할 수 있다. 기존에는 버퍼 대신 주로 바이트 배열(byte[], 배열도 객체다)을 사용했기 때문에 JVM의 힙 영역에 메모리가 할당되고 맨 처음으로 바이트 배열의 초기 값이 시스템 메모리로 한 번 복사되어야 했다. 이렇게 초기 한 번 뿐이지만 복사가 이루어진다는 점도 성능에 나">
+<meta name="twitter:image" content="http://cfile23.uf.tistory.com/image/270D0C4F58C92481152819">
+<link rel="publisher" href="UA-97209547-1">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="개발하는 조롱이" type="application/atom+xml" />
+    
+
+    <!-- Google Analytics -->
+    
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-97209547-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">개발하는 조롱이</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Book
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            JavaIO NIO
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Buffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2017/04/10/JavaIOWhatIOBuffer/">13. 버퍼 01. 버퍼 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferMake/">13. 버퍼 06. 버퍼 만들기</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Byte
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOByteStream/">04. 바이트 스트림 : 바이트 단위 IO 클래스</a></li>  <li class="file"><a href="/2017/04/10/JavaIOByteStream/">바이트 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteBuffer
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOByteBuffer/">13. 버퍼 07. ByteBuffer</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Channel
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOChannel/">14. 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOFileChannel/">14. 채널 03. 파일 채널</a></li>  <li class="file"><a href="/2017/04/10/JavaIOSocketChannel/">14. 채널 04. 소켓 채널</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Char
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOCharIOClass/">05. 문자 스트림 : 문자 단위 IO 클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Override
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/09/JavaIOOverrinding/">03. 자바 I/O ( 오버라이딩에 대한 이해 )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Pipe
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOPiped/">04. 2. 바이트 단위 IO 클래스 (2) (Piped)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Selector
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOSelector/">15. 셀렉터 Selector 01. 셀렉터 개요</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Socket
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasicsocket/">07. 네트워크 프로그래밍 기초 01. 소켓이란</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Stream
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            TCP
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/NetworkAndNetworking/">네트워크와 네트워킹</a></li>  <li class="file"><a href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingbasic/">07. 네트워크 프로그래밍 기초 - 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIO/">12. NIO 개요 01.자바 IO는 느리다?</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIONIO/">12. NIO 개요 04. 자바의 새로운 변화</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            이펙티브자바
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Access Modifier
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/11/EffectiveJavaRule13/">규칙 13 클래스와 멤버의 접근 권한은 최소화하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Builder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule2/">규칙2 생성자 인자가 많을 때는 Builder 패턴 적용을 고려하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Convention
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaNamingConvention/">Effective Java, 일반적으로 통용되는 작명 관습을 따르라 ( naming convention )</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Factory
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule1/">규칙1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Instance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule5/">규칙5 불필요한 객체는 만들지 말라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/11/Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라/">Effective-Java-규칙18_추상_클래스_대신_인터페이스를_사용하라</a></li>  <li class="file"><a href="/2018/03/15/이펙티브자바-4장-클래스와-인터페이스-1/">이펙티브자바 4장 클래스와 인터페이스 (1)</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Singleton
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule3/">규칙3 private 생성자나 enum 자료형은 싱글턴 패턴을 따르도록 설계하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            new
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaRule4/">규칙4 객체 생성을 막을 때는 private 생성자를 사용하라</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반 원칙
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/EffectiveJavaGeneralProgrammingRule/">Effective Java, 일반적인 프로그래밍 원칙들</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바병렬프로그래밍
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Code
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">자바병렬프로그래밍-챕터4-객체구성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Synchronized
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/">자바병렬프로그래밍_Chapter05_구성단위</a></li>  <li class="file"><a href="/2017/05/12/자바병렬프로그래밍-Chapter05-동기화클래스/">자바병렬프로그래밍-Chapter05-동기화클래스</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeThread/">Java Concurrency in Practice, Thread</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeThreadSafe/">Java Concurrency in Practice, 스레드 안전성</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread Pool
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/">자바병렬프로그래밍-Chapter06-6.2.3-스레드풀</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            cache
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현/">자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            task
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/15/자바병렬프로그래밍-Chapter06-작업실행-task.1/">자바병렬프로그래밍-Chapter06-작업실행-task</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            객체 공유
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/">Java Concurrency in Practice, Objec Share</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            동시성과 병렬성
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/13/자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism/">자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/08/JavaConcurrencyinPracticeIntroduce/">Java Concurrency in Practice, 개요</a></li>  <li class="file"><a href="/2017/05/09/JavaConcurrencyinPracticeObjectShare/">Java Concurrency in Practice, 객체 공유</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의 정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Interface/">Interface</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            자바의정석
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Annotation
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaAnnotation/">Standard Of Java, Chapter 12. Annotation</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Generic
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Generic/">Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaEnum/">Standard Of Java, Chapter 12. Generics</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaGenerics/">Standard Of Java, Chapter 12. Generics</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Interface
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/StandardOfJavaInterface/">Standard Of Java, Interface</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Thread
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a></li>  <li class="file"><a href="/2017/04/10/StandardOfJavaChater13Thread/">Standard Of Java, Chapter 13. Thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/StandardOfJava/">총 정리</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘온소프트웨어
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Unicode
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareUnicode/">Joel On Software, UniCode</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            기본으로 돌아가기
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareBacktothebasic/">Joel On Software, 기본으로 돌아가기</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            명세서
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JoelOnSoftwareC5C14/">조엘 온 소프트웨어 C5-C14</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareSelectLanguage/">Joel On Software, Select Language</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            조엘 테스트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareCheckList/">Joel On Software, 조엘 테스트 : 더 나은 코드를 위한 12단계</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            헤드퍼스트디자인패턴
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            STRATEGY
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/20/디자인패턴-STRATEGY/">디자인패턴-STRATEGY</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DataBase
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/ConnectionPool/">Connection Pool</a></li>  <li class="file"><a href="/2017/04/05/Engine/">engine</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Infra
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            CI
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Jenkins
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/">GCP에 CI 구축하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MQ
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Kafka
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/12/ApachKafkaInstall/">Apache Kafka 설치</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Logging
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/LogBack(slf4j)/">LogBack (slf4j)</a></li>  <li class="file"><a href="/2017/04/04/MDC/">MDC</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            라이브러리
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/ShutDownHook/">ShutDownHook</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            문법
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/trycatch문의finally와return의우선순위/">try catch문의 finally와 return의 우선순위</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/CallbyValuereference/">Call by Value reference</a></li>  <li class="file"><a href="/2017/04/04/Lock/">Lock</a></li>  <li class="file"><a href="/2017/05/10/Executor란-기초/">Executor란?-기초</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Language
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/05/Document/">Document</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Network
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ByteOrder
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/06/ByteOrder/">Network Byte Order</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Test
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/26/블로그옮김-테스트/">블로그 테마 변경, 마크다운 테스트</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Tools
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IDE
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Eclipse
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/eclipse유용한단축키/">Eclipse 유용한 단축키</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            설계
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            OOP
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            연습
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            블랙잭
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(1)/">객체 지향 설계 연습하기 - 블랙잭 (1)</a></li>  <li class="file"><a href="/2018/03/12/객체지향설계-블랙잭(2)/">객체 지향 설계 연습하기 - 블랙잭 (2)</a></li>  <li class="file"><a href="/2018/03/14/객체지향설계-블랙잭(3)/">객체 지향 설계 연습하기 - 블랙잭 (3)</a></li>  <li class="file"><a href="/2018/03/20/객체지향설계-블랙잭(4)/">객체지향설계-블랙잭(4)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            업무
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            장애
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/21/업무-이야기-장애편 (1)/">장애응대-SOCKET편 (1)</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            일반
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            비트
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/03/2complement/">2의 보수법으로 음수 표현하기</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-JavaIOWhatIOBuffer" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Buffer/">Buffer</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Buffer/">Buffer</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/JavaIOWhatIOBuffer/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170410-JavaIOWhatIOBuffer.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170410-JavaIOWhatIOBuffer.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170410-JavaIOWhatIOBuffer.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            13. 버퍼 01. 버퍼 개요
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h1>01. 버퍼 개요</h1>
+<p><img src="http://cfile23.uf.tistory.com/image/270D0C4F58C92481152819" alt="img"><br>
+버퍼는 운영체제의 커널이 관리하는 시스템 메모리를 직접 사용할 수 있다. 기존에는 버퍼 대신 주로 바이트 배열(byte[], 배열도 객체다)을 사용했기 때문에 JVM의 힙 영역에 메모리가 할당되고 맨 처음으로 바이트 배열의 초기 값이 시스템 메모리로 한 번 복사되어야 했다. 이렇게 초기 한 번 뿐이지만 복사가 이루어진다는 점도 성능에 나쁘게 작용했지만 결정적으로 DMA, 가상 메모리, 메모리 맵 파일 등의 운영체제 수준에서 제공해주는 유용한 기능들까지도 사용할 수 없다는 점이 가장 큰 단점이었다.</p>
+<p>이에 대한 해법으로 C/C++에서 포인터를 사용하듯이 자바에서도 직접 시스템 메모리를 사용할 수 있는 버퍼(Buffer) 클래스를 java.nio 패키지에 포함시켰다.</p>
+<p><img src="http://cfile8.uf.tistory.com/image/256AF73E58C929B62681DE" alt="img2"><br>
+그림에서 볼 수 있듯이 java.nio 패키지는 크게 Buffer 클래스와 ByteOrder 클래스로 나눠진다. 먼저 ByteOrder 클래스에 대해 간단히 살펴보자.</p>
+<p>컴퓨터마다 바이트를 저장하는 순서가 다르다. Big Endian과 Little Endian으로 구분할 수 있다. 자바는 기본적으로 네트워크에서 사용하는 빅 엔디안을 사용하고 대부분의 유닉스 운영체제 역시 빅 엔디안 방식을 사용한다. 반면 윈도우 운영체제의 경우에는 리틀 엔디안을 사용한다. ByteOrder 클래스는 버퍼, 즉 메모리의 바이트 순서를 조정해 주기 위해 사용되는데 사실 거의 사용되지 않는다고 봐도 무방하다.</p>
+<h3>Buffer</h3>
+<p>buffer 클래스는 자신을 상속하는 하위 클래스들에서 공통적으로 사용할 메소드들을 정의한 부모 클래스다. buffer를 상속하는 각각의 하위 클래스들은 Buffer 계층 구조에서 클래스 명을 볼 수 있듯이 boolean을 제외하고 모두 기본 형식의 버퍼들이다. 버퍼는 어떤 하나의 데이터 형태들을 저장하는 컨테이너라고 할 수 있다. 버퍼는 시작과 끝이 있는 일직선 모양의 데이터 구조를 갖고 내부적으로 자신의 상태 정보를 네 가지 기본 속성 값에 저장한다. 또한 이렇게 각 버퍼에 있는 네 가지 기본 속성들을 편리하게 제어할 수 있는 다양한 유틸리티 메소드들을 제공해준다. 따라서 배열보다 훨씬 사용하기 편하고 강력한 기능들을 갖추고 있다.</p>
+<h1>02. 버퍼의 네 가지 기본 속성</h1>
+<p>모든 버퍼들의 부모 클래스인 Bufer는 네가지 속성이 있다. 각각의 버퍼는 자체적으로 이 속성들을 저장하고 있고 이 속성을 이용해서 버퍼 자체를 제어하는 것이다.</p>
+<p><img src="http://cfile23.uf.tistory.com/image/2633873558C92DE33071A1" alt="img3"><br>
+mark를 제외한 나머지 세 개의 속성 값은 음수를 가질 수 없다. 단, mark 속성만이 초기 값으로 -1을 갖는다. 눈여겨볼 또 다른 점은 capacity 속성을 착각하면 안 된다는 점이다. capacity 속성은 버퍼의 바이트 크기를 정하는 것이 아니라 각 형식 버퍼에 맞는 기본 형식의 데이터를 각각의 기본형 버퍼 클래스에 몇 개나 넣을 수 있는지를 나타내는 것이다.</p>
+<p>즉, IntBuffer의 Capacity를 100으로 정했다면 이 버퍼에는 int를 100개 넣을 수 있다는 의미다. 따라서 1024를 초기 값으로 지정해준 경우, ByteBuffer는 실제 1024Byte의 메모리를 점유하고, int는 4byte이므로 IntBuffer는 4096Byte를 long은 8Byte이므로 LongBuffer는 8192Byte를 갖게 된다.</p>
+<p>이 네가지의 속성의 관계는 다음과 같다.</p>
+<p><code>0 &lt;= mark &lt;= position &lt;= limit &lt;= capacity</code></p>
+<p><img src="http://cfile26.uf.tistory.com/image/23517D4658C931F50F15B4" alt="img4"><br>
+capacity가 10인 버퍼를 생성하면 위와 같은 모습이 된다. 앞서 버퍼의 속성을 통해 본것처럼 position은 0으로 설정되어 있고 limit와 capacity는 10으로 설정되어 있다. 이제 앞으로 이렇게 생성된 Buffer 클래스의 position, limit, mark 속성을 적절히 제어하면서 버퍼를 이용할 것이다. Buffer 클래스는 이 기본 속성들을 제어하는 다양한 메소드들을 제공하는데, 우선 다음의 API를 살펴보자</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Buffer &#123;</span><br><span class="line">    public final int position();</span><br><span class="line">    public final int limit();</span><br><span class="line">    public final int capacity();</span><br><span class="line"></span><br><span class="line">    public final Buffer position(int newPosition);</span><br><span class="line">    public final Buffer limit(int newLimit);</span><br><span class="line"></span><br><span class="line">    public final Buffer mark();</span><br><span class="line">    public final Buffer reset();</span><br><span class="line"></span><br><span class="line">    public final int remaining();</span><br><span class="line">    public final boolean hasRemainig();</span><br><span class="line">    public abstract boolean isReadOnly();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Buffer 클래스에서 제공하는 메소드 중 일부분을 나타냈다. 버퍼 계열 클래스 모두가 공통적으로 사용하는 메소드들이기 때문에 오버라이딩되는 것을 막기 위해서 메소드들을 final로 지정했다는 것이 눈여겨볼 점이다. 다만 생성하는 시점에 결정되는 읽기 전용 버퍼인지를 나타내는 isReadOnly() 메소드는 추상(abstract) 메소드로 지정해서 나중에 구현 클래스에서 오버라이딩해서 구현하게 해놨다.</p>
+<p><code>첫째 문단의 메소드 세 개는 position, limit, capacity 위치 값을 리턴하는 간단한 getter 메소드다.</code><br>
+<code>둘째 문단의 메소드 두 개는 position과 limit의 위치 값을 지정해주는 setter 메소드다.</code><br>
+<code>셋째 문단에 위치한 mark() 메소드는 현재 포지션을 mark 속성에 저장하게 한다. 그리고 이렇게 저장된 mark 위치로 나중에 이동하고 싶을때 reset() 메소드를 사용하면 된다. 하지만 mark() 메소드로 mark 속성 값을 설정하지 않고 reset() 메소드를 호출하면 InvalidMarkException이 발생한다. 또한 Position이나 limit 값이 mark 위치보다 작은데도 reset() 메소드를 호출하면 InvalidMarkException이 발생한다. 다음은 mark() 메소드와 reset() 메소드의 간단한 사용 템플릿 예다.</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">buf.position(1);    // position = 1</span><br><span class="line">buf.mark();         // mark = 1</span><br><span class="line">buf.position(5);    // position = 5</span><br><span class="line">buf.reset();        // position = mark = 1</span><br></pre></td></tr></table></figure>
+<p>Buffer 계열 클래스들은 체이닝을 이용하도록 디자인되어 있다. API를 보면 알 수 있겠지만 대부분의 메소드에는 Buffer 또는 각 구현 형식별 버퍼 클래스가 리턴 된다. 버퍼 클래스에 이렇게 체이닝 디자인을 도입한 이유는 체이닝이 코드량을 줄여주며 코드를 명확하고 이해하기 쉽게 해주기 때문이다. 쳉닝을 이용해서 앞서 설명한 mark(), reset() 메소드를 이용하는 코드 템플릿을 만들면 다음과 같이 한 줄로 표현할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf.position(1).mark().position(5).reset();</span><br></pre></td></tr></table></figure>
+<p>Buffer 클래스는 효율성을 높이기 위해 디자인까지 신경을 썻다.</p>
+<p>넷째 문단에 위치한 remaining() 메소드는 &quot;limit - position&quot;과 같은 뜻이다. 즉, 현재 position을 기준으로 해서 버퍼에 읽을 수 있는 데이터가 몇 개나 남았는지를 알려주는 메소드다. hasRemaining() 메소드는 &quot;(limit - position &gt; 0)&quot;을 의미한다. 즉, 현재 position을 기준으로 해서 버퍼에 읽을 수 있는 데이터가 있는지 없는지를 boolean형 값으로 리턴해주는 것이다. isReadOnly() 메소드는 버퍼가 읽기 전용인지 아닌지를 알려주는 메소드다.</p>
+<p>필자는 앞으로 ByteBuffer를 기준으로 해서 설명할 것이다. 그 이유는 ByteBuffer가 가장 많이 사용되고 있으며 또한 다른 버퍼들도 거의 동일한 형식의 메소드를 제공하고 사용법도 유사하므로 ByteBuffer만 제대로 활용할 줄 안다면 다른 형식의 버퍼도 API를 보고 쉽게 이용할 수 있기 때문이다.</p>
+<h3>03. 버퍼에서 데이터 읽고 쓰기</h3>
+<p>Buffer 클래스를 상속하는 모든 하위 클래스들을 다양한 형식으로 데이터를 읽거나 쓸 수 있는 메소드를 제공한다. 다음은 ByteBuffer가 제공하는 메소드의 일부분이다. 하지만 다른 버퍼들도 메소드 파라미터와 리턴 값만이 다른 동일한 메소드를 제공하고 있으므로 사용법은 동일하다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//상대적 위치로 읽고 쓰기</span><br><span class="line">public abstract byte get();</span><br><span class="line">public abstract ByteBuffer put(byte b);</span><br><span class="line"></span><br><span class="line">//절대적 위치로 읽고 쓰기</span><br><span class="line">public abstract byte get(int index);</span><br><span class="line">public abstract ByteBuffer put(int index, byte b);</span><br><span class="line"></span><br><span class="line">//버퍼의 데이터를 주어진 배열로 읽고 쓰기</span><br><span class="line">public ByteBuffer get(byte[] dst);</span><br><span class="line">public ByteBuffer get(byte[] dst, int offset, int length);</span><br><span class="line">public final ByteBuffer put(byte[] src);</span><br><span class="line">public ByteBuffer put(byte[] src, int offset, int length);</span><br><span class="line"></span><br><span class="line">//파라미터로 주어진 버퍼의 내용을 쓰기</span><br><span class="line">public ByteBuffer put(ByteBuffer src);</span><br></pre></td></tr></table></figure>
+<h3>1. 상대적 위치를 이용해서 1바이트씩 읽고 쓰기</h3>
+<p>상대적 위치를 이용해서 버퍼에 데이터를 읽거나 쓰는 메소드는 다음과 같다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//상대적 위치로 읽고 쓰기</span><br><span class="line">public abstract byte get();</span><br><span class="line">public abstract ByteBuffer put(byte b);</span><br><span class="line"></span><br><span class="line">ByteBuffer buf = ....</span><br><span class="line">byte b = buf.get();</span><br></pre></td></tr></table></figure>
+<p>이렇게 buf.get()을 호출하게 되면 position은 현재 위치의 요소를 가져오고 position은 1이 더해진 값으로 이동한다. 그러나 limit와 capacity 위치는 변화가 없다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//버퍼에 쓰는 것</span><br><span class="line">ByteBuffer buf = ...</span><br><span class="line">but.put((byte) z);</span><br></pre></td></tr></table></figure>
+<p>put을 호출하게 되면 현재 위치의 요소에 z가 삽입되게 되고 position은 1이 ㄷㅓ해진다. limit와 capacity는 변동이 없다.<br>
+지속적으로 get, put 메소드를 호출하게 되면 총 크기의 범위를 벗어나게 되면 각각 BufferUnderflowException과 BufferOverflowException이 발생한다는 점이다. 따라서 읽고 쓰기 전에 항상 현재 position과 limit를 비교한 후에 버퍼에 데이터를 읽거나 쓰는 것이 바람직하다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import java.nio.ByteBuffer;</span><br><span class="line"></span><br><span class="line">public class RelativeBufferTest &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        //크기가 10인 ByteBuffer를 생성한다.</span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocate(10);</span><br><span class="line">        System.out.println(&quot;Init Position : &quot; + buf.position());</span><br><span class="line">        System.out.println(&quot;, Init Limit : &quot; + buf.limit());</span><br><span class="line">        System.out.println(&quot;, Init Capacity : &quot; + buf.capacity());</span><br><span class="line"></span><br><span class="line">        // 현재 position이 0인데, 이곳에 mark를 해둔다.</span><br><span class="line">        buf.mark();</span><br><span class="line">        // a, b, c를 순서대로 버퍼에 넣는다.</span><br><span class="line">        buf.put((byte) 10).put((byte) 11).put((byte) 12);</span><br><span class="line">        // mark해둔 0 인덱스로 position을 되돌린다.</span><br><span class="line">        buf.reset();</span><br><span class="line"></span><br><span class="line">        //현재 position의 버퍼에 있는 데이터를 출력한다.</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get() + &quot;, Position : &quot; + buf.position());</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get() + &quot;, Position : &quot; + buf.position());</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get() + &quot;, Position : &quot; + buf.position());</span><br><span class="line">        //position 4는 아무 값도 넣지 않았지만 기본적으로 0이 입력됨을 볼 수 있다.</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get() + &quot;, Position : &quot; + buf.position());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>초기 값이 position은 0, limit와 capacity는 10으로 설정되어 있다. 이 코드에서 눈여겨볼 것은 마지막 출력 행에서 버퍼의 인덱스가 4인 위치에서 아무런 데이터를 넣지 않았는데 Null이 아닌 0이 나온다.</p>
+<h3>2. 절대적 위치를 이용해서 1바이트씩 읽고 쓰기</h3>
+<p>절대적 위치를 이용해서 버퍼에 데이터를 읽거나 쓰기 위한 메소드.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//절대적 위치로 읽고 쓰기</span><br><span class="line">public abstract byte get(int index);</span><br><span class="line">public abstract ByteBuffer put(int index, byte b);</span><br></pre></td></tr></table></figure>
+<p>상대적인 방법이 현재 position을 이용해 데이터를 읽거나 썻다면 절대적인 방법은 어느 위치의 데이터를 읽고 쓸지 그 위치를 직접 지정해서 읽거나 쓰는 방식이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer but = ....</span><br><span class="line">byte b = buf.get(5);</span><br></pre></td></tr></table></figure>
+<p>이처럼 5의 위치의 요소를 읽는다. 하지만 상대적 위치와는 달리 Position의 위치에는 변화가 없다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer but = ....</span><br><span class="line">buf.put(5, (byte) z);</span><br></pre></td></tr></table></figure>
+<p>지정한 위치에 데이터를 쓰면 5번 위치의 요소에 z가 삽입되며 Position 위치 또한 변화가 없다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import java.nio.ByteBuffer;</span><br><span class="line"></span><br><span class="line">public class AbsoluteBufferTest &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        //크기가 10인 ByteBuffer 배열을 생성한다.</span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocate(10);</span><br><span class="line">        System.out.print(&quot;Init Position : &quot; + buf.position());</span><br><span class="line">        System.out.print(&quot;, Init Limit : &quot; + buf.limit());</span><br><span class="line">        System.out.println(&quot;, Init Capacity : &quot; + buf.capacity());</span><br><span class="line"></span><br><span class="line">        buf.put(3, (byte) 3);</span><br><span class="line">        buf.put(4, (byte) 4);</span><br><span class="line">        buf.put(5, (byte) 5);</span><br><span class="line">        //위치를 지정해서 쓴 경우에는 position이 변하지 않는다.</span><br><span class="line">        System.out.println(&quot;Position : &quot; + buf.capacity());</span><br><span class="line"></span><br><span class="line">        buf.put(3, (byte) 3);</span><br><span class="line">        buf.put(4, (byte) 4);</span><br><span class="line">        buf.put(5, (byte) 5);</span><br><span class="line">        //위치를 지정해서 쓴 경우에는 position이 변하지 않는다.</span><br><span class="line">        System.out.println(&quot;Position : &quot; + buf.position());</span><br><span class="line"></span><br><span class="line">        // 버퍼에 있는 데이터를 출력한다. 역시 position이 변하지 않는다.</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get(3) + &quot;, Position : &quot; + buf.position());</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get(4) + &quot;, Position : &quot; + buf.position());</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get(5) + &quot;, Position : &quot; + buf.position());</span><br><span class="line">        // position 9에는 아무 값도 넣지 않았지만 기본적으로 0이 입력됨을 볼 수 있다.</span><br><span class="line">        System.out.println(&quot;Value : &quot; + buf.get(9) + &quot;, Position : &quot; + buf.position());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3>3. 배열을 이용해서 한꺼번에 많은 데이터를 읽고 쓰기</h3>
+<p>배열을 이용해서 버퍼에 데이터를 읽거나 쓰기위해 제공 되는 메소드</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//버퍼의 데이터를 주어진 배열로 읽고 쓰기</span><br><span class="line">public ByteBuffer get(byte[] dst);</span><br><span class="line">public ByteBuffer get(byte[] dst, int offset, int length);</span><br><span class="line">public final ByteBuffer put(byte[] src);</span><br><span class="line">public ByteBuffer put(byte[] src, int offset, int length);</span><br></pre></td></tr></table></figure>
+<p>만약, 버퍼에 데이터를 한꺼번에 많이 읽거나 써야할 때 지금까지 공부한 방법을 이용할 경우, 다음의 코드 템플릿 형태로 읽게 된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0; buffer.hasRemaining(); i++) &#123;</span><br><span class="line">    byteArray(i) = buffer.get();</span><br><span class="line">&#125;</span><br><span class="line">//또는</span><br><span class="line">int size = buffer.remaining();</span><br><span class="line">for (int i = 0; i &lt; size; i++)&#123;</span><br><span class="line">    byteArray[i] = buffer.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 루프를 이용해서 대량의 데이터를 읽거나 쓰는 것은 이제부터 설명할 메소드를 이용하는 것보다 코드가 길다는 것을 제외하고도 매번 반복적으로 get() 또는 put() 메소드를 호출해야 하는 비효율적인 방법이다. 버퍼에서는 이런 경우에 대비해서 배열을 이용해서 데이터를 버퍼에서 읽거나 쓸 수 있게 제공해 준다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(10);</span><br><span class="line">Byte[] bulk = new byte[5];</span><br><span class="line">...</span><br><span class="line">byte b = buf.get(bulk);</span><br></pre></td></tr></table></figure>
+<p>여기에서 buf.get(bulk)는 get(bulk, 0, bulk.length)와 같으며 bulk를 읽어 5개를 한번에 입력한다. 앞전에 본 상대적 입력에나 출력에서 position이 움직이지 않았지만 여기에서 byte 배열을 이용해서 한꺼번에 넣는 방법은 position이 움직여 6을 가리키게 된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import java.nio.ByteBuffer;</span><br><span class="line"></span><br><span class="line">public class BulkReadTest &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocate(10);</span><br><span class="line">        buf.put((byte) 0).put((byte) 1).put((byte) 2).put((byte) 3).put((byte) 4);</span><br><span class="line">        buf.mark();</span><br><span class="line">        buf.put((byte) 5).put((byte) 6).put((byte) 7).put((byte) 8).put((byte) 9);</span><br><span class="line">        buf.reset();</span><br><span class="line"></span><br><span class="line">        byte[] b = new byte[15];</span><br><span class="line"></span><br><span class="line">        // 버퍼에서 얼마나 쓸 수 있는지를 계산한다.</span><br><span class="line">        int size = buf.remaining();</span><br><span class="line">        if (b.length &lt; size) &#123;</span><br><span class="line">            size = b.length;</span><br><span class="line">        &#125;</span><br><span class="line">        // 버퍼 또는 배열에서 이용할 수 있는 만큼만 이용한다.</span><br><span class="line">        buf.get(b, 0, size);</span><br><span class="line">        System.out.println(&quot;Position : &quot; + buf.position() + &quot;, Limit : &quot; + buf.limit());</span><br><span class="line"></span><br><span class="line">        //byte[]에 담은 데이터를 처리하기 위한 메소드다.</span><br><span class="line">        doSomething(b, size);</span><br><span class="line">    &#125;</span><br><span class="line">    // byte[]와 함께 배열이 얼마나 사용되었는지 크기를 함께 넘겨줘서 사용한다.</span><br><span class="line">    public static void doSomething(byte[] b, int size) &#123;</span><br><span class="line">        for(int i = 0; i&lt; size; i++) &#123;</span><br><span class="line">            System.out.println(&quot;byte = &quot; + b[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>버퍼에 쓰기도 이와 비슷하게 사용할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(10);</span><br><span class="line">Byte[] bulk = new byte[5];</span><br><span class="line">...</span><br><span class="line">byte b = buf.put(bulk);</span><br></pre></td></tr></table></figure>
+<h3>4. 버퍼 자체를 파라미터로 받아서 쓰기</h3>
+<p>버퍼 자체를 파라미터로 받아서 쓰기 위해 제공해주는 메소드</p>
+<p><code>//파라미터로 주어진 버퍼의 내용을 쓰기 public ByteBuffer put(ByteBuffer src);</code></p>
+<p>이전까지 모두 get과 put의 쌍으로 이루어져 있는데 이 방식에는 put() 메소드밖에 존재하지 않는다. 그 이유는 aBuffer.put(bBuffer)와 bBuffer.get(aBuffer)는 같은 결과를 가져오기 때문이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer aBuf = ByteBuffer.allocate(10);</span><br><span class="line">ByteBuffer bBuf = ByteBuffer.allocate(5);</span><br><span class="line">....</span><br><span class="line">aBuf.put(bBuf);</span><br></pre></td></tr></table></figure>
+<p>출처 : 김성박 송지훈 공저, 『 자바 IO &amp; NIO 네트워크 프로그래밍』, 한빛미디어(2004.9.30), 13장 인용</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2017/04/10/JavaIOWhatIO/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    12. NIO 개요 01.자바 IO는 느리다?
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/04/10/JavaIOWhatIOBufferMake/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">13. 버퍼 06. 버퍼 만들기</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+        <section id="comments"> 
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+ </section>
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            cho_jeong_ha &copy; 2018 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span></span> | 
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"><span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://jungha-cho.github.io/2017/04/10/JavaIOWhatIOBuffer/';
+        
+        this.page.identifier = 'JavaIOWhatIOBuffer';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'https-jungha-cho-github-io' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
