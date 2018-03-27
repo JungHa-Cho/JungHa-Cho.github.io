@@ -3,23 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Tag: 기초 | 개발하는 조롱이</title>
+    <title>디자인패턴-Command | 개발하는 조롱이</title>
     
     
-        <meta name="keywords" content="키워드가 뭐지?" />
+        <meta name="keywords" content="헤드퍼스트디자인패턴,디자인패턴,Command" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="개발합니다.">
-<meta name="keywords" content="키워드가 뭐지?">
-<meta property="og:type" content="website">
-<meta property="og:title" content="개발하는 조롱이">
-<meta property="og:url" content="http://jungha-cho.github.io/tags/기초/index.html">
+    <meta name="description" content="Command 패턴의 정의  커맨드 패턴을 이용하면 요구 사항을 객체로 캡슐화 가능하다. 매개 변수를 써서 여러 가지 다른 요구 사항을 집어넣을 수 있다. 요청 내역을 큐에 저장하거나 로그로 기록할 수 있으며, 작업 취소 기능도 지원한다.   Meta Command 패턴?  메타 커맨드 패턴은 명령들로 이루어진 매크로를 만들어서 여러 개의 명령을 한 번에">
+<meta name="keywords" content="헤드퍼스트디자인패턴,디자인패턴,Command">
+<meta property="og:type" content="article">
+<meta property="og:title" content="디자인패턴-Command">
+<meta property="og:url" content="http://jungha-cho.github.io/2018/03/27/디자인패턴-Command-(2)/index.html">
 <meta property="og:site_name" content="개발하는 조롱이">
-<meta property="og:description" content="개발합니다.">
+<meta property="og:description" content="Command 패턴의 정의  커맨드 패턴을 이용하면 요구 사항을 객체로 캡슐화 가능하다. 매개 변수를 써서 여러 가지 다른 요구 사항을 집어넣을 수 있다. 요청 내역을 큐에 저장하거나 로그로 기록할 수 있으며, 작업 취소 기능도 지원한다.   Meta Command 패턴?  메타 커맨드 패턴은 명령들로 이루어진 매크로를 만들어서 여러 개의 명령을 한 번에">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://jungha-cho.github.io/images/commandv2.jpg">
+<meta property="og:updated_time" content="2018-03-27T12:07:28.359Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="개발하는 조롱이">
-<meta name="twitter:description" content="개발합니다.">
+<meta name="twitter:title" content="디자인패턴-Command">
+<meta name="twitter:description" content="Command 패턴의 정의  커맨드 패턴을 이용하면 요구 사항을 객체로 캡슐화 가능하다. 매개 변수를 써서 여러 가지 다른 요구 사항을 집어넣을 수 있다. 요청 내역을 큐에 저장하거나 로그로 기록할 수 있으며, 작업 취소 기능도 지원한다.   Meta Command 패턴?  메타 커맨드 패턴은 명령들로 이루어진 매크로를 만들어서 여러 개의 명령을 한 번에">
+<meta name="twitter:image" content="http://jungha-cho.github.io/images/commandv2.jpg">
 <link rel="publisher" href="UA-97209547-1">
     
 
@@ -174,9 +177,9 @@
         
         
          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             Book
                         </a>
@@ -604,20 +607,20 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             헤드퍼스트디자인패턴
                         </a>
                          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             Command
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/27/디자인패턴-Command-(2)/">디자인패턴-Command</a></li>  <li class="file"><a href="/2018/03/27/디자인패턴-Command/">디자인패턴-Command</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2018/03/27/디자인패턴-Command-(2)/">디자인패턴-Command</a></li>  <li class="file"><a href="/2018/03/27/디자인패턴-Command/">디자인패턴-Command</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -991,122 +994,143 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-tag"></i></span>
-        <h1 class="title">#기초</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-디자인패턴-Command-(2)" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/04/04/ConnectionPool/">Connection Pool</a>
-        </h1>
-    
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/헤드퍼스트디자인패턴/">헤드퍼스트디자인패턴</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/헤드퍼스트디자인패턴/Command/">Command</a>
+    </div>
 
-                <div class="article-meta">
-                    
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Command/">Command</a>, <a class="tag-link" href="/tags/디자인패턴/">디자인패턴</a>, <a class="tag-link" href="/tags/헤드퍼스트디자인패턴/">헤드퍼스트디자인패턴</a>
+    </div>
+
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/04/04/ConnectionPool/">
-            <time datetime="2017-04-04T13:43:59.000Z" itemprop="datePublished">2017-04-04</time>
+        <a href="/2018/03/27/디자인패턴-Command-(2)/">
+            <time datetime="2018-03-27T10:56:40.000Z" itemprop="datePublished">2018-03-27</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/DataBase/">DataBase</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/DataBase/일반/">일반</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/기초/">기초</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20180327-디자인패턴-Command-(2).md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20180327-디자인패턴-Command-(2).md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20180327-디자인패턴-Command-(2).md'> History </a>
+                            </div>
+                        
+                    </div>
+                
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/04/04/Lock/">Lock</a>
+        <h1 class="article-title" itemprop="name">
+            디자인패턴-Command
         </h1>
     
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/04/Lock/">
-            <time datetime="2017-04-04T13:40:59.000Z" itemprop="datePublished">2017-04-04</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/일반/">일반</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/기초/">기초</a>
-    </div>
-
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">Command 패턴의 정의</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">다이어그램</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">커맨드 패턴 활용법</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">업무 적용?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">Reference</span></a></li></ol>
                 </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/04/04/CallbyValuereference/">Call by Value reference</a>
-        </h1>
-    
+            
+        
+        
+            <h1>Command 패턴의 정의</h1>
+<ul>
+<li>커맨드 패턴을 이용하면 요구 사항을 객체로 캡슐화 가능하다.</li>
+<li>매개 변수를 써서 여러 가지 다른 요구 사항을 집어넣을 수 있다.</li>
+<li>요청 내역을 큐에 저장하거나 로그로 기록할 수 있으며, 작업 취소 기능도 지원한다.</li>
+</ul>
+<blockquote>
+<p>Meta Command 패턴?</p>
+<blockquote>
+<p>메타 커맨드 패턴은 명령들로 이루어진 매크로를 만들어서 여러 개의 명령을 한 번에 실행 가능 하다.</p>
+</blockquote>
+</blockquote>
+<h1>다이어그램</h1>
+<p><img src="/images/commandv2.jpg" alt="commandv2"></p>
+<h1>커맨드 패턴 활용법</h1>
+<p>커맨드를 이용하면 컴퓨테이션의 한 부분을 패키지로 묶어서 일급 객체 형태로 전달하는 것도 가능하다.<br>
+말이 좀 어렵지만, 책에서는 Thread Pool을 이용해 설명하고 있다. 작업큐는 execute 커맨드를 이용해 큐에 넣는 곳과 빼는곳이 있는데 빼는곳에서는 여러개의 스레드가 기다리고 있다가, 순서대로 작업을 처리한다. 하지만 스레드는 작업의 내용을 알고 처리하진 않는다.</p>
+<p>이용법들</p>
+<ul>
+<li>Command 인터페이스에 logging 메소드를 추가해 로그를 기록하게 한다.</li>
+<li>store 메소드를 추가해 특정 작업까지 수행했다는 체크 포인트를 만들고, 종료 후 다시 시작할때 체크 포인트 부터 시작하게 구현 할 수 있다.</li>
+</ul>
+<h1>업무 적용?</h1>
+<p>업무에 사용되는 Java 기반 Client 프로그램은 작업의 과정은 똑같지만, 작업 내용은 세세하게 달라지는 부분이 있다. 커맨드 패턴을 공부하면서 해당 부분이 번뜩 떠올랐으며, 작업 처리 프로세스와 작업 종류를 분리해 작업 종류의 확장성과 의존성 분리의 이점을 가져올 수 있을 것 같다는 생각이 들었다. Invoker와 Receiver를 분리 시키는 Command 패턴 처럼 말이다.</p>
+<h1>Reference</h1>
+<blockquote>
+<ul>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+</ul>
+</blockquote>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/04/CallbyValuereference/">
-            <time datetime="2017-04-04T12:19:59.000Z" itemprop="datePublished">2017-04-04</time>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/2018/03/27/디자인패턴-Command/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">디자인패턴-Command</div>
         </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/일반/">일반</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/기초/">기초</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
     
-</div>
+</nav>
+
+
+
+
+
+    
+    
+        <section id="comments"> 
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+ </section>
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
 </section>
         </div>
         <footer id="footer">
@@ -1127,11 +1151,13 @@
     <script>
     var disqus_config = function () {
         
-        this.page.identifier = '';
+            this.page.url = 'http://jungha-cho.github.io/2018/03/27/디자인패턴-Command-(2)/';
+        
+        this.page.identifier = '디자인패턴-Command-(2)';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'https-jungha-cho-github-io' + '.disqus.com/count.js';
+        s.src = '//' + 'https-jungha-cho-github-io' + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

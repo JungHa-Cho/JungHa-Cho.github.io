@@ -194,7 +194,7 @@
                             &nbsp;
                             Buffer
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBuffer/">13. 버퍼 01. 버퍼 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferMake/">13. 버퍼 06. 버퍼 만들기</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferMake/">13. 버퍼 06. 버퍼 만들기</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBuffer/">13. 버퍼 01. 버퍼 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -284,7 +284,7 @@
                             &nbsp;
                             TCP
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -617,7 +617,7 @@
                             &nbsp;
                             Command
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/27/디자인패턴-Command/">디자인패턴-Command</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/27/디자인패턴-Command-(2)/">디자인패턴-Command</a></li>  <li class="file"><a href="/2018/03/27/디자인패턴-Command/">디자인패턴-Command</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -992,6 +992,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-JavaConcurrencyinPracticeSharedObject" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/객체-공유/">객체 공유</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaConcurrencyinPracticeSharedObject.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaConcurrencyinPracticeSharedObject.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaConcurrencyinPracticeSharedObject.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/">Java Concurrency in Practice, Objec Share</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h1>03. 객체 공유</h1>
+<h3>3.1 가시성</h3>
+<p>가시성은 그다지 직관적으로 이해할 수 있는 문제가 아니기 때문에 흔히 무시하고 넘어가는 경우가 많다.<br>
+동기화 기능을 지정하지 않으면 컴파일러나 프로세서, jvm 등이 프로그램 코드가 실행되는 순서를 임의로 바꿔 실행하는 이상한 경우가 발생하기도 한다. 다시 말하자면, 동기화 되지 않은 상황에서 메모리상의 변수를 대상으로 작성해둔 코드가 반드시 이런 순서로 동작할 것이다 라고 단정지을 수 없다.</p>
+<h3>3.1.1 스테일 데이터</h3>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/10/JavaConcurrencyinPracticeSharedObject/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-JavaIOByteStream" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1915,105 +2019,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/06/ByteOrder/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-ShutDownHook" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/라이브러리/">라이브러리</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/05/ShutDownHook/">
-            <time datetime="2017-04-05T14:43:59.000Z" itemprop="datePublished">2017-04-05</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170405-ShutDownHook.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170405-ShutDownHook.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170405-ShutDownHook.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/05/ShutDownHook/">ShutDownHook</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>프로세스가 종료될때 반드시 실행되어야 하는 코드를 임의로 정의할 수 있다.</p>
-<p>Runtime Library에 정의되어 있다.</p>
-<p>Shutdown Hook은 프로세스가 종료될때 반드시 실행되고 Hook이 끝날때까지는 프로세스도 종료되지 않는다.<br>
-Shutdown Hook은 짧게 작성되어야 한다. 머신 종료에 의한 프로세스 종료일때 JVM은 프로세스가 완전히 종료될때까지 기다리지 않고 일정 시간 후 종료한다. 따라서 Shutdown Hook은 Hook이 실행되기 전에 종료될 수도 있고 도중에 종료될 수도 있다.<br>
-Shutdown Hook은 반드시 실행되지는 않는다. Shutdown hook은 정상적인 종료 상황에서만 호출된다. 따라서 비정상적인 종료에서도 반드시 실행되어야 하는 일들은 Java App를 실행하는 스크립트를 작성하거나 App을 하나더 만든다.<br>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/05/ShutDownHook/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
