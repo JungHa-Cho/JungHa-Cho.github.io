@@ -41,7 +41,7 @@
 
 
     
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/css/images/favicon.ico" />
     
 
     <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
@@ -275,7 +275,7 @@
                             &nbsp;
                             Stream
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -284,7 +284,7 @@
                             &nbsp;
                             TCP
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -801,6 +801,24 @@
                     </li> 
                      </ul> 
                     </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            생산성
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Windows
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/27/Win-검색에-지친-사람을-위해/">Win 검색에 지친 나를 위해</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
                      </ul> 
                     </li> 
                     
@@ -956,6 +974,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-JavaConcurrencyinPracticeObjectShareThreadConfine" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Thread/">Thread</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">
+            <time datetime="2017-05-09T05:10:59.000Z" itemprop="datePublished">2017-05-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>3.3 스레드 한정</h3>
+<p>스레드 안정성을 확보하는 방법</p>
+<ol>
+<li>변경 가능한 객체를 공유해 사용하는 경우, 항상 동기화 한다.</li>
+<li>동기화를 사용하지 않는다면, 기본적으로 객체를 공유해 사용하지 않아야 한다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-JavaConcurrencyinPracticeObjectShare" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -990,13 +1112,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170509-JavaConcurrencyinPracticeObjectShare.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShare.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170509-JavaConcurrencyinPracticeObjectShare.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShare.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170509-JavaConcurrencyinPracticeObjectShare.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShare.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1094,13 +1216,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170509-JavaConcurrencyinPracticeThreadSafe.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170509-JavaConcurrencyinPracticeThreadSafe.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170509-JavaConcurrencyinPracticeThreadSafe.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170509-JavaConcurrencyinPracticeThreadSafe.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170509-JavaConcurrencyinPracticeThreadSafe.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170509-JavaConcurrencyinPracticeThreadSafe.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1198,13 +1320,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170508-JavaConcurrencyinPracticeIntroduce.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170508-JavaConcurrencyinPracticeIntroduce.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170508-JavaConcurrencyinPracticeIntroduce.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170508-JavaConcurrencyinPracticeIntroduce.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170508-JavaConcurrencyinPracticeIntroduce.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170508-JavaConcurrencyinPracticeIntroduce.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1302,13 +1424,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1406,13 +1528,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1510,13 +1632,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170412-ApachKafkaInstall.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170412-ApachKafkaInstall.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170412-ApachKafkaInstall.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170412-ApachKafkaInstall.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170412-ApachKafkaInstall.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170412-ApachKafkaInstall.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1614,13 +1736,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170411-EffectiveJavaRule13.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170411-EffectiveJavaRule13.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170411-EffectiveJavaRule13.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170411-EffectiveJavaRule13.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170411-EffectiveJavaRule13.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170411-EffectiveJavaRule13.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1684,110 +1806,6 @@
 
 
     
-        <article id="post-EffectiveJavaRule4" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/">이펙티브자바</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/new/">new</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/new/">new</a>, <a class="tag-link" href="/tags/이펙티브자바/">이펙티브자바</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/10/EffectiveJavaRule4/">
-            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170410-EffectiveJavaRule4.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170410-EffectiveJavaRule4.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170410-EffectiveJavaRule4.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/10/EffectiveJavaRule4/">규칙4 객체 생성을 막을 때는 private 생성자를 사용하라</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>규칙4 객체 생성을 막을 때는 private 생성자를 사용하라</h3>
-<ul>
-<li>객체를 만들 수 없도록 하려고 클래스를 abstract로 선어내 봤자 소용없다.</li>
-<li>Private 생성자를 클래스에 넣어서 객체 생성을 방지하자는 것이다.</li>
-</ul>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/10/EffectiveJavaRule4/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <article id="post-EffectiveJavaRule5" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1822,13 +1840,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170410-EffectiveJavaRule5.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-EffectiveJavaRule5.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170410-EffectiveJavaRule5.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-EffectiveJavaRule5.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170410-EffectiveJavaRule5.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-EffectiveJavaRule5.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1926,13 +1944,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170410-JavaConcurrencyinPracticeIntroduce.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaConcurrencyinPracticeIntroduce.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170410-JavaConcurrencyinPracticeIntroduce.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaConcurrencyinPracticeIntroduce.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170410-JavaConcurrencyinPracticeIntroduce.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaConcurrencyinPracticeIntroduce.markdown'> History </a>
                             </div>
                         
                     </div>

@@ -41,7 +41,7 @@
 
 
     
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/css/images/favicon.ico" />
     
 
     <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
@@ -275,7 +275,7 @@
                             &nbsp;
                             Stream
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -284,7 +284,7 @@
                             &nbsp;
                             TCP
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -801,6 +801,24 @@
                     </li> 
                      </ul> 
                     </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            생산성
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Windows
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/27/Win-검색에-지친-사람을-위해/">Win 검색에 지친 나를 위해</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
                      </ul> 
                     </li> 
                     
@@ -956,6 +974,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-자바병렬프로그래밍-Chapter06-6-2-3-스레드풀" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Thread-Pool/">Thread Pool</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Thread-Pool/">Thread Pool</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/">
+            <time datetime="2017-05-15T11:23:53.000Z" itemprop="datePublished">2017-05-15</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170515-자바병렬프로그래밍-Chapter06-6-2-3-스레드풀.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170515-자바병렬프로그래밍-Chapter06-6-2-3-스레드풀.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170515-자바병렬프로그래밍-Chapter06-6-2-3-스레드풀.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/">자바병렬프로그래밍-Chapter06-6.2.3-스레드풀</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h1>Chapter 6 작업 실행</h1>
+<h2>6.2.3 스레드 풀</h2>
+<ul>
+<li><code>스레드 풀 thread pool</code>은 작업을 처리할 수 있는 동일한 형태의 스레드를 <code>풀 pool</code>의 형태로 관리한다.</li>
+<li>일반적으로 스레드 풀은 풀 내부의 스레드로 처리할 작업을 쌓아둬야 하기 때문에 <code>작업 큐 work queue</code>와 굉장히 밀접한 관련이 있다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/15/자바병렬프로그래밍-Chapter06-6-2-3-스레드풀/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-자바병렬프로그래밍-Chapter06-작업실행-task.1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -990,13 +1112,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170515-자바병렬프로그래밍-Chapter06-작업실행-task.1.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170515-자바병렬프로그래밍-Chapter06-작업실행-task.1.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170515-자바병렬프로그래밍-Chapter06-작업실행-task.1.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170515-자바병렬프로그래밍-Chapter06-작업실행-task.1.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170515-자바병렬프로그래밍-Chapter06-작업실행-task.1.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170515-자바병렬프로그래밍-Chapter06-작업실행-task.1.md'> History </a>
                             </div>
                         
                     </div>
@@ -1094,13 +1216,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170513-자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170513-자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170513-자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170513-자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170513-자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170513-자바병렬프로그래밍-동시성concurrency과-병렬성Parallelism.md'> History </a>
                             </div>
                         
                     </div>
@@ -1198,13 +1320,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170513-자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170513-자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170513-자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170513-자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170513-자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170513-자바병렬프로그래밍-Chapter05-효율적이고-확장성-있는-결과-캐시-구현.md'> History </a>
                             </div>
                         
                     </div>
@@ -1302,13 +1424,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170512-자바병렬프로그래밍-Chapter05-동기화클래스.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-동기화클래스.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170512-자바병렬프로그래밍-Chapter05-동기화클래스.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-동기화클래스.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170512-자바병렬프로그래밍-Chapter05-동기화클래스.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-동기화클래스.md'> History </a>
                             </div>
                         
                     </div>
@@ -1406,13 +1528,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> History </a>
                             </div>
                         
                     </div>
@@ -1510,13 +1632,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170511-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170511-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170511-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170511-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170511-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170511-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라.md'> History </a>
                             </div>
                         
                     </div>
@@ -1614,13 +1736,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170510-Executor란-기초.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170510-Executor란-기초.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170510-Executor란-기초.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170510-Executor란-기초.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170510-Executor란-기초.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170510-Executor란-기초.md'> History </a>
                             </div>
                         
                     </div>
@@ -1718,13 +1840,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> History </a>
                             </div>
                         
                     </div>
@@ -1822,13 +1944,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> Source </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> Edit </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> History </a>
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> History </a>
                             </div>
                         
                     </div>
@@ -1879,110 +2001,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-JavaConcurrencyinPracticeObjectShareThreadConfine" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Thread/">Thread</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">
-            <time datetime="2017-05-09T05:10:59.000Z" itemprop="datePublished">2017-05-09</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/raw/writing/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/edit/writing/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/jeongha-cho/Wiki-site/commits/writing/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>3.3 스레드 한정</h3>
-<p>스레드 안정성을 확보하는 방법</p>
-<ol>
-<li>변경 가능한 객체를 공유해 사용하는 경우, 항상 동기화 한다.</li>
-<li>동기화를 사용하지 않는다면, 기본적으로 객체를 공유해 사용하지 않아야 한다.</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
