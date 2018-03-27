@@ -275,7 +275,7 @@
                             &nbsp;
                             Stream
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -284,7 +284,7 @@
                             &nbsp;
                             TCP
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -1182,110 +1182,6 @@
 
 
     
-        <article id="post-EffectiveJavaNamingConvention" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/">이펙티브자바</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/Convention/">Convention</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Convention/">Convention</a>, <a class="tag-link" href="/tags/이펙티브자바/">이펙티브자바</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/10/EffectiveJavaNamingConvention/">
-            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-EffectiveJavaNamingConvention.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-EffectiveJavaNamingConvention.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-EffectiveJavaNamingConvention.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/10/EffectiveJavaNamingConvention/">Effective Java, 일반적으로 통용되는 작명 관습을 따르라 ( naming convention )</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>작명 규칙을 어기는 API는 사용하기 어렵다. 이 규칙을 어기는 구현은 유지보수하기 어렵다. 어느 쪽이건 간에, 철자에 관계된 작명 규칙을 어기면 그 코드를 이용할 프로그래머는 혼란스러워 할 뿐 아니라 짜증을 낼 것이고, 오류로 이어질 잘못된 가정들을 하게 될 것이다. - effective java</p>
-<h3>패키지</h3>
-<p>패키지 이름은 마침표를 구분점으로 사용하는 계층적 이름이어야 한다.</p>
-<p>패키지 이름을 구성하는 각각의 컴포넌트는 알파벳 소문자로 구성하고, 숫자는 거의 사용하지 않는다.</p>
-<p>여러분의 조직 바깥에서 이용될 패키지 이름은 해당 조직의 인터넷 도메인 이름으로 시작해야 하는데, edu.cmu, com.sun, gov.sna 처럼 최상위 도메인 이름이 먼저 온다.</p>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/10/EffectiveJavaNamingConvention/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <article id="post-EffectiveJavaGeneralProgrammingRule" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1377,6 +1273,110 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/10/EffectiveJavaGeneralProgrammingRule/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-EffectiveJavaNamingConvention" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/">이펙티브자바</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/Convention/">Convention</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Convention/">Convention</a>, <a class="tag-link" href="/tags/이펙티브자바/">이펙티브자바</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/EffectiveJavaNamingConvention/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-EffectiveJavaNamingConvention.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-EffectiveJavaNamingConvention.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-EffectiveJavaNamingConvention.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/10/EffectiveJavaNamingConvention/">Effective Java, 일반적으로 통용되는 작명 관습을 따르라 ( naming convention )</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><p>작명 규칙을 어기는 API는 사용하기 어렵다. 이 규칙을 어기는 구현은 유지보수하기 어렵다. 어느 쪽이건 간에, 철자에 관계된 작명 규칙을 어기면 그 코드를 이용할 프로그래머는 혼란스러워 할 뿐 아니라 짜증을 낼 것이고, 오류로 이어질 잘못된 가정들을 하게 될 것이다. - effective java</p>
+<h3>패키지</h3>
+<p>패키지 이름은 마침표를 구분점으로 사용하는 계층적 이름이어야 한다.</p>
+<p>패키지 이름을 구성하는 각각의 컴포넌트는 알파벳 소문자로 구성하고, 숫자는 거의 사용하지 않는다.</p>
+<p>여러분의 조직 바깥에서 이용될 패키지 이름은 해당 조직의 인터넷 도메인 이름으로 시작해야 하는데, edu.cmu, com.sun, gov.sna 처럼 최상위 도메인 이름이 먼저 온다.</p>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/10/EffectiveJavaNamingConvention/#more">Read More</a>
             </div>
         
         <footer class="article-footer">

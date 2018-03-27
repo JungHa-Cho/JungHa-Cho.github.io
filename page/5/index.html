@@ -275,7 +275,7 @@
                             &nbsp;
                             Stream
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -284,7 +284,7 @@
                             &nbsp;
                             TCP
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingEchoserver/">08. TCP 프로그래밍 02. 에코 클라이언트/서버 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a></li>  <li class="file"><a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -1182,110 +1182,6 @@
 
 
     
-        <article id="post-JavaIOObjectStream3" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Stream/">Stream</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/10/JavaIOObjectStream3/">
-            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaIOObjectStream3.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaIOObjectStream3.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaIOObjectStream3.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>객체가 전송되거나 쓴다고 하면, 보통 데이터만 해당된다고 생각할 수 있다. 객체가 전송된다는 것은 애플릿, 윈도우 등도 전송될 수 있다는 것을 의미한다.</p>
-<p>객체 전송은 다음과 같은 순서를 지켜야 한다.</p>
-<ol>
-<li>데이터를 특정 통신 채널로 보낼 수 있는 형태로 바꾼다. 이를 마샬링(marshaling)이라고 한다.</li>
-<li>변환된 데이터를 전송하거나 쓴다.</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/10/JavaIOObjectStream3/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <article id="post-JavaIOObjectStream2" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1377,6 +1273,110 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/10/JavaIOObjectStream2/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JavaIOObjectStream3" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Stream/">Stream</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/JavaIOObjectStream3/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaIOObjectStream3.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaIOObjectStream3.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaIOObjectStream3.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><p>객체가 전송되거나 쓴다고 하면, 보통 데이터만 해당된다고 생각할 수 있다. 객체가 전송된다는 것은 애플릿, 윈도우 등도 전송될 수 있다는 것을 의미한다.</p>
+<p>객체 전송은 다음과 같은 순서를 지켜야 한다.</p>
+<ol>
+<li>데이터를 특정 통신 채널로 보낼 수 있는 형태로 바꾼다. 이를 마샬링(marshaling)이라고 한다.</li>
+<li>변환된 데이터를 전송하거나 쓴다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/10/JavaIOObjectStream3/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
