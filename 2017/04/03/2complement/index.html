@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Number-line.svg/1500px-Number-line.svg.png">
 <meta property="og:image" content="http://i.stack.imgur.com/sd9po.jpg">
-<meta property="og:updated_time" content="2018-03-26T07:36:46.967Z">
+<meta property="og:updated_time" content="2018-03-28T00:51:55.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2의 보수법으로 음수 표현하기">
 <meta name="twitter:description" content="부호있는 정수를 표현하기 위해 사용하는 2의 보수법이 얼마나 자연스럽고 아름다운지 써보려고 한다. 초딩때 프로그래밍을 처음 배울때는 그냥 외웠었는데 중딩때 쯤 이게 얼마나 아름다운 방법인지에 깨달음(ㅎㅎ)이 왔었더랬다. 2의 보수법으로 음수를 표현하는 기계적 방법(즉 알고리즘)은 아래와 같다.  모든 비트를 뒤집는다. 예를 들어 양수가 00100000 였다">
@@ -1070,9 +1070,7 @@
 <p>직선의 양끝을 위와 같이 자른 다음에 직선의 양끝(-128과 127)을 이어붙여서 고리(ring)로 만들자:</p>
 <img src="http://i.stack.imgur.com/sd9po.jpg" title="Check out the Falcon 9 from SpaceX">
 <p>이 그림을 보고 0에서 시작해서 시계방향으로 돌면서 이진수 값을 하나씩 매핑하면 2의 보수법을 따르는 인코딩이 완성된다. 이 그림을 떠올리면 127 다음에 -128이 나오는 이유, 0은 <code>00000000</code>인데 -1은 <code>11111111</code>인 이유, 2의 보수법 인코딩에서 사칙연산이 자연스럽게 수행되는 이유, carry flag가 어떤 경우에 켜지며 그 때의 값이 어떻게 되는지 등 온갖 것들이 자연스럽게 이해된다.  참말 아름답지 아니한가?</p>
-<p>출처<br>
-<a href="http://www.ecogwiki.com/2%EC%9D%98_%EB%B3%B4%EC%88%98%EB%B2%95%EC%9C%BC%EB%A1%259" target="_blank" rel="noopener">http://www.ecogwiki.com/2의_보수법으��%9</a><br>
-C_%EC%9D%8C%EC%88%98_%ED%91%9C%ED%98%84%ED%95%98%EA%B8%B0</p>
+<p><a href="http://www.ecogwiki.com/2%EC%9D%98_%EB%B3%B4%EC%88%98%EB%B2%95%EC%9C%BC%EB%A1%9C_%EC%9D%8C%EC%88%98_%ED%91%9C%ED%98%84%ED%95%98%EA%B8%B0" target="_blank" rel="noopener">출처</a></p>
 
             </div>
         
