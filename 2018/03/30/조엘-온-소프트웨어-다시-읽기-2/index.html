@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="개발하는 조롱이">
 <meta property="og:description" content="3장 더 나은 코드를 위한 12단계 조엘 테스트  소스 코드 관리 시스템을 사용하는지? 한방 빌드를 만들어낼 수 있나? 일일 빌드를 수행 중인가? 버그 추적 시스템 운영 중인가? 코드를 새로 작성하기 전에 버그를 수정하는지? 일정을 업데이트 하는지? 명세서를 작성하고 있는지? 조용한 작업 환경에서 일하고 있는지? 경제적인 범위 내에서 최고 성능의 도구를 사">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-30T13:20:11.159Z">
+<meta property="og:updated_time" content="2018-03-30T13:36:43.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="조엘 온 소프트웨어 다시 읽기 (2)">
 <meta name="twitter:description" content="3장 더 나은 코드를 위한 12단계 조엘 테스트  소스 코드 관리 시스템을 사용하는지? 한방 빌드를 만들어낼 수 있나? 일일 빌드를 수행 중인가? 버그 추적 시스템 운영 중인가? 코드를 새로 작성하기 전에 버그를 수정하는지? 일정을 업데이트 하는지? 명세서를 작성하고 있는지? 조용한 작업 환경에서 일하고 있는지? 경제적인 범위 내에서 최고 성능의 도구를 사">
@@ -1185,32 +1185,44 @@
 <tr>
 <td>00000000</td>
 <td>0000007F</td>
-<td>0vvvvvvv</td>
+<td>0xxxxxxx</td>
 </tr>
 <tr>
 <td>00000080</td>
 <td>000007FF</td>
-<td>110vvvvv 10vvvvvv</td>
+<td>110xxxxx 10xxxxxx</td>
 </tr>
 <tr>
 <td>00000800</td>
 <td>0000FFFF</td>
-<td>1110vvvv 10vvvvvv 10vvvvvv</td>
+<td>1110xxxx 10xxxxxx 10xxxxxx</td>
 </tr>
 <tr>
 <td>00010000</td>
 <td>001FFFFF</td>
-<td>11110vvv 10vvvvvv 10vvvvvv 10vvvvvv</td>
+<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
 </tr>
 <tr>
 <td>00200000</td>
 <td>03FFFFFF</td>
-<td>111110vv 10vvvvvv 10vvvvvv 10vvvvvv 10vvvvvv</td>
+<td>111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
 <p>위 표가 뜻하는 바를 완벽하게 이해하진 못하겠다.</p>
+<blockquote>
+<p>2018-03-30, 변경! 최소와 최대는 범위를 뜻함<br>
+한글 “위” <a href="http://www.unicode.org/charts/PDF/UAC00.pdf" target="_blank" rel="noopener">코드 포인트</a>는 <code>U+C704</code>로 00000800~0000FFFF 범위에 속함<br>
+따라서, 1110xxxx 10xxxxxx 10xxxxxx 형식을 사용하며, <code>U+C704</code>를 2진수로 변경시 1100 0111 0000 0100로 표현되고, 순서대로 형식에 맞게 넣어주면 된다.<br>
+따라서 한글 ==<em>위</em>==는 코드포인트 <code>U+C704</code>이고, 이는 UTF-8 2진수로 변환시  1110<strong>1100</strong> 10<strong>011100</strong> 10<strong>000100</strong> 로 변환된다. 결과적으로 이 문자는 <code>3바이트</code>로 인코딩 된다.</p>
+<blockquote>
+<p>결국 첫 128 문자는 1바이트로 표시되고 <code>**(ASCII)**</code>, 그 다음 1920 문자는 2바이트로 표시되며, 나머지 문자들 중 BMP 안에 들어 있는 것은 3바이트, 아닌 것은 4바이트로 표시된다.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>아하!!!, 더 자세한 내용은 위키 백과 참조!</p>
 </blockquote>
 <ul>
 <li>
