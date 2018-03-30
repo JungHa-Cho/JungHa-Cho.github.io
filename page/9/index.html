@@ -275,7 +275,7 @@
                             &nbsp;
                             Stream
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -573,6 +573,15 @@
                             기본으로 돌아가기
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareBacktothebasic/">Joel On Software, 기본으로 돌아가기</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            다시읽기
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/30/조엘-온-소프트웨어-다시-읽기-2/">조엘 온 소프트웨어 다시 읽기 (2)</a></li>  <li class="file"><a href="/2018/03/30/조엘-온-소프트웨어-다시-읽기/">조엘 온 소프트웨어 다시 읽기</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -889,7 +898,7 @@
                             &nbsp;
                             일반
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  <li class="file"><a href="/2018/03/29/문득-궁금해-졌습니다-객체-지향이란-무엇이며-이를-채용하는-언어는-어떠한-특성이-있을까/">문득 궁금해 졌습니다. 객체 지향이란 무엇이며, 이를 채용하는 언어는 어떠한 특성이 있을까?</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  <li class="file"><a href="/2018/03/29/문득-궁금해-졌습니다-객체-지향이란-무엇이며-이를-채용하는-언어는-어떠한-특성이-있을까/">문득 궁금해 졌습니다. 객체 지향이란 무엇이며, 이를 채용하는 언어는 어떠한 특성이 있을까?</a></li>  <li class="file"><a href="/2018/03/30/객체-지향-연습-하기-프로젝트/">객체 지향 연습 하기 프로젝트</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -1001,6 +1010,422 @@
 </aside>
             
             <section id="main">
+        <article id="post-JavaIOByteStream" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Byte/">Byte</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Byte/">Byte</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/09/JavaIOByteStream/">
+            <time datetime="2017-04-09T12:10:59.000Z" itemprop="datePublished">2017-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170409-JavaIOByteStream.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170409-JavaIOByteStream.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170409-JavaIOByteStream.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/09/JavaIOByteStream/">04. 바이트 스트림 : 바이트 단위 IO 클래스</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>04. 바이트 스트림 : 바이트 단위 IO 클래스</h3>
+<p><a href="http://java.io" target="_blank" rel="noopener">java.io</a> 패키지에 있는 클래스 중에서 바이트 스트림은 다양한 입출력 프로그램에서 사용된다. 모든 데이터는 바이트 단위로 구성되어 있기 때문이다. 하지만, 많은 개발자들이 바이트 스트림 클래스의 사용 방법에 대해 어려워한다. 이는 바이트 스트림 클래스의 사용 원리를 이해하지 못하기 때문이다.</p>
+<p><a href="http://java.io" target="_blank" rel="noopener">java.io</a> 패키지에서 클래스는 객체를 재사용하는 좋은 예이다. <a href="http://java.io" target="_blank" rel="noopener">java.io</a> 패키지의 클래스를 조합해서 다양한 방법으로 사용할 수 있기 때문이다. <a href="http://java.io" target="_blank" rel="noopener">java.io</a> 패키지의 바이트 스트림은 네트워크 프로그래밍을 할 경우에도 사용하며 JDBC에서 대용량 바이너리 파일을 데이터베이스에 저장하거나 읽어 들이고자 할 경우에도 사용한다.</p>
+<p>XML 프로그래밍에서는 XML 문서를 읽어 들이거나 XML 문서를 출력할 때 <a href="http://java.io" target="_blank" rel="noopener">java.io</a> 패키지의 바이트 스트림을 사용하기도 한다.<br>
+즉, <a href="http://java.io" target="_blank" rel="noopener">java.io</a> 패키지의 바이트 스트림은 입출력과 관련된 곳이라면 항상 사용된다고 생각해도 과언이 아니다.</p>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/09/JavaIOByteStream/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JavaIOOverrinding" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Override/">Override</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>, <a class="tag-link" href="/tags/Override/">Override</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/09/JavaIOOverrinding/">
+            <time datetime="2017-04-09T12:10:59.000Z" itemprop="datePublished">2017-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170409-JavaIOOverrinding.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170409-JavaIOOverrinding.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170409-JavaIOOverrinding.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/09/JavaIOOverrinding/">03. 자바 I/O ( 오버라이딩에 대한 이해 )</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>오버라이딩에 대한 확실한 이해</h3>
+<p>자바의 상속과 오버라이딩에 대한 확실한 이해가 없으면 안된다!내가 알고 있는 오버라이딩과 오버로딩의 개념이 헷갈린다.</p>
+<ul>
+<li>오버라이딩<br>
+올라타다. 라는 단어로 외웠다. 즉, 부모의 메소드를 자식 클래스에서 메소드를 다시 재정의 할 수 있는 기능이다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/09/JavaIOOverrinding/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JavaIOWhatisjavaIO" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/일반/">일반</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/IO/">IO</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/09/JavaIOWhatisjavaIO/">
+            <time datetime="2017-04-09T12:10:59.000Z" itemprop="datePublished">2017-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3><a href="http://Java.io" target="_blank" rel="noopener">Java.io</a></h3>
+<p>읽고 쓸 수 있는 클래스들은 크게 두 가지로 나뉘어지는데, 바이트 단위로 읽고 쓸수 있는 '바이트 스트림 클래스’와 문자 단위로 읽고 쓸 수 있는 '문자 스트림 클래스’로 나뉜다.</p>
+<p>처음의 자바는 바이트 단위로 읽고 쓸 수 있는 바이트 스트림 클래스만 존재했지만, 2바이트 문화권인 한국, 일본, 중국 등의 영향으로 문자 스트림 클래스가 추후에 추가됐다. 이는 한글을 입출력하는 프로그램의 경우 문자 스트림 클래스를 사용하는 것이 유리하다는 것을 의미한다.</p>
+<p><img src="http://cfile29.uf.tistory.com/image/223F6E3D56103655110058" alt="es2"></p>
+<ul>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/09/JavaIOWhatisjavaIO/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-Interface" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의-정석/">자바의 정석</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의-정석/Interface/">Interface</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Interface/">Interface</a>, <a class="tag-link" href="/tags/자바의-정석/">자바의 정석</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/06/Interface/">
+            <time datetime="2017-04-06T12:10:59.000Z" itemprop="datePublished">2017-04-06</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170406-Interface.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170406-Interface.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170406-Interface.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/06/Interface/">Interface</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>JAVA Interface</h3>
+<ul>
+<li>
+<p>개발 시간을 단축시킬 수 있다. ( 설계도를 제공 )</p>
+</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/06/Interface/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-NetworkAndNetworking" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1209,110 +1634,6 @@
 
 
     
-        <article id="post-Interface" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의-정석/">자바의 정석</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의-정석/Interface/">Interface</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Interface/">Interface</a>, <a class="tag-link" href="/tags/자바의-정석/">자바의 정석</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/06/Interface/">
-            <time datetime="2017-04-06T12:10:59.000Z" itemprop="datePublished">2017-04-06</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170406-Interface.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170406-Interface.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170406-Interface.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/06/Interface/">Interface</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>JAVA Interface</h3>
-<ul>
-<li>
-<p>개발 시간을 단축시킬 수 있다. ( 설계도를 제공 )</p>
-</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/06/Interface/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <article id="post-Generic" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1404,110 +1725,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/06/Generic/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Chapter13Thread" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의정석/">자바의정석</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의정석/Thread/">Thread</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바의정석/">자바의정석</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/06/Chapter13Thread/">
-            <time datetime="2017-04-06T12:10:59.000Z" itemprop="datePublished">2017-04-06</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170406-Chapter13Thread.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170406-Chapter13Thread.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170406-Chapter13Thread.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>Chapter 13. Thread</h3>
-<ul>
-<li>멀티 쓰레딩의 장단점</li>
-<li>CPU의 사용률을 향상시킨다.</li>
-<li>사용자에 대한 응답성이 향상된다.</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/06/Chapter13Thread/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
@@ -1625,6 +1842,110 @@
 
 
     
+        <article id="post-Chapter13Thread" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의정석/">자바의정석</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의정석/Thread/">Thread</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바의정석/">자바의정석</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/06/Chapter13Thread/">
+            <time datetime="2017-04-06T12:10:59.000Z" itemprop="datePublished">2017-04-06</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170406-Chapter13Thread.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170406-Chapter13Thread.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170406-Chapter13Thread.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>Chapter 13. Thread</h3>
+<ul>
+<li>멀티 쓰레딩의 장단점</li>
+<li>CPU의 사용률을 향상시킨다.</li>
+<li>사용자에 대한 응답성이 향상된다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/06/Chapter13Thread/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-ShutDownHook" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1724,298 +2045,8 @@ Shutdown Hook은 반드시 실행되지는 않는다. Shutdown hook은 정상적
 
 
     
-        <article id="post-Engine" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/DataBase/">DataBase</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/DataBase/일반/">일반</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/05/Engine/">
-            <time datetime="2017-04-05T14:43:59.000Z" itemprop="datePublished">2017-04-05</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170405-Engine.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170405-Engine.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170405-Engine.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/05/Engine/">engine</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>MyISAM ( Indexed Sequential Access Method )</h3>
-<ul>
-<li>결론부터, 트랜잭션 처리가 불필요하며 Select 속도가 빠르므로 조회작업 특화 엔진</li>
-<li>비 트랜잭션 세이프(Non-Transaction-Safe)</li>
-<li>테이블 단위 Lock (Table Level Locking) 쓰기(INSERT, UPDATE) 작업 속도가 느림, Select 속도가 빠름</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/05/Engine/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Document" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Language/">Language</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Language/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Language/Java/일반/">일반</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/05/Document/">
-            <time datetime="2017-04-05T14:43:59.000Z" itemprop="datePublished">2017-04-05</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170405-Document.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170405-Document.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170405-Document.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/05/Document/">Document</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-            
-        
-        
-            <p>XML 문서 전체를 메모리에 저장<br>
-트리 모델<br>
-org.w3c.dom.Node 인터페이스 기반,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">package test;</span><br><span class="line"></span><br><span class="line">import javax.xml.parsers.DocumentBuilder;</span><br><span class="line">import javax.xml.parsers.DocumentBuilderFactory;</span><br><span class="line"></span><br><span class="line">import org.w3c.dom.Document;</span><br><span class="line">import org.w3c.dom.Element;</span><br><span class="line">import org.w3c.dom.Node;</span><br><span class="line">import org.w3c.dom.NodeList;</span><br><span class="line"></span><br><span class="line">public class docum &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        // TODO Auto-generated method stub</span><br><span class="line">        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">        DocumentBuilder builder = factory.newDocumentBuilder();</span><br><span class="line">        Document doc = builder.parse(&quot;src/test/doc_test.xml&quot;);</span><br><span class="line">        Element root = doc.getDocumentElement();</span><br><span class="line">        System.out.println(&quot;ROOT: &quot; + root.getNodeName());</span><br><span class="line"></span><br><span class="line">        NodeList all = root.getChildNodes();</span><br><span class="line">        System.out.println(&quot;루트의 지식노드수 :&quot; + all.getLength());</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; all.getLength(); i++) &#123;</span><br><span class="line">            Node node = all.item(i);</span><br><span class="line">            System.out.println(&quot;자식노드 : &quot; + node.getNodeName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // personal 이라는 이름을 가진 요소들을 모두 가려내는 작업.</span><br><span class="line">        NodeList n_list = root.getElementsByTagName(&quot;personal&quot;);</span><br><span class="line">        // 첫번째 요소 personal이라는 요소</span><br><span class="line">        Element p = (Element) n_list.item(0);</span><br><span class="line">        Node s_node = n_list.item(0);</span><br><span class="line">        NodeList s_list = s_node.getChildNodes();</span><br><span class="line">        for (int i = 0; i &lt; s_list.getLength(); i++) &#123;</span><br><span class="line">            if (!s_node.getNodeName().equals(&quot;#text&quot;)) &#123;</span><br><span class="line">                Node no = s_node.getFirstChild();</span><br><span class="line">                System.out.println(no.getNodeName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 얻어낸 personal의 자식요소들 중에서 name을 구하고 싶을때</span><br><span class="line">        NodeList names = p.getElementsByTagName(&quot;name&quot;);</span><br><span class="line">        Element el_name = (Element) names.item(0);</span><br><span class="line">        // name의 값을 구한다.</span><br><span class="line">        Node txt = el_name.getFirstChild();</span><br><span class="line">        System.out.println(&quot;Names: &quot; + txt.getNodeValue());</span><br><span class="line"></span><br><span class="line">        // personal의 두번째 요소중 phone을 구하자!</span><br><span class="line">        p = (Element) n_list.item(1);</span><br><span class="line">        names = p.getElementsByTagName(&quot;phone&quot;);</span><br><span class="line">        el_name = (Element) names.item(0);</span><br><span class="line">        txt = el_name.getFirstChild();</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;phone: &quot; + txt.getNodeValue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-DesignPattern" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/설계/">설계</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/설계/일반/">일반</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/05/DesignPattern/">
-            <time datetime="2017-04-05T14:43:59.000Z" itemprop="datePublished">2017-04-05</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170405-DesignPattern.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170405-DesignPattern.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170405-DesignPattern.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/05/DesignPattern/">DesignPattern</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>처음 업무를 맡아서 원 소스를 받았을때 코드를 보기가 힘들었다. 눈에 들어오지도 않을뿐더러 이게 왜 필요한 메소드인지 왜 필요한 로직인지 이해조차 할수 없었다. 내 스타일의 코딩이 아니었고 처음 보는 구조였고 내가 익숙한 코드도 아니었다. 온갖 핑계와 이해가 안된다며 스스로 안좋은 코드라고 정의내렸다. 이는 좋은 코드는 무엇인가에 대한 고민으로 이어졌고 또 이 원 소스가 정말로 안좋은 코드인가에 대한 고민과 이해에 대해 이어졌다. 결론은 내가 문제였다. 핑계로 점칠돼 소스를 이해하지도 않았고 이 소스의 진짜 문제가 무엇인지도 몰랐다.</p>
-<p>이에 체계적이고 유지보수가 가능한, 또 적재 적소에 필요할때 사용할수 있는 또 누구에게나 익숙한 코딩 스타일과 패턴을 익히고 사용하기위해 디자인 패턴 공부의 필요성을 느꼈다.</p>
-<h3>디자인 패턴이란?</h3>
-<p>필요성을 느끼고 나서 이것저것 책도 살펴보고 검색도 해봤지만, 어려운 말 이해되지 않는 내용과 깊은 지식과 경험을 필요로하는 조언들이 넘쳐났다. 누군가가 오랫동안 생각하고 만들고 조언한 내용들이란것은 알겠지만, 이제 갖 디자인 패턴의 필요성을 느끼고 입문하려니 너무 어려운 말들 뿐이었다.</p>
-<p>일단, 한걸음씩 오늘은 여러 부분에서 공통적으로 강조하는 SOLID 원칙에 대해 이해하고 넘어가자.</p>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/05/DesignPattern/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
         </nav>
     
 </section>

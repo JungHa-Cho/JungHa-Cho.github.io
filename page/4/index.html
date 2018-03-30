@@ -275,7 +275,7 @@
                             &nbsp;
                             Stream
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JavaIOObjectStream2/">06. 01. 객체 스트림 : 생각해볼 문제와 간단한 예제</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream3/">06. 03. 객체 스트림 소개</a></li>  <li class="file"><a href="/2017/04/10/JavaIOObjectStream/">06. 객체 스트림 개요</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -573,6 +573,15 @@
                             기본으로 돌아가기
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/10/JoelOnSoftwareBacktothebasic/">Joel On Software, 기본으로 돌아가기</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            다시읽기
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/30/조엘-온-소프트웨어-다시-읽기-2/">조엘 온 소프트웨어 다시 읽기 (2)</a></li>  <li class="file"><a href="/2018/03/30/조엘-온-소프트웨어-다시-읽기/">조엘 온 소프트웨어 다시 읽기</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -889,7 +898,7 @@
                             &nbsp;
                             일반
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  <li class="file"><a href="/2018/03/29/문득-궁금해-졌습니다-객체-지향이란-무엇이며-이를-채용하는-언어는-어떠한-특성이-있을까/">문득 궁금해 졌습니다. 객체 지향이란 무엇이며, 이를 채용하는 언어는 어떠한 특성이 있을까?</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/04/04/JavaProgramming지침(설계편)/">Java-Programming-지침-(설계편)</a></li>  <li class="file"><a href="/2017/04/05/DesignPattern/">DesignPattern</a></li>  <li class="file"><a href="/2018/03/29/문득-궁금해-졌습니다-객체-지향이란-무엇이며-이를-채용하는-언어는-어떠한-특성이-있을까/">문득 궁금해 졌습니다. 객체 지향이란 무엇이며, 이를 채용하는 언어는 어떠한 특성이 있을까?</a></li>  <li class="file"><a href="/2018/03/30/객체-지향-연습-하기-프로젝트/">객체 지향 연습 하기 프로젝트</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -1001,6 +1010,318 @@
 </aside>
             
             <section id="main">
+        <article id="post-자바병렬프로그래밍-챕터4-객체구성" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Code/">Code</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Code/">Code</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">
+            <time datetime="2017-05-09T17:26:43.000Z" itemprop="datePublished">2017-05-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170510-자바병렬프로그래밍-챕터4-객체구성.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/">자바병렬프로그래밍-챕터4-객체구성</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>Chapter 4 객체 구성 이어서…</h3>
+<h3>차량 위치 추적</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Point&gt; location = vehicles.getLocation();</span><br><span class="line"><span class="keyword">for</span> (String key : locations.keySet())</span><br><span class="line">  renderVehicle(key, locations.get(key));</span><br></pre></td></tr></table></figure>
+<p>이와 유사하게 업데이터 스레드는 차량에 장착된 GPS 장치에서 읽어낸 위치 정보를 자동으로 입력하거나, GUI 화면에서 수동으로 입력한 내용을 새로운 위치 정보로 업데이트한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vehicleMoved</span><span class="params">(VehicleMovedEvent evt)</span> </span>&#123;</span><br><span class="line">  Point loc = evt.getNewLocation();</span><br><span class="line">  vehicles.setLocation(evt.getVehicleId(), loc.x, loc.y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/10/자바병렬프로그래밍-챕터4-객체구성/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JavaConcurrencyinPracticeObjectShareThreadConfine" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Thread/">Thread</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">
+            <time datetime="2017-05-09T05:10:59.000Z" itemprop="datePublished">2017-05-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170509-JavaConcurrencyinPracticeObjectShareThreadConfine.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>3.3 스레드 한정</h3>
+<p>스레드 안정성을 확보하는 방법</p>
+<ol>
+<li>변경 가능한 객체를 공유해 사용하는 경우, 항상 동기화 한다.</li>
+<li>동기화를 사용하지 않는다면, 기본적으로 객체를 공유해 사용하지 않아야 한다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/09/JavaConcurrencyinPracticeObjectShareThreadConfine/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JavaConcurrencyinPracticeChapter4Objectcomposition" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Thread/">Thread</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/">
+            <time datetime="2017-05-09T05:10:59.000Z" itemprop="datePublished">2017-05-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170509-JavaConcurrencyinPracticeChapter4Objectcomposition.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/">Java Concurrency in Practice, 객체 공유 - 스레드 한정</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><hr>
+<h3>Chapter 04. 객체 구성</h3>
+<p>기본적으로 어떤 프로그램의 스레드 안전성을 확보하고 있는지 확인하는 것은 굉장히 어려운 일이다. 대신 스레드 안전성을 확보한 개별 컴포넌트를 가져다가 안전한 방법을 동원해 서로 연결해 사용한다면 규모있는 컴포넌트나 프로그램을 좀더 쉽게 작성할 수 있다.</p>
+<p>4장에서는 컴포넌트의 스레드 안전성을 안정적으로 확보할 수 있고, 이와 함께 개발자가 코드를 작성하는 과정에서 실수한다 해도 스레드 안전성을 해치지 않도록 도와주는 클래스 구성 방법을 살펴보자.</p>
+<h3>4.1 스레드 안전한 클래스 설계</h3>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/09/JavaConcurrencyinPracticeChapter4Objectcomposition/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-JavaConcurrencyinPracticeObjectShare" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1313,110 +1634,6 @@
 
 
     
-        <article id="post-JoelOnSoftwareC5C14" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/조엘온소프트웨어/">조엘온소프트웨어</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/조엘온소프트웨어/명세서/">명세서</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/명세서/">명세서</a>, <a class="tag-link" href="/tags/조엘온소프트웨어/">조엘온소프트웨어</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/08/JoelOnSoftwareC5C14/">
-            <time datetime="2017-05-08T09:50:59.000Z" itemprop="datePublished">2017-05-08</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/08/JoelOnSoftwareC5C14/">조엘 온 소프트웨어 C5-C14</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>5장, 손쉬운 기능명세 작성법</h3>
-<ul>
-<li>명세서 없이 코딩에 뛰어드는 짓은 하지말자</li>
-<li>명세서 작성에서 얻을수 있는 결실은 프로그램 설계이다.</li>
-<li>작성한 설계서를 바탕으로 고객이 원하는 바를 파악하고 다시 설계서를 수정함으로써 삽질을 줄일수 있다.</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/05/08/JoelOnSoftwareC5C14/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <article id="post-JenkinsslacktrelloGoogleCloudPlatform" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1508,6 +1725,110 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JoelOnSoftwareC5C14" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/조엘온소프트웨어/">조엘온소프트웨어</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/조엘온소프트웨어/명세서/">명세서</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/명세서/">명세서</a>, <a class="tag-link" href="/tags/조엘온소프트웨어/">조엘온소프트웨어</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/08/JoelOnSoftwareC5C14/">
+            <time datetime="2017-05-08T09:50:59.000Z" itemprop="datePublished">2017-05-08</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170508-JoelOnSoftwareC5C14.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/08/JoelOnSoftwareC5C14/">조엘 온 소프트웨어 C5-C14</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3>5장, 손쉬운 기능명세 작성법</h3>
+<ul>
+<li>명세서 없이 코딩에 뛰어드는 짓은 하지말자</li>
+<li>명세서 작성에서 얻을수 있는 결실은 프로그램 설계이다.</li>
+<li>작성한 설계서를 바탕으로 고객이 원하는 바를 파악하고 다시 설계서를 수정함으로써 삽질을 줄일수 있다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/08/JoelOnSoftwareC5C14/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
@@ -1729,320 +2050,8 @@
 
 
     
-        <article id="post-JavaIONetworkProgrammingTCPProgramming" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/TCP/">TCP</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>, <a class="tag-link" href="/tags/TCP/">TCP</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">
-            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaIONetworkProgrammingTCPProgramming.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaIONetworkProgrammingTCPProgramming.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaIONetworkProgrammingTCPProgramming.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/">08. TCP 프로그래밍</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h2>08. TCP 프로그래밍</h2>
-<h3>1. 클라이언트의 접속 대기</h3>
-<p>서버쪽에서는 클라이언트의 접속을 기다리기위해 ServerSocket 객체의 accept() 메소드를 실행해서 대기하게 된다. 서버 쪽에서는 이 accept()메소드에서 멈추게 되는데 이를 블로킹 메소드라고 한다.</p>
-<h3>2. 클라이언트 접속</h3>
-<p>accept()로 대기중인 서버라면 클라이언트는 서버로 접속할 수 있다. 클라이언트에서 서버 정보를 담은 Socket만 생성하게 되면 내부적으로 알아서 접속이 일어난다. 성공적으로 Socket 객체가 생성되었다면, 서버의 accept() 메소드는 클라이언트에 대한 Socket 객체를 반환한다.</p>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/10/JavaIONetworkProgrammingTCPProgramming/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-JavaIONetworkProgrammingThreadEcho" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/TCP/">TCP</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>, <a class="tag-link" href="/tags/TCP/">TCP</a>, <a class="tag-link" href="/tags/Thread/">Thread</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">
-            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaIONetworkProgrammingThreadEcho.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaIONetworkProgrammingThreadEcho.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaIONetworkProgrammingThreadEcho.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/">08. TCP 프로그래밍 03. 멀티스레드를 이용한 에코 서버</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>03. 멀티스레드를 이용한 에코 서버</h3>
-<h3>1. 멀티스레드 에코 서버 프로그래밍</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">import java.net.*;</span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class EchoThreadServer &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            ServerSocket server = new ServerSocket(10001);</span><br><span class="line">            System.out.println(&quot;접속을 기다립니다.&quot;);</span><br><span class="line">            while(true)&#123;</span><br><span class="line">                Socket socket = server.accept();</span><br><span class="line">                EchoThread ethr = new EchoThread(socket);</span><br><span class="line">                ethr.start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class EchoThread extends Thread&#123;</span><br><span class="line">    private Socket sock;</span><br><span class="line">    public EchoThread(Socket socke)&#123;</span><br><span class="line">        this.sock = socke;</span><br><span class="line">    &#125;</span><br><span class="line">    public void run()&#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            InetAddress inetAddr = sock.getInetAddress();</span><br><span class="line">            System.out.println(inetAddr.getHostAddress() + &quot;로 부터 접속했습니다.&quot;);</span><br><span class="line">            OutputStream out = sock.getOutputStream();</span><br><span class="line">            InputStream in = sock.getInputStream();</span><br><span class="line">            PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));</span><br><span class="line">            BufferedReader br = new BufferedReader(new InputStreamReader(in));</span><br><span class="line">            String line = null;</span><br><span class="line">            while((line = br.readLine()) != null)&#123;</span><br><span class="line">                System.out.println(&quot;클라이언트로부터 전송받은 문자열 : &quot;+line);</span><br><span class="line">                pw.println(line);</span><br><span class="line">                pw.flush();</span><br><span class="line">            &#125;</span><br><span class="line">            pw.close();</span><br><span class="line">            br.close();</span><br><span class="line">            sock.close();</span><br><span class="line">        &#125;catch(Exception ex)&#123;</span><br><span class="line">            System.out.println(ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3>05. ChatServer, Client</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">import java.net.*;</span><br><span class="line">import java.io.*;</span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class ChatServer &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            ServerSocket server = new ServerSocket(10001);</span><br><span class="line">            System.out.println(&quot;접속을 기다립니다.&quot;);</span><br><span class="line">            HashMap hm = new HashMap();</span><br><span class="line">            while(true) &#123;</span><br><span class="line">                Socket sock = server.accept();</span><br><span class="line">                ChatThread chatthread = new ChatThread(sock, hm);</span><br><span class="line">                chatthread.start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch(Exception e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ChatThread extends Thread &#123;</span><br><span class="line">    private Socket sock;</span><br><span class="line">    private String id;</span><br><span class="line">    private BufferedReader br;</span><br><span class="line">    private HashMap hm;</span><br><span class="line">    private boolean initFlag = false;</span><br><span class="line">    public ChatThread(Socket sock, HashMap hm) &#123;</span><br><span class="line">        this.sock = sock;</span><br><span class="line">        this.hm = hm;</span><br><span class="line">        try &#123;</span><br><span class="line">            PrintWriter pw = new PrintWriter (new OutputStreamWriter(sock.getOutputStream()));</span><br><span class="line">            br = new BufferedReader(new InputStreamReader(sock.getInputStream()));</span><br><span class="line">            id = br.readLine();</span><br><span class="line">            broadcast(id + &quot;님이 접속했습니다.&quot;);</span><br><span class="line">            System.out.println(&quot;접속한 사용자의 아이디는 &quot;+id+&quot;입니다.&quot;);</span><br><span class="line">            synchronized(hm) &#123;</span><br><span class="line">                hm.put(this.id, pw);</span><br><span class="line">            &#125;</span><br><span class="line">            initFlag = true;</span><br><span class="line">        &#125;catch(Exception ex) &#123;</span><br><span class="line">            System.out.println(ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            String line = null;</span><br><span class="line">            while((line = br.readLine()) != null) &#123;</span><br><span class="line">                if(line.equals(&quot;/quit&quot;)) break;</span><br><span class="line">                if(line.indexOf(&quot;/to &quot;) == 0)&#123;</span><br><span class="line">                    sendmsg(line);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    broadcast(id+&quot; : &quot;+line);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch(Exception ex) &#123;</span><br><span class="line">            System.out.println(ex);</span><br><span class="line">        &#125;finally&#123;</span><br><span class="line">            synchronized(hm)&#123;</span><br><span class="line">                hm.remove(id);</span><br><span class="line">            &#125;</span><br><span class="line">            broadcast(id + &quot; 님이 접속 종료했습니다.&quot;);</span><br><span class="line">            try&#123;</span><br><span class="line">                if(sock != null) sock.close();</span><br><span class="line">            &#125;catch(Exception ex)&#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void sendmsg(String msg)&#123;</span><br><span class="line">        int start = msg.indexOf(&quot; &quot;) +1;</span><br><span class="line">        int end = msg.indexOf(&quot; &quot;, start);</span><br><span class="line"></span><br><span class="line">        if(end != -1) &#123;</span><br><span class="line">            String to = msg.substring(start, end);</span><br><span class="line">            String msg2 = msg.substring(end+1);</span><br><span class="line">            Object obj = hm.get(to);</span><br><span class="line">            if(obj != null)&#123;</span><br><span class="line">                PrintWriter pw = (PrintWriter) obj;</span><br><span class="line">                pw.println(id + &quot; 님이 다음의 귓속말을 보내셨습니다 : &quot;+msg2);</span><br><span class="line">                pw.flush();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void broadcast(String msg)&#123;</span><br><span class="line">        synchronized(hm) &#123;</span><br><span class="line">            Collection collection = hm.values();</span><br><span class="line">            Iterator iter = collection.iterator();</span><br><span class="line">            while(iter.hasNext())&#123;</span><br><span class="line">                PrintWriter pw = (PrintWriter)iter.next();</span><br><span class="line">                pw.println(msg);</span><br><span class="line">                pw.flush();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/10/JavaIONetworkProgrammingThreadEcho/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-JavaIONetworkProgrammingbasic" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/일반/">일반</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/10/JavaIONetworkProgrammingbasic/">
-            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaIONetworkProgrammingbasic.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaIONetworkProgrammingbasic.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaIONetworkProgrammingbasic.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/10/JavaIONetworkProgrammingbasic/">07. 네트워크 프로그래밍 기초 - 개요</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>실무 개발자 중 프로그래밍은 하는데, 개념이 약한 경우, 반면 개념은 확실한데 실제 프로그래밍이 약한 경우. 이 두 경우 모두 바람직한 현상은 아니다. 하지만 그래도 후자가 발전 가능성이 더 높을것 같다.</p>
-<p>책에서는 &quot;내공이 깊으면 연공이 자유롭다&quot;라는 말을 한다. 개발에 빗대어 보자면 개념이 확실하다면 실제 프로그래밍을 쉽게 할수 있다는것 같다. 이 책에서는 개발단에서 일어나는 일 뿐만 아니라 기반 지식을 중요하게 강조하고 있다.</p>
-<p>네트워크 프로그래밍을 하려면 운영체제를 잘 알 필요가 있다. 유닉스 시스템에서 프로그래밍을 자주하는 프로그래머라면 유닉스 시스템의 네트워크 방법에 대한 이해가 필요하고 윈도우 시스템에서 프로그래밍을 자주하는 프로그래머라면 윈도우 시스템의 네트워크 방법에 대한 이해를 필요로 한다.</p>
-<p>특히 자바 프로그램의 경우 유닉스 시스템에서 운용될 때가 많기 때문에 이러한 운영체제에 대한 기본적인 지식이 상당히 중요하다. 또한 자바는 시스템에 대해 비종속적이라고 말을 하는데, 이는 자바 개발자가 여러 가지 종류의 운영체제에서 개발할 수 있어야 한다는 의미다.</p>
-<p>프로그램 언어는 시스템에 대해서 비종속적인데, 개발자가 종속적이라면 어떻겠는가?</p>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/10/JavaIONetworkProgrammingbasic/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
         </nav>
     
 </section>
