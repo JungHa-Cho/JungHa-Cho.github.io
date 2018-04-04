@@ -999,7 +999,7 @@
                             &nbsp;
                             일지
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/03/2018-04-03-독서-일지/">2018-04-03 독서 일지</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/03/2018-04-03-독서-일지/">2018-04-03 독서 일지</a></li>  <li class="file"><a href="/2018/04/04/2018-04-04-독서-일지/">2018-04-04-독서-일지.md</a></li>  </ul> 
                     </li> 
                      </ul> 
     </div>
@@ -1073,6 +1073,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-JavaIOWhatIOBufferutil" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/Buffer/">Buffer</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Buffer/">Buffer</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/JavaIOWhatIOBufferutil/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-JavaIOWhatIOBufferutil.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-JavaIOWhatIOBufferutil.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-JavaIOWhatIOBufferutil.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/10/JavaIOWhatIOBufferutil/">13. 버퍼 04. Buffer 클래스가 제공하는 유틸리티 메소드</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h1>04. buffer 클래스가 제공하는 유틸리티 메소드</h1>
+<p>이번 단에서는 버퍼 계열의 부모 클래스인 Buffer 클래스에 대해 살펴보자. 버퍼 클래스는 유용한 유틸리티 메소드를 많이 가지고 있다.</p>
+<h3>1. clear() 메소드</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(10);</span><br><span class="line">...</span><br><span class="line">buf.clear();</span><br></pre></td></tr></table></figure>
+<p>이처럼 clear() 메소드를 호출하게 되면 position, limit, mark 값의 속성들이 버퍼가 생성될 떄 초기값으로 초기화 된다.</p>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/10/JavaIOWhatIOBufferutil/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-JavaIOByteStream" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1177,110 +1281,6 @@
 
 
     
-        <article id="post-JavaIOWhatisjavaIO" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/일반/">일반</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/IO/">IO</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/09/JavaIOWhatisjavaIO/">
-            <time datetime="2017-04-09T12:10:59.000Z" itemprop="datePublished">2017-04-09</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3><a href="http://Java.io" target="_blank" rel="noopener">Java.io</a></h3>
-<p>읽고 쓸 수 있는 클래스들은 크게 두 가지로 나뉘어지는데, 바이트 단위로 읽고 쓸수 있는 '바이트 스트림 클래스’와 문자 단위로 읽고 쓸 수 있는 '문자 스트림 클래스’로 나뉜다.</p>
-<p>처음의 자바는 바이트 단위로 읽고 쓸 수 있는 바이트 스트림 클래스만 존재했지만, 2바이트 문화권인 한국, 일본, 중국 등의 영향으로 문자 스트림 클래스가 추후에 추가됐다. 이는 한글을 입출력하는 프로그램의 경우 문자 스트림 클래스를 사용하는 것이 유리하다는 것을 의미한다.</p>
-<p><img src="http://cfile29.uf.tistory.com/image/223F6E3D56103655110058" alt="es2"></p>
-<ul>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/09/JavaIOWhatisjavaIO/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
         <article id="post-JavaIOOverrinding" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1372,6 +1372,110 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/09/JavaIOOverrinding/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-JavaIOWhatisjavaIO" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/">JavaIO NIO</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/JavaIO-NIO/일반/">일반</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/IO/">IO</a>, <a class="tag-link" href="/tags/JavaIO-NIO/">JavaIO NIO</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/09/JavaIOWhatisjavaIO/">
+            <time datetime="2017-04-09T12:10:59.000Z" itemprop="datePublished">2017-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170409-JavaIOWhatisjavaIO.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/09/JavaIOWhatisjavaIO/">03. 05. 자바 IO란?</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h3><a href="http://Java.io" target="_blank" rel="noopener">Java.io</a></h3>
+<p>읽고 쓸 수 있는 클래스들은 크게 두 가지로 나뉘어지는데, 바이트 단위로 읽고 쓸수 있는 '바이트 스트림 클래스’와 문자 단위로 읽고 쓸 수 있는 '문자 스트림 클래스’로 나뉜다.</p>
+<p>처음의 자바는 바이트 단위로 읽고 쓸 수 있는 바이트 스트림 클래스만 존재했지만, 2바이트 문화권인 한국, 일본, 중국 등의 영향으로 문자 스트림 클래스가 추후에 추가됐다. 이는 한글을 입출력하는 프로그램의 경우 문자 스트림 클래스를 사용하는 것이 유리하다는 것을 의미한다.</p>
+<p><img src="http://cfile29.uf.tistory.com/image/223F6E3D56103655110058" alt="es2"></p>
+<ul>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/09/JavaIOWhatisjavaIO/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
@@ -1996,105 +2100,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/06/ByteOrder/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-ShutDownHook" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Java/">Java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Java/라이브러리/">라이브러리</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/05/ShutDownHook/">
-            <time datetime="2017-04-05T14:43:59.000Z" itemprop="datePublished">2017-04-05</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170405-ShutDownHook.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170405-ShutDownHook.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170405-ShutDownHook.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/05/ShutDownHook/">ShutDownHook</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>프로세스가 종료될때 반드시 실행되어야 하는 코드를 임의로 정의할 수 있다.</p>
-<p>Runtime Library에 정의되어 있다.</p>
-<p>Shutdown Hook은 프로세스가 종료될때 반드시 실행되고 Hook이 끝날때까지는 프로세스도 종료되지 않는다.<br>
-Shutdown Hook은 짧게 작성되어야 한다. 머신 종료에 의한 프로세스 종료일때 JVM은 프로세스가 완전히 종료될때까지 기다리지 않고 일정 시간 후 종료한다. 따라서 Shutdown Hook은 Hook이 실행되기 전에 종료될 수도 있고 도중에 종료될 수도 있다.<br>
-Shutdown Hook은 반드시 실행되지는 않는다. Shutdown hook은 정상적인 종료 상황에서만 호출된다. 따라서 비정상적인 종료에서도 반드시 실행되어야 하는 일들은 Java App를 실행하는 스크립트를 작성하거나 App을 하나더 만든다.<br>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/05/ShutDownHook/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
