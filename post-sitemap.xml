@@ -7,8 +7,16 @@
     </url>
 
     <url>
-        <loc>http://jungha-cho.github.io/2018/04/05/2018-04-05-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
-        <lastmod>2018-04-05T12:04:26.662Z</lastmod>
+        <loc>http://jungha-cho.github.io/2018/04/09/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%84%A4%EA%B3%84-%EB%B8%94%EB%9E%99%EC%9E%AD-13/</loc>
+        <lastmod>2018-04-09T13:31:37.611Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/2018/04/09/2018-04-09-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
+        <lastmod>2018-04-09T11:32:09.259Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +24,15 @@
 
     <url>
         <loc>http://jungha-cho.github.io/2018/04/04/2018-04-04-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
-        <lastmod>2018-04-04T13:20:51.626Z</lastmod>
+        <lastmod>2018-04-09T11:22:09.314Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/2018/04/05/2018-04-05-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
+        <lastmod>2018-04-09T11:22:02.471Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
