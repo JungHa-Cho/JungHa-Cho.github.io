@@ -616,34 +616,6 @@
     </url>
 
     <url>
-        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/</loc>
-        <lastmod>2018-04-09T13:37:04.423Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/OOP/</loc>
-        <lastmod>2018-04-09T13:37:04.423Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/OOP/%EC%97%B0%EC%8A%B5/</loc>
-        <lastmod>2018-04-09T13:37:04.423Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/OOP/%EC%97%B0%EC%8A%B5/%EB%B8%94%EB%9E%99%EC%9E%AD/</loc>
-        <lastmod>2018-04-09T13:37:04.423Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jungha-cho.github.io/categories/Data-Structure/</loc>
         <lastmod>2018-04-10T13:34:03.482Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -681,6 +653,34 @@
     <url>
         <loc>http://jungha-cho.github.io/categories/%EC%9D%BC%EC%A7%80/</loc>
         <lastmod>2018-04-12T12:07:24.260Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/</loc>
+        <lastmod>2018-04-12T14:23:26.366Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/OOP/</loc>
+        <lastmod>2018-04-12T14:23:26.366Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/OOP/%EC%97%B0%EC%8A%B5/</loc>
+        <lastmod>2018-04-12T14:23:26.366Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EC%84%A4%EA%B3%84/OOP/%EC%97%B0%EC%8A%B5/%EB%B8%94%EB%9E%99%EC%9E%AD/</loc>
+        <lastmod>2018-04-12T14:23:26.366Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
