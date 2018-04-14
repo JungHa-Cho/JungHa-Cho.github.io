@@ -1044,7 +1044,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/11/책-정리-1/">책 정리 (1)</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/2018/04/03/2018-04-03-독서-일지/">2018-04-03 독서 일지</a></li>  <li class="file"><a href="/2018/04/04/2018-04-04-독서-일지/">2018-04-04-독서-일지</a></li>  <li class="file"><a href="/2018/04/05/2018-04-05-독서-일지/">2018-04-05 독서 일지</a></li>  <li class="file"><a href="/2018/04/09/2018-04-09-독서-일지/">2018-04-09 독서 일지</a></li>  <li class="file"><a href="/2018/04/10/2018-04-10-독서-일지/">2018-04-10 독서 일지</a></li>  <li class="file"><a href="/2018/04/11/2018-04-11-독서-일지/">2018-04-11 독서 일지</a></li>  <li class="file"><a href="/2018/04/12/2018-04-12-독서-일지/">2018-04-12 독서 일지</a></li>  </ul> 
+                     <li class="file"><a href="/2018/04/03/2018-04-03-독서-일지/">2018-04-03 독서 일지</a></li>  <li class="file"><a href="/2018/04/04/2018-04-04-독서-일지/">2018-04-04-독서-일지</a></li>  <li class="file"><a href="/2018/04/05/2018-04-05-독서-일지/">2018-04-05 독서 일지</a></li>  <li class="file"><a href="/2018/04/09/2018-04-09-독서-일지/">2018-04-09 독서 일지</a></li>  <li class="file"><a href="/2018/04/10/2018-04-10-독서-일지/">2018-04-10 독서 일지</a></li>  <li class="file"><a href="/2018/04/11/2018-04-11-독서-일지/">2018-04-11 독서 일지</a></li>  <li class="file"><a href="/2018/04/12/2018-04-12-독서-일지/">2018-04-12 독서 일지</a></li>  <li class="file"><a href="/2018/04/14/2018-04-14-독서-일지/">2018-04-14 독서 일지</a></li>  </ul> 
                     </li> 
                      <li class="file"><a href="/2018/04/10/String-StringBuilder-StringBuffer/">String, StringBuilder, StringBuffer</a></li>  </ul> 
     </div>
@@ -1118,6 +1118,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-자바병렬프로그래밍-Chapter05-구성단위" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/">자바병렬프로그래밍</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바병렬프로그래밍/Synchronized/">Synchronized</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Synchronized/">Synchronized</a>, <a class="tag-link" href="/tags/자바병렬프로그래밍/">자바병렬프로그래밍</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/">
+            <time datetime="2017-05-12T10:14:02.000Z" itemprop="datePublished">2017-05-12</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170512-자바병렬프로그래밍-Chapter05-구성단위.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/">자바병렬프로그래밍_Chapter05_구성단위</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h1>자바 병렬 프로그래밍. Chapter 05. 구성 단위</h1>
+<h2>5.1 동기화된 컬렉션 클래스</h2>
+<h3>5.1.1 동기화된 컬렉션의 문제점</h3>
+<ul>
+<li>동기화된 컬렉션을 사용하면 따로 락이나 동기화 기법을 사용하지 않는다 해도 이런 대부분의 기능이 모두 스레드 안전하다.</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/05/12/자바병렬프로그래밍-Chapter05-구성단위/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-Effective-Java-규칙18-추상-클래스-대신-인터페이스를-사용하라" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -2041,110 +2145,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/05/08/JoelOnSoftwareC5C14/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-JenkinsslacktrelloGoogleCloudPlatform" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Infra/">Infra</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Infra/CI/">CI</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Infra/CI/Jenkins/">Jenkins</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/CI/">CI</a>, <a class="tag-link" href="/tags/Jenkins/">Jenkins</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/">
-            <time datetime="2017-05-08T09:50:59.000Z" itemprop="datePublished">2017-05-08</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170508-JenkinsslacktrelloGoogleCloudPlatform.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/">GCP에 CI 구축하기</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>Google Cloud Platform에 CI 구축하기</h3>
-<p>GCP 프로모션을 통해 1년간 사용할 수 있는 무료 크레딧 $300을 지원받았다.<br>
-이를 통해 CentOS를 설치하고 Jenkins, SonarQube를 운용중이다.<br>
-여기에 Slack을 연동하고 github과 gitlab repo를 연동시켜 각 프로젝트의 일일 빌드를<br>
-수행하는데 이용하고 있다.</p>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/05/08/JenkinsslacktrelloGoogleCloudPlatform/#more">Read More</a>
             </div>
         
         <footer class="article-footer">

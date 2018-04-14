@@ -1044,7 +1044,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/11/책-정리-1/">책 정리 (1)</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/2018/04/03/2018-04-03-독서-일지/">2018-04-03 독서 일지</a></li>  <li class="file"><a href="/2018/04/04/2018-04-04-독서-일지/">2018-04-04-독서-일지</a></li>  <li class="file"><a href="/2018/04/05/2018-04-05-독서-일지/">2018-04-05 독서 일지</a></li>  <li class="file"><a href="/2018/04/09/2018-04-09-독서-일지/">2018-04-09 독서 일지</a></li>  <li class="file"><a href="/2018/04/10/2018-04-10-독서-일지/">2018-04-10 독서 일지</a></li>  <li class="file"><a href="/2018/04/11/2018-04-11-독서-일지/">2018-04-11 독서 일지</a></li>  <li class="file"><a href="/2018/04/12/2018-04-12-독서-일지/">2018-04-12 독서 일지</a></li>  </ul> 
+                     <li class="file"><a href="/2018/04/03/2018-04-03-독서-일지/">2018-04-03 독서 일지</a></li>  <li class="file"><a href="/2018/04/04/2018-04-04-독서-일지/">2018-04-04-독서-일지</a></li>  <li class="file"><a href="/2018/04/05/2018-04-05-독서-일지/">2018-04-05 독서 일지</a></li>  <li class="file"><a href="/2018/04/09/2018-04-09-독서-일지/">2018-04-09 독서 일지</a></li>  <li class="file"><a href="/2018/04/10/2018-04-10-독서-일지/">2018-04-10 독서 일지</a></li>  <li class="file"><a href="/2018/04/11/2018-04-11-독서-일지/">2018-04-11 독서 일지</a></li>  <li class="file"><a href="/2018/04/12/2018-04-12-독서-일지/">2018-04-12 독서 일지</a></li>  <li class="file"><a href="/2018/04/14/2018-04-14-독서-일지/">2018-04-14 독서 일지</a></li>  </ul> 
                     </li> 
                      <li class="file"><a href="/2018/04/10/String-StringBuilder-StringBuffer/">String, StringBuilder, StringBuffer</a></li>  </ul> 
     </div>
@@ -1118,6 +1118,110 @@
 </aside>
             
             <section id="main">
+        <article id="post-EffectiveJavaRule1" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/">이펙티브자바</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/이펙티브자바/Factory/">Factory</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Factory/">Factory</a>, <a class="tag-link" href="/tags/이펙티브자바/">이펙티브자바</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/10/EffectiveJavaRule1/">
+            <time datetime="2017-04-10T09:10:59.000Z" itemprop="datePublished">2017-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170410-EffectiveJavaRule1.markdown'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170410-EffectiveJavaRule1.markdown'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170410-EffectiveJavaRule1.markdown'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/10/EffectiveJavaRule1/">규칙1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><h1>규칙1 생성자 대신 정적 팩터리 메서드를 사용할 수 없는지 생각해 보라</h1>
+<h3>객체의 생성과 삭제</h3>
+<ul>
+<li>객체를 만들어야 하는 시점과 그 방법</li>
+<li>객체 생성을 피해야 하는 경우와 그 방법</li>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2017/04/10/EffectiveJavaRule1/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-EffectiveJavaNamingConvention" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -2041,110 +2145,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2017/04/06/Generic/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-Chapter13Thread" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Book/">Book</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의정석/">자바의정석</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Book/자바의정석/Thread/">Thread</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Thread/">Thread</a>, <a class="tag-link" href="/tags/자바의정석/">자바의정석</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/06/Chapter13Thread/">
-            <time datetime="2017-04-06T12:10:59.000Z" itemprop="datePublished">2017-04-06</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/raw/master/source/_posts/20170406-Chapter13Thread.markdown'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/edit/master/source/_posts/20170406-Chapter13Thread.markdown'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/JungHa-Cho/JungHa-Cho.github.io/commits/master/source/_posts/20170406-Chapter13Thread.markdown'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/06/Chapter13Thread/">Chapter 13. Thread</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><h3>Chapter 13. Thread</h3>
-<ul>
-<li>멀티 쓰레딩의 장단점</li>
-<li>CPU의 사용률을 향상시킨다.</li>
-<li>사용자에 대한 응답성이 향상된다.</li>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2017/04/06/Chapter13Thread/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
