@@ -679,13 +679,6 @@
     </url>
 
     <url>
-        <loc>http://jungha-cho.github.io/categories/%EC%9D%BC%EC%A7%80/</loc>
-        <lastmod>2018-04-17T07:35:16.238Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jungha-cho.github.io/categories/%EC%9E%90%EB%B0%94/</loc>
         <lastmod>2018-04-17T08:32:05.161Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -695,6 +688,13 @@
     <url>
         <loc>http://jungha-cho.github.io/categories/%EC%9E%90%EB%B0%94/%EC%9D%BC%EB%B0%98/</loc>
         <lastmod>2018-04-17T08:32:05.161Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EC%9D%BC%EC%A7%80/</loc>
+        <lastmod>2018-04-17T13:15:42.491Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
