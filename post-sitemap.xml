@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>http://jungha-cho.github.io/2018/04/10/String-StringBuilder-StringBuffer/</loc>
+        <lastmod>2018-04-17T08:32:05.161Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/2018/04/17/2018-04-17-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
+        <lastmod>2018-04-17T07:35:16.238Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jungha-cho.github.io/2018/04/16/2018-04-16-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
         <lastmod>2018-04-16T08:41:07.330Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -73,14 +89,6 @@
     <url>
         <loc>http://jungha-cho.github.io/2018/04/10/2018-04-10-%EB%8F%85%EC%84%9C-%EC%9D%BC%EC%A7%80/</loc>
         <lastmod>2018-04-10T12:40:16.748Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jungha-cho.github.io/2018/04/10/String-StringBuilder-StringBuffer/</loc>
-        <lastmod>2018-04-10T01:07:38.312Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
