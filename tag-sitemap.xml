@@ -331,13 +331,6 @@
     </url>
 
     <url>
-        <loc>http://jungha-cho.github.io/tags/Socket/</loc>
-        <lastmod>2018-03-26T13:16:16.430Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jungha-cho.github.io/tags/DataBase/</loc>
         <lastmod>2018-03-26T13:16:16.430Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -346,6 +339,13 @@
 
     <url>
         <loc>http://jungha-cho.github.io/tags/MyBatis/</loc>
+        <lastmod>2018-03-26T13:16:16.430Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/tags/Socket/</loc>
         <lastmod>2018-03-26T13:16:16.430Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -682,7 +682,7 @@
 
     <url>
         <loc>http://jungha-cho.github.io/tags/%EC%9D%BC%EC%A7%80/</loc>
-        <lastmod>2018-05-02T14:00:36.882Z</lastmod>
+        <lastmod>2018-05-03T14:04:09.666Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
