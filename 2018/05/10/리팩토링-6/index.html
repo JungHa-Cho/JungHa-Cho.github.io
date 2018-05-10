@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="개발하는 조롱이">
 <meta property="og:description" content="멀티 스레드 환경에서 스레드 중단 및 복구, 종료  멀티 스레드 환경에서 스레드 관리자의 리팩토링 전에 Java Concurrency In Practice의 7장 중단 및 종료를 복습하기로 함  자바에서 스레드의 종료  자바에서 스레드가 작업을 실행하고 있을 때 강제로 멈추도록 하는 방법이 없다. 물론 예전에는 있었다. Thread.stop()과 Threa">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-10T07:13:05.373Z">
+<meta property="og:updated_time" content="2018-05-10T08:12:27.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="리팩토링 (6)">
 <meta name="twitter:description" content="멀티 스레드 환경에서 스레드 중단 및 복구, 종료  멀티 스레드 환경에서 스레드 관리자의 리팩토링 전에 Java Concurrency In Practice의 7장 중단 및 종료를 복습하기로 함  자바에서 스레드의 종료  자바에서 스레드가 작업을 실행하고 있을 때 강제로 멈추도록 하는 방법이 없다. 물론 예전에는 있었다. Thread.stop()과 Threa">
@@ -1237,16 +1237,16 @@
 <h3>종료</h3>
 <h2>취소 요청이 들어올때까지 계속해서 소수를 찾아내는 작업을 진행하고, 취소 요청 플래그를 사용해 작업을 멈춘다.</h2>
 <ul>
-<li>안정적인 동작을 위해서는 cancelled 플래그가 volatile로 선언되어 있어야 한다.<br>
-{ % gist a764693fb55983aee2df9e43d31c8b81 PrimeGenerator.java % }</li>
+<li>안정적인 동작을 위해서는 cancelled 플래그가 volatile로 선언되어 있어야 한다.</li>
 </ul>
+<script src="//gist.github.com/a764693fb55983aee2df9e43d31c8b81.js?file=PrimeGenerator.java"></script>
 <h2>소수 계산 작업 스레드를 실행시킨 다움 1초 후에 소수 계산 작업을 멈춘다.</h2>
 <ul>
 <li>이렇게 종료하게 되면, 반드시 1초후에 종료하는 것을 보장하지 않는다.</li>
 <li>취소 요청 후 나머지 작업을 진행하기 위한 최소한의 시간이 필요하기 때문이다.</li>
-<li>finally 구문 때문에, 슬립 도중 인터럽트가 걸려도, cancel은 반드시 호출 된다.<br>
-{ % gist a764693fb55983aee2df9e43d31c8b81 aSecondOfPrimes.java % }</li>
+<li>finally 구문 때문에, 슬립 도중 인터럽트가 걸려도, cancel은 반드시 호출 된다.</li>
 </ul>
+<script src="//gist.github.com/a764693fb55983aee2df9e43d31c8b81.js?file=aSecondOfPrimes.java"></script>
 <h2>작업을 취소하려 할때에는 <code>취소 정책</code>이 명확해야 한다.</h2>
 <ul>
 <li>외부 프로그램에서 작업을 취소하려 할 때 어떤 방법으로 취소 요청을 보낼 수 있는지, 작업 내부에서 취소 요청이 들어 왔는지를 언제 확인하는지, 취소 요청이 들어오면 실행 중이던 작업이 어떤 형태로 동작하는지 등에 대한 정보를 제공해야 안전하게 사용할 수 있다.</li>
