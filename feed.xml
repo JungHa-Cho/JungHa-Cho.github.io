@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="http://jungha-cho.github.io/"/>
-  <updated>2018-06-29T04:23:49.125Z</updated>
+  <updated>2018-06-29T04:31:23.846Z</updated>
   <id>http://jungha-cho.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>시린토큰</title>
+    <link href="http://jungha-cho.github.io/2018/06/29/%EC%8B%9C%EB%A6%B0%ED%86%A0%ED%81%B0/"/>
+    <id>http://jungha-cho.github.io/2018/06/29/시린토큰/</id>
+    <published>2018-06-29T04:08:41.000Z</published>
+    <updated>2018-06-29T04:31:23.846Z</updated>
+    
+    <content type="html"><![CDATA[<h1>시린토큰</h1><p><img src="/images/cirin.png" alt="cirin.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;시린토큰&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/images/cirin.png&quot; alt=&quot;cirin.png&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="코인" scheme="http://jungha-cho.github.io/categories/%EC%BD%94%EC%9D%B8/"/>
+    
+    
+      <category term="코인" scheme="http://jungha-cho.github.io/tags/%EC%BD%94%EC%9D%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>바른손X디센트럴랜드-파트너쉽</title>
