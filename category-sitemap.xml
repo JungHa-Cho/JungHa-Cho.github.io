@@ -701,7 +701,14 @@
 
     <url>
         <loc>http://jungha-cho.github.io/categories/%EC%9D%BC%EC%A7%80/</loc>
-        <lastmod>2018-05-16T07:36:54.353Z</lastmod>
+        <lastmod>2018-06-09T05:47:47.103Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EC%BD%94%EC%9D%B8/</loc>
+        <lastmod>2018-06-29T03:59:43.418Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
