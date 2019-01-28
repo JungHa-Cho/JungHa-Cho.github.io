@@ -707,8 +707,15 @@
     </url>
 
     <url>
-        <loc>http://jungha-cho.github.io/categories/%EC%BD%94%EC%9D%B8/</loc>
-        <lastmod>2018-06-29T04:31:23.846Z</lastmod>
+        <loc>http://jungha-cho.github.io/categories/%EB%82%9A%EC%8B%9C/</loc>
+        <lastmod>2019-01-28T08:20:38.518Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jungha-cho.github.io/categories/%EB%82%9A%EC%8B%9C/%EC%9D%BC%EC%A7%80/</loc>
+        <lastmod>2019-01-28T08:20:38.518Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
